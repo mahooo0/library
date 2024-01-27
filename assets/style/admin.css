@@ -18,14 +18,14 @@
     top: 75px;
     left: 35px;
   }
- .logo-container{
+ .logo_container{
     width: 282.592px;
 height: 85.044px;
 flex-shrink: 0;
 display: flex;
 flex-direction: row;
 align-items: center;
-position: absolutes;
+position: absolute;
 
 
 
@@ -127,7 +127,20 @@ line-height: normal;
 }
 
 
- 
+
+
+
+
+
+/* Mobile responsive stil */
+@media only screen and (max-width: 768px) {
+}
+
+
+
+
+
+  
 
 
 
