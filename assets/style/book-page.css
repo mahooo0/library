@@ -449,4 +449,35 @@ body {
 .comments {
     margin-bottom: 148px;
 }
+
+
+
+/* SOCIAL MEDIA */
+.social-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 196.187%;
+    color: var(--blackmain);
+    margin-bottom: 30px;
+  }
+  
+  .social-sect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 133px;
+  }
+  
+  .social-sect .media-logos {
+    margin-left: 25px;
+  }
+  
+  .facebook-logo,
+  .twitter-logo {
+    margin-right: 52px;
+    cursor: pointer;
+  }
+
 /* Jalya */
