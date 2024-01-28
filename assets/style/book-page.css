@@ -91,6 +91,14 @@ body {
 
 /* FOOTER */
 
+.bottom-logo {
+    margin-left: 214px;
+}
+
+.footerNav ul li a {
+    text-decoration: none;
+}
+
 .footerContainer {
   background-color: var(--Brown);
 }
