@@ -504,10 +504,20 @@ body {
 .mobile-line {
   display: none;
 }
+.book-year-mobile {
+  display: none;
+}
+
+.headerContainer .menu-mobile  
+{
+  display: none;
+}
+
 /* Responsive Styles */
 
 /* Mobile */
 @media only screen and (max-width: 600px) {
+
   .menuNav {
     display: none;
   }
@@ -524,11 +534,12 @@ body {
     /* margin-left: 15px; */
   }
 
-  .headerContainer .menu-mobile {
+ .header .headerContainer .menu-mobile {
     /* float: right; */
     display: block;
     margin-left: auto;
   }
+
 
   .about-book .about-text button {
     width: 81px;
