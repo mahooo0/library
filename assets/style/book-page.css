@@ -92,11 +92,11 @@ body {
 /* FOOTER */
 
 .bottom-logo {
-    margin-left: 214px;
+  margin-left: 214px;
 }
 
 .footerNav ul li a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .footerContainer {
@@ -455,37 +455,300 @@ body {
 }
 
 .comments {
-    margin-bottom: 148px;
+  margin-bottom: 148px;
 }
-
-
 
 /* SOCIAL MEDIA */
 .social-text {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 196.187%;
+  color: var(--blackmain);
+  margin-bottom: 30px;
+}
+
+.social-sect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 133px;
+}
+
+.social-sect .media-logos {
+  margin-left: 25px;
+}
+
+.facebook-logo,
+.twitter-logo {
+  margin-right: 52px;
+  cursor: pointer;
+}
+
+.headerContainer .menu-mobile {
+  display: none;
+}
+
+.about-img .book-year-mobile {
+  display: none;
+}
+
+.book-text-mob {
+  display: none;
+}
+
+.mobile-footer-catalog {
+  display: none;
+}
+.mobile-line {
+  display: none;
+}
+/* Responsive Styles */
+
+/* Mobile */
+@media only screen and (max-width: 600px) {
+  .menuNav {
+    display: none;
+  }
+
+  .joinUs {
+    display: none;
+  }
+
+  .headerContainer {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    /* justify-content: center; */
+    /* margin-left: 15px; */
+  }
+
+  .headerContainer .menu-mobile {
+    /* float: right; */
+    display: block;
+    margin-left: auto;
+  }
+
+  .about-book .about-text button {
+    width: 81px;
+    height: 23.49px;
+    border: none;
+    margin-left: 15px;
+    /* margin-top: 51px; */
+  }
+
+  .about-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-book .book-year {
+    display: none;
+  }
+
+  .about-text .book-text {
+    display: none;
+  }
+
+  .about-img .new-modal {
+    display: none;
+  }
+
+  .about-img .book-year-mobile {
+    display: block;
+  }
+
+  .book-year-mobile {
+    width: 69px;
+    height: 23px;
+    background-color: var(--blue);
+    border-radius: 2px;
+    box-shadow: 0px 3px 8px rgba(225, 106, 0, 0.19);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-top: 58px;
+    margin-bottom: 44px;
+    /* margin: 90px; */
+  }
+
+  .book-year-mobile p {
+    margin: 0;
+    color: #fff;
+    font-family: var(--mantserrat-font);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    width: 30px;
+    height: 9px;
+  }
+
+  .comments {
+    display: none;
+  }
+  .book-text-mob {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .book-text-mob h2 {
+    color: var(--Black);
+
+    /* Заголовок h2 */
+    font-family: var(--fontMontserrat);
     font-size: 25px;
     font-style: normal;
     font-weight: 900;
-    line-height: 196.187%;
-    color: var(--blackmain);
-    margin-bottom: 30px;
+    line-height: 196.187%; /* 49.047px */
   }
-  
-  .social-sect {
+
+  .book-text-mob h6 {
+    color: var(--Black);
+    text-align: center;
+    font-family: var(--fontMontserrat);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 196.187%; /* 23.542px */
+  }
+  .book-text-mob p {
+    color: var(--Black);
+    text-align: center;
+    font-family: var(--fontMontserrat);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 196.187%; /* 23.542px */
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 8px;
+    margin-bottom: 82px;
+  }
+
+  .mobile-footer-catalog {
+    display: block;
+  }
+  .mobile-footer-catalog ul {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    color: #f2f2f2;
+    margin-top: 11px;
+  }
+  .mobile-line {
+    display: block;
+    border-top: 1px solid beige;
+    width: 350px;
+    margin-top: 32px;
+    /* margin-bottom: 27px; */
+  }
+
+  .copyright {
+    display: none;
+  }
+
+  .mobile-line .copyrigh-mob {
+    margin-top: 10px;
+    width: 231px;
+    height: 37px;
+    color: #fff;
+    text-align: center;
+    font-family: var(--fontMontserrat);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 196.187%; /* 23.542px */
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 133px;
+    justify-content: center;
+    margin-left: 50px;
   }
-  
+
+  .bottom-logo {
+    width: 250px;
+    height: 102px;
+  }
+
+  .mobile-footer-catalog ul li {
+    width: 69px;
+  }
+
+  .menuNav li {
+    margin-bottom: 10px;
+  }
+
+  .about-book {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-text,
+  .about-img {
+    width: 100%;
+  }
+
+  .about-text button {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .comments {
+    padding-left: 0;
+  }
+
+  .input-btn input {
+    width: 100%;
+  }
+
+  .anonim-comments .comm1,
+  .anonim-comments .comm2 {
+    width: 100%;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footerNav {
+    display: none;
+  }
+  .footer-right {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .bottom-logo {
+    margin-left: 0;
+  }
+
+  .social-text {
+    margin-bottom: 20px;
+  }
+
   .social-sect .media-logos {
-    margin-left: 25px;
+    margin-left: 0;
   }
-  
+
   .facebook-logo,
-  .twitter-logo {
-    margin-right: 52px;
-    cursor: pointer;
+  .twitter-logo,
+  .insta-logo {
+    margin: 0 10px 20px;
   }
+
+  .copyright {
+    margin-top: 20px;
+  }
+}
 
 /* Jalya */
