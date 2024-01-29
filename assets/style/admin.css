@@ -133,7 +133,9 @@ line-height: normal;
 
 
 /* Mobile responsive stil */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
+
+.logo_container
 }
 
 
