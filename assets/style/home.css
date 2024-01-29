@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
-/* MURAD */
-
 :root {
     --Brown: #391F00;
     --Orange: #E16A00;
@@ -16,106 +13,7 @@ body {
     font-family: var(--fontMontserrat);
 }
 
-/* HEADER */
-
-.header {
-    width: 100%;
-}
-
-.headerContainer {
-    display: flex;
-    height: 86px;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    width: 80%;
-    margin-bottom: 80px;
-    border-bottom: 2px solid whitesmoke;
-}
-
-.menuNav {
-    display: flex;
-}
-
-.menuNav li a {
-    color: var(--Black);
-    font-family: var(--fontMontserrat);
-    font-weight: 400;
-    font-size: 12px;
-    margin-right: 21px;
-    text-decoration: none;
-}
-
-.joinUs {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.4s ease all;
-}
-
-.joinUs:hover {
-    opacity: 0.5;
-}
-
-.active {
-    color: var(--Orange) !important;
-    text-decoration: underline;
-    font-weight: 700 !important;
-}
-
-/* FOOTER */
-
-.footerContainer {
-    background-color: var(--Brown);
-}
-
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 56px 0 50px 0;
-    margin-bottom: 50px;
-}
-
-.footer-right {
-    display: flex;
-    width: 48.8%;
-}
-
-.footerNav {
-    margin-right: 91px;
-}
-
-.footerNav h3 {
-    font-size: 18px;
-    color: #fff;
-    font-weight: 400;
-    margin-bottom: 12px;
-}
-
-.footerNav ul li {
-    margin-bottom: 8px;
-}
-
-.footerNav ul li a {
-    color: #fff;
-    font-size: 12px;
-    font-weight: 200;
-}
-
-.footerNav ul li a:hover {
-    opacity: 0.6;
-}
-
-.copyright {
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 400;
-    color: #000;
-    color: #FFF;
-    text-align: center;
-    padding-bottom: 20px;
-}
+/* MURAD */
 
 /* Home FIRST Line (Books from A to Z) */
 
