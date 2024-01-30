@@ -486,9 +486,6 @@ body {
   cursor: pointer;
 }
 
-.about-book .about-text {
-  margin-bottom: 122px;
-}
 
 .menu-mobile {
   display: none;
@@ -682,6 +679,7 @@ body {
   .bottom-logo {
     width: 250px;
     height: 102px;
+
   }
 
   .mobile-footer-catalog ul li {
@@ -710,11 +708,6 @@ body {
   .comments {
     padding-left: 0;
   }
-
-
-.about-book .book-text p {
-  margin-bottom: 122px;
-}
 
   .input-btn input {
     width: 100%;
@@ -749,6 +742,7 @@ body {
   .social-sect .media-logos {
     margin-left: 0;
   }
+
 
   .facebook-logo,
   .twitter-logo,
@@ -1016,6 +1010,7 @@ body {
     margin-left: 0;
   }
 
+
   .facebook-logo,
   .twitter-logo,
   .insta-logo {
@@ -1026,6 +1021,5 @@ body {
     margin-top: 20px;
   }
 }
-/* Jalya */
 
 /* Jalya */
