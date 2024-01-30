@@ -23,7 +23,7 @@ body {
 }
 
 .contactHeading {
-    font-family: Montserrat;
+    font-family: var(--fontMontserrat);
     font-size: 36px;
     font-style: normal;
     font-weight: 900;
