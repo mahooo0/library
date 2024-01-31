@@ -212,6 +212,9 @@ justify-content: center;
 .main{
     display: flex;
     flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .right_side_h3{
@@ -566,67 +569,13 @@ line-height: normal;
 
 
 
-/* Yukarıdaki CSS kodu ile eşleştirilmiş medya sorgusu */
 
-/* Yukarıdaki CSS kodları ile uyumlu hale getirilmiş media sorgusu */
 
-@media only screen and (max-width: 600px) {
-    /* Header admin logo */
-    .menu {
-      padding: 17px 0 100.42px 12px;
-    }
-  
-    .logo_img {
-      width: 151.22px;
-    }
-  
-    /* Login form */
-    #Login .login-container {
-      max-width: 380px;
-      width: 100%;
-      padding: 27px 18.55px 50.26px;
-    }
-  
-    #Login .login-container .form p {
-      font-size: 20px;
-      width: 100%;
-      padding: 0;
-      padding-bottom: 20px;
-      margin: 0 auto 26px;
-    }
-    #Login .login-container .form input {
-      height: 40.84px;
-      margin-bottom: 21.99px;
-      padding-left: 12px;
-      font-size: 16px;
-    }
-  
-    #Login .login-container .form input::placeholder {
-      padding-left: 11.49px;
-      font-size: 16px;
-    }
-  
-    #Login .login-container .form button {
-      height: 30.63px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    /* Second panel */
-    #Second-panel .left,
-    #Second-panel .right .account-logo {
-      display: none;
-      z-index: 2;
-    }
-  
-    #Second-panel .right .mobile-container {
-      display: block;
-    }
-  
-    /* Devam eden stiller... */
-  }
-  
+
+
+
+
+   
   
 
 

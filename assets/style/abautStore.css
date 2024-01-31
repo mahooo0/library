@@ -6,7 +6,9 @@
 .body{
     background: #FFFAF5;
 }
-.text {
+
+
+.about_store{
   margin-top: 235px;
   margin-left: 71px;
   color: #241400;
@@ -15,16 +17,17 @@
   font-style: normal;
   font-weight: 900;
   line-height: 70.627px;
+ 
 }
 
-.img {
+.img_1 {
   width: 570px;
   height: 310px;
   flex-shrink: 0;
  
 }
 
-.text_p {
+.text_info{
   display: flex;
   width: 686px;
   height: 253px;
