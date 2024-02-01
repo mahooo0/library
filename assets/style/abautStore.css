@@ -3,12 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-.body{
-    background: #FFFAF5;
+
+.body {
+  background: #FFFAF5;
 }
 
-
-.about_store{
+.about_store {
   margin-top: 235px;
   margin-left: 71px;
   color: #241400;
@@ -17,19 +17,17 @@
   font-style: normal;
   font-weight: 900;
   line-height: 70.627px;
- 
 }
 
 .img_1 {
-  width: 570px;
+  width: 50%;
   height: 310px;
   flex-shrink: 0;
- 
 }
 
-.text_info{
+.text_info {
   display: flex;
-  width: 686px;
+  width: 65%;
   height: 253px;
   flex-direction: column;
   justify-content: center;
@@ -38,15 +36,35 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height:  35.314px ;
+  line-height: 35.314px;
 }
 
+.container {
+  display: flex;
+  gap: 72px;
+}
 
-.container{
-    display: flex;
+/* Mobile style */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
   
-    gap: 72px;
+  .about_store {
+    margin-top: 50px; 
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .text_info {
+    width: 100%;
+    margin-top: 20px; 
+    padding: 0 20px; 
+    text-align: center;
+  }
+
+  .img_1 {
+    height: auto; 
+  }
 }
-
-
-
