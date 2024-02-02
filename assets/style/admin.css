@@ -54,14 +54,13 @@ height: 6.61631rem;
 flex-shrink: 0;
 }
 .logo{
-    width: 17.662rem;
-height: 6.61631rem;
+
 flex-shrink: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-top: 5.83rem;
+
 }
 .logo_text{
     margin-left: 0.5rem;
@@ -214,7 +213,7 @@ justify-content: center;
     flex-direction: row;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 ;
 }
 
 .right_side_h3{
