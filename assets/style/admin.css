@@ -1,3 +1,20 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* MAIN */
+
+:root {
+  --Brown: #391f00;
+  --Orange: #e16a00;
+  --Black: #241400;
+  --Background: #fffaf5;
+  --white: #fff;
+  --fontMontserrat: 'Montserrat', sans-serif;
+}
+
+
+
+
 /* mahoo */
 
 .menu {
@@ -12,7 +29,7 @@
   left: 0;
 }
 * {
-  font-family: Montserrat;
+ font-family: var(--fontMontserrat);
 }
 .logo_text_1 {
   display: flex;
@@ -37,10 +54,10 @@
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
-  color: #fff;
+  color: var(--white);
 
   /* Текст в параграфах */
-  font-family: Montserrat;
+ font-family: var(--fontMontserrat);
   font-size: 0.8125rem;
   font-style: normal;
   font-weight: 400;
@@ -85,7 +102,7 @@
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
-  color: #fff;
+  color:var(--white);
   font-family: Montserrat;
   font-size: 1.125rem;
   font-style: normal;
@@ -110,13 +127,13 @@
   margin-top: 8px;
 }
 .body {
-  background: #fffaf5;
+  background:var(--Background);
   display: flex;
   flex-direction: row;
 }
 .right_side_h1 {
   color: #333;
-  font-family: Montserrat;
+ font-family: var(--fontMontserrat);
   font-size: 1.875rem;
   font-style: normal;
   font-weight: 600;
@@ -126,7 +143,7 @@
 }
 .search_book h3 {
   color: #333;
-  font-family: Montserrat;
+  font-family: var(--fontMontserrat);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -148,7 +165,7 @@
   line-height: normal;
   border-radius: 2.125rem;
   border: 2px solid rgba(57, 31, 0, 0.48);
-  background: #fff;
+  background: var(--white);
 }
 .search_section_btn {
   display: flex;
@@ -423,7 +440,7 @@
   margin: 0.63rem 0 0 2rem;
 }
 /* mahoo */
-
+/* anar */
 * {
   padding: 0;
   margin: 0;
@@ -450,7 +467,7 @@
   position: absolute;
 }
 .logo_text {
-  color: #fff;
+  color:var(--white);
   margin-left: 8px;
   display: flex;
   width: 207.553px;
@@ -465,7 +482,7 @@
 }
 
 .library {
-  color: #fff;
+  color:var(--white);
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
@@ -479,7 +496,7 @@
   width: 662px;
   height: 544.311px;
   flex-shrink: 0;
-  background-color: #fff;
+  background-color:var(--white);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -493,7 +510,7 @@
   flex-shrink: 0;
   color: #000;
   text-align: center;
-  font-family: Montserrat;
+  font-family: var(--fontMontserrat);
   font-size: 44px;
   font-style: normal;
   font-weight: 700;
@@ -505,7 +522,7 @@
   height: 74.541px;
   flex-shrink: 0;
   border: 1px solid #cecece;
-  background: #fff;
+  background: var(--white);
   color: #797667;
   font-family: 'Crimson Text';
   font-size: 19px;
@@ -522,7 +539,7 @@
   border-radius: 5px;
   border: 1px solid #cecece;
   background: #e16a00;
-  color: #fff;
+  color: var(--white);
   text-align: center;
   font-family: 'Crimson Text';
   font-size: 19px;
@@ -530,3 +547,17 @@
   font-weight: 700;
   line-height: normal;
 }
+
+@media only screen and (max-width: 768px) {
+  
+.section1{
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+  
+  }
+
+

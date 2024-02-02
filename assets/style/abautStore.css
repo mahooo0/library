@@ -46,7 +46,7 @@
   flex-direction: column;
   justify-content: center;
   color: #241400;
-  font-family: Montserrat;
+ font-family: var(--fontMontserrat);
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
