@@ -27,6 +27,7 @@
 
 body {
   background-color: var(--background);
+  justify-content: center;
 }
 
 :root {
@@ -173,8 +174,8 @@ body {
 
 .about-book {
   display: flex;
-  justify-content: center;
-  gap: 141px;
+  /* justify-content: center; */
+ justify-content: space-between;
 }
 
 .about-text {
@@ -288,9 +289,17 @@ body {
 .comments {
   display: flex;
   flex-direction: column;
-  padding-left: 130px; /*  ??? */
-}
+  
 
+}
+.comments_area{
+
+display: flex;
+justify-content: start;
+
+
+
+}
 .send-button {
   position: absolute;
   top: 0;
