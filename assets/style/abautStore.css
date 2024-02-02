@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* MAIN */
+
+:root {
+  --Brown: #391f00;
+  --Orange: #e16a00;
+  --Black: #241400;
+  --Background: #fffaf5;
+  --white: #fff;
+  --fontMontserrat: 'Montserrat', sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,21 +18,19 @@
 }
 
 .body {
-  background: #FFFAF5;
+  background:var(--Background);
 }
 
-.about_store{
-
+.about_store {
   /* margin-top: 235px; */
-  margin-left: 98px;
-  color: #241400;
-  font-family: Montserrat;
+  /* margin-left: 98px; */
+  color:var(--Black);
+  font-family: var(--fontMontserrat);
   font-size: 36px;
- 
+
   font-style: normal;
-  font-weight: 900; 
-   line-height: 70.627px; 
-  
+  font-weight: 800;
+  line-height: 70.627px;
 }
 
 .img_1 {
@@ -43,35 +54,39 @@
   margin-top: 40px;
 }
 
-.container {
+
+.about_store_section div{
+
+
   width: 100%;
   display: flex;
+ 
   gap: 72px;
- margin-bottom: 60px;
+
 }
 
 /* Mobile style */
 @media only screen and (max-width: 768px) {
-  .container {
+  .about_store_section div{
     flex-direction: column;
     align-items: center;
   }
-  
+
   .about_store {
-margin-top: 50px;
+    margin-top: 50px;
     margin-left: 0;
     text-align: center;
   }
 
   .text_info {
     width: 100%;
-  height: 100%; 
-    padding: 0 20px; 
+    height: 100%;
+    padding: 0 20px;
     text-align: center;
   }
 
   .img_1 {
-    height: auto; 
+    width: 100%;
+    height: 100%;
   }
- 
 }
