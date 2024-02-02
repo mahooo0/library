@@ -71,7 +71,9 @@ margin-top: 50px;
   }
 
   .img_1 {
-    height: auto; 
+    width: 100%;
+    height: 100%;
+   
   }
  
 }
