@@ -35,7 +35,7 @@ JOIN US
 
 .modal {
   /* display none for default  */
-  display: block;
+  display: none;
   position: fixed;
   z-index: 999;
   left: 0;
