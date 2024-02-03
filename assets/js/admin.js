@@ -43,7 +43,7 @@ function showBookVariants(books) {
             const clone = variantDiv.cloneNode(true);
             clone.classList.remove('variant');
             search_variant.appendChild(clone);
-            variantDiv.remove(); // Orijinal öğeyi listeden kaldır
+            variantDiv.remove(); 
         });
         search_variant.appendChild(variantDiv);
     });
