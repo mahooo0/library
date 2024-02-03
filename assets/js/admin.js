@@ -36,14 +36,21 @@ function showBookVariants(books) {
         const variantDiv = document.createElement('div');
         variantDiv.classList.add('variant');
         variantDiv.innerHTML = `
-            <img src="${book.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png'}" alt="Book Image">
-            <p>${book.volumeInfo.title}</p>
+            <img class="variant-image" src="${book.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png'}" alt="Book Image">
+            <div class="variant-details">
+                <h3>${book.volumeInfo.title}</h3>
+                <p>${book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author'}</p>
+                <p>${book.volumeInfo.publisher || 'Unknown Publisher'}</p>
+                <p>${book.volumeInfo.publishedDate || 'Unknown Date'}</p>
+            </div>
         `;
         variantDiv.addEventListener('click', () => {
-            const clone = variantDiv.cloneNode(true);
-            clone.classList.remove('variant');
-            search_variant.appendChild(clone);
-            variantDiv.remove(); 
+            search_variant.innerHTML = ''; // hazirki melumatlari temizleyen
+            variantDiv.classList.remove('variant');
+            variantDiv.classList.add('selected-variant');
+            variantDiv.style.width = "100%";
+            variantDiv.style.height = "100%";
+            search_variant.appendChild(variantDiv); // Klik olunan məlumatları divin icine kocuren
         });
         search_variant.appendChild(variantDiv);
     });
