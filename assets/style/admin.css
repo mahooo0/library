@@ -166,6 +166,7 @@
   border-radius: 2.125rem;
   border: 2px solid rgba(57, 31, 0, 0.48);
   background: var(--white);
+  padding-left: 1rem;
 }
 .search_section_btn {
   display: flex;
@@ -207,7 +208,7 @@
 }
 .search_variants {
   width: 24.25rem;
-  height: 5.3125rem;
+  height: auto;
   flex-shrink: 0;
   border-radius: 2.1875rem;
   background: #f1f0f0;
