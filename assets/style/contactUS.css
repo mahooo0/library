@@ -23,7 +23,7 @@ body {
 }
 
 .contactHeading {
-    font-family: Montserrat;
+    font-family: var(--fontMontserrat);
     font-size: 36px;
     font-style: normal;
     font-weight: 900;
@@ -96,3 +96,45 @@ textarea.form-control {
 .sendButton:hover {
     background: var(--Hover);
 }
+
+
+/* MOBILE */
+
+@media only screen and (max-width: 600px) {
+    .containerContact {
+      padding: 0 15px;
+    }
+    .row {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .column {
+      flex: 1 1 100%;
+    }
+    .sendButton {
+      width: 243px;
+      height: 49px;
+    }
+    }
+
+  @media only screen and (min-width: 601px) and (max-width: 1000px) {
+    .containerContact {
+      padding: 0 15px;
+    }
+    .row {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .column {
+      flex: 1 1 100%;
+    }
+    .sendButton {
+      width: 415px;
+    }
+    }
+  
+  @media only screen and (min-width: 1001px) and (max-width: 1250px) {
+    .containerContact {
+      padding: 0 50px;
+    }
+  }
