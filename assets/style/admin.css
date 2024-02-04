@@ -191,7 +191,12 @@
   flex-direction: row;
   margin-top: 0.81rem;
   margin-left: 2.25rem;
+
 }
+
+
+
+
 .variant p {
   color: #bcbcbc;
   font-family: Preahvihear;
@@ -247,6 +252,7 @@
   background: #fff;
   margin-left: 2.06rem;
   margin-top: 1.12rem;
+ 
 }
 .book_form_secion {
   display: flex;
