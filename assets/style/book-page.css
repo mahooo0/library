@@ -495,6 +495,11 @@ justify-content: start;
   cursor: pointer;
 }
 
+.new-modal p 
+{
+  margin-top: 15px;
+}
+
 
 .menu-mobile {
   display: none;

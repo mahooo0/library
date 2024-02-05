@@ -166,6 +166,7 @@
   border-radius: 2.125rem;
   border: 2px solid rgba(57, 31, 0, 0.48);
   background: var(--white);
+  padding-left: 1rem;
 }
 .search_section_btn {
   display: flex;
@@ -190,7 +191,12 @@
   flex-direction: row;
   margin-top: 0.81rem;
   margin-left: 2.25rem;
+
 }
+
+
+
+
 .variant p {
   color: #bcbcbc;
   font-family: Preahvihear;
@@ -207,7 +213,7 @@
 }
 .search_variants {
   width: 24.25rem;
-  height: 5.3125rem;
+  height: auto;
   flex-shrink: 0;
   border-radius: 2.1875rem;
   background: #f1f0f0;
@@ -246,6 +252,7 @@
   background: #fff;
   margin-left: 2.06rem;
   margin-top: 1.12rem;
+ 
 }
 .book_form_secion {
   display: flex;

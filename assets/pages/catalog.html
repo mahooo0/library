@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Catalog</title>
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/catalog.css">
+    <link rel="stylesheet" href="/assets/style/joinUs.css">
   </head>
   <body class="body">
   
@@ -45,13 +46,33 @@
         </ul>
         </nav>
       
-      <div class="joinUs">
+      <div  id="joinBtn" class="joinUs">
       <img src="../images/joinUs.svg" alt="profile" />
       <a id="myBtn">Join Us</a>
       </div>
       </header>
       
-      
+
+
+    <!-- JOIN US  -->
+
+    <div id="joinModal" class="modal">
+      <div class="modal-content">
+  <div class="join-modal">
+              <span>Join Us</span>
+              <div class="join-inp">
+                  <input type="text" placeholder="Full name">
+                  <input type="email"  placeholder="Email">
+              </div>
+              
+              <div class="join-btn">
+                  <button>Join</button>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
 
 
 
@@ -583,6 +604,7 @@ Policy
 </div>
 </div>
 </footer>
+<script src="/assets/scripts/join-modal.js"></script>
 
 
 <script src="/assets/js/catalog.js"></script>
