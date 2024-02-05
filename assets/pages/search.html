@@ -265,8 +265,66 @@
       </div>
       </footer>
 
+      <script type="module">
       
-      <script src="/assets/scripts/join-modal.js"></script>
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, orderByChild, startAt, endAt, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c",
+            authDomain: "library-35b3c.firebaseapp.com",
+            projectId: "library-35b3c",
+            storageBucket: "library-35b3c.appspot.com",
+            messagingSenderId: "498632706422",
+            appId: "1:498632706422:web:9d181dd4820520b7c01257",
+            databaseURL: "https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+    
+      
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+    
+        const inputSearchEl = document.querySelector('#inputSearchEl');
+        const searchBtnEl = document.querySelector('#searchBtnEl');
+        const bookEl = document.querySelector('#bookEl');
+    
+        const databaseRef = ref(database, 'books');
+    
+        inputSearchEl.addEventListener('input', async () => {
+            const searchTerm = inputSearchEl.value.trim();
+            if (searchTerm.length === 0) {
+                bookEl.innerHTML = ''; 
+                return;
+            }
+    
+    
+            const query = ref(databaseRef);
+            const filteredQuery = orderByChild(query, 'title')
+                .startAt(searchTerm) 
+                .endAt(searchTerm + "\uf8ff"); 
+    
+           
+            onValue(filteredQuery, (snapshot) => {
+                bookEl.innerHTML = ''; /
+                snapshot.forEach((childSnapshot) => {
+                    const bookData = childSnapshot.val();
+                    const bookDiv = document.createElement('div');
+                    bookDiv.classList.add('book');
+                    bookDiv.innerHTML = `
+                        <h2>${bookData.title}</h2>
+                        <p>${bookData.author}</p>
+                        <p>${bookData.description}</p>
+                    `;
+                    bookEl.appendChild(bookDiv);
+                });
+            });
+        });
+    </script>
+    
+
+      
+        <script src="/assets/scripts/join-modal.js"></script>
    
  <script src="../js/main.js"></script>
 <script src="../js/search.js"></script>
