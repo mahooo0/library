@@ -24,8 +24,15 @@ const search_Input = document.querySelector('#search_Input');
 const search_Btn = document.querySelector('#search_Btn');
 const search_variant = document.querySelector('#search_variant');
 const book_add = document.querySelector('#book_add');
-
 const book_form_div = document.querySelector('#book_form_div');
+// HTML book form elementleri
+const form_section_title=document.querySelector('#form_section_title')
+const form_section_autor=document.querySelector('#form_section_autor')
+const form_section_img=document.querySelector('#form_section_img')
+const form_textarea=document.querySelector('#form_textarea')
+const form_section_type=document.querySelector('#form_section_type')
+
+
 
 
 search_Input.addEventListener('input', async () => {
@@ -70,81 +77,82 @@ async function showBookVariants(books) {
             </div>
         `;
   });
+ search_variant.innerHTML = bookdata.join(' ');
 
-  search_variant.innerHTML = bookdata.join(' ');
-  const variant = document.querySelector('#variant');
-  variant.addEventListener('click', (s) => {
-    let seachBook = s.target.innerHTML;
-    let filterBook = books.filter((e) => {
-      if (e.volumeInfo.title == seachBook) {
-        return e;
-      }
-    });
-    console.log(filterBook);
-
-    const titleInput = filterBook[0].volumeInfo.title || 'Unknown Title';
-    const imageUrlInput =
-      filterBook[0].volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png';
-    const descriptionInput =
-      filterBook[0].volumeInfo.description || 'No Description Available';
-    const authorInput = filterBook[0].volumeInfo.authors || 'Unknown Author';
-    const bookTypeInput = filterBook[0].volumeInfo.categories || 'Unknown Type';
-
-    book_form_div.innerHTML = `
-              
-                    <div class="book_form_secion">
-                        <h2 class="book_form_secion_title">Book Name</h2>
-                        <input type="text" class="book_form_secion_inp" value="${titleInput}" placeholder="Angels">
-                    </div>
-                    <div class="book_form_secion">
-                        <h2 class="book_form_secion_title">Author Name</h2>
-                        <input type="text" class="book_form_secion_inp" value="${authorInput}" placeholder="Dan Brown">
-                    </div>
-                    <div class="book_form_secion">
-                        <h2 class="book_form_secion_title">Book Image Url</h2>
-                        <input type="text" class="book_form_secion_inp" placeholder="Alex Smith" value="${imageUrlInput}">
-                    </div>
-                    <div class="book_form_secion">
-                        <h2 class="book_form_secion_title"> Description</h2>
-                        <textarea cols="30" rows="10" class="description_inp" placeholder="We work without holidays and weekends! Resident...We work without holidays and weekends! Resident...We work without holidays and weekends! Resident...">${descriptionInput}</textarea>
-                    </div>
-                    <div class="book_form_secion">
-                        <h2 class="book_form_secion_title">Book Type</h2>
-                        <input type="text" class="book_form_secion_inp" value="${bookTypeInput}" placeholder="fantastic">
-                    </div>
-                    <button class="book_form_secion_btn">add</button>
-              
-            `;
-
-
-
-  
-
-          
-            book_form_div.addEventListener('click', () => {
-                
-       
-      const bookData = {
-        title: titleInput,
-        author: authorInput[0],
-        imageUrl: imageUrlInput,
-        description: descriptionInput,
-        bookType: bookTypeInput[0],
-        Date:Date.now()
-      };
-      addBookToFirebase(bookData);
-   
-
-      titleInput.value = '';
-      authorInput.value = '';
-      imageUrlInput.value = '';
-      descriptionInput.value = '';
-      bookTypeInput.value = '';
-    });
+  const variants = document.querySelectorAll('.variant-details');
+  variants.forEach(variant => {
+    variant.addEventListener('click', () => fillFormInputs(variant.textContent.trim(), books));
   });
 }
 
-// Elementin gorsenmeyi ucun funksiya
+// book formu dolduracaq funksiya
+function fillFormInputs(selectedTitle, books) {
+  const selectedBook = books.find(book => book.volumeInfo.title === selectedTitle);
+
+  if (!selectedBook) {
+    console.error('Selected book not found.');
+    return;
+  }
+
+  const titleInput = selectedBook.volumeInfo.title || 'Unknown Title';
+  const imageUrlInput = selectedBook.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png';
+  const descriptionInput = selectedBook.volumeInfo.description || 'No Description Available';
+  const authorInput = selectedBook.volumeInfo.authors || 'Unknown Author';
+  const bookTypeInput = selectedBook.volumeInfo.categories || 'Unknown Type';
+
+  form_section_title.value = titleInput;
+  form_section_autor.value = authorInput;
+  form_section_img.value = imageUrlInput;
+  form_textarea.value = descriptionInput;
+  form_section_type.value = bookTypeInput;
+}
+
+
+book_form_div.addEventListener('click', (event) => {
+
+  if (!event.target.matches('.book_form_secion_btn')) return;
+
+ 
+  const formInputs = getFormInputs();
+
+  // Herhansi bir setr bossa xeta veren if sherti
+  if (!formInputs.title || !formInputs.author || !formInputs.imageUrl || !formInputs.description || !formInputs.bookType) {
+    alert('Please fill in all fields!');
+    return;
+  }
+
+  // butun setrler doludursa kitabi firebase elave eden
+  const bookData = {
+    title: formInputs.title,
+    author: formInputs.author,
+    imageUrl: formInputs.imageUrl,
+    description: formInputs.description,
+    bookType: formInputs.bookType,
+    Date: Date.now()
+  };
+
+  addBookToFirebase(bookData);
+
+  // eger her sey qaydasidadisa formu temizleyir
+  clearFormInputs();
+});
+
+// Firebase'e kitap elave eden funksiya
+function addBookToFirebase(bookData) {
+  const booksRef = ref(database, 'books');
+  push(booksRef, bookData);
+}
+
+// Formdaki setrleri temizleyen funkisya
+function clearFormInputs() {
+  form_section_title.value = '';
+  form_section_autor.value = '';
+  form_section_img.value = '';
+  form_textarea.value = '';
+  form_section_type.value = '';
+}
+
+// Elementin görünmesi ucun funksiya
 function displayFunk(el) {
   let class_List = el.classList;
   if (class_List.contains('d-none')) {
@@ -152,8 +160,13 @@ function displayFunk(el) {
   }
 }
 
-// Firebase'e kitablari atan funksiya
-function addBookToFirebase(bookData) {
-  const booksRef = ref(database, 'books');
-  push(booksRef, bookData);
+// Formdaki setrleri qebul eden funksiya
+function getFormInputs() {
+  const title = form_section_title.value.trim();
+  const author = form_section_autor.value.trim();
+  const imageUrl = form_section_img.value.trim();
+  const description = form_textarea.value.trim();
+  const bookType = form_section_type.value.trim();
+
+  return { title, author, imageUrl, description, bookType };
 }
