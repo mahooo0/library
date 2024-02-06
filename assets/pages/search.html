@@ -55,33 +55,35 @@
           <li><a href="./search.html" class="active">Search</a></li>
           </ul>
           </nav>
-      
-      <div  id="joinBtn" class="joinUs">
-      <img src="../images/joinUs.svg" alt="profile" />
-      <a id="myBtn">Join Us</a>
-      </div>
+ 
+<div class="joinUs">
+  <img src="/assets/images/joinUs.svg" alt="profile" />
+  <a id="joinBtn">Join Us</a>
+  </div>
       </header>
       
 
 
-    <!-- JOIN US  -->
 
-    <div id="joinModal" class="modal">
-      <div class="modal-content">
-  <div class="join-modal">
-              <span>Join Us</span>
-              <div class="join-inp">
-                  <input type="text" placeholder="Full name">
-                  <input type="email"  placeholder="Email">
-              </div>
-              
-              <div class="join-btn">
-                  <button>Join</button>
-              </div>
-          </div>
-      </div>
+   <!-- JOIN US  -->
 
-  </div>
+   <div id="joinModal" class="modal">
+    <div class="modal-content">
+<div class="join-modal">
+            <span>Join Us</span>
+            <div class="join-inp">
+                <input type="email" placeholder="Email" id="Join_email">
+                <input type="password"  placeholder="password" id="Join_password">
+            </div>
+            
+            <div class="join-btn">
+                <button id="Join_btn">Join</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 
 
@@ -269,7 +271,7 @@
     
 
       
-        <script src="/assets/scripts/join-modal.js"></script>
+    <script type="module" src="/assets/scripts/join-modal.js"></script>
    
  <script  type="module" src="../js/main.js"></script>
 <script src="../js/search.js"></script>
