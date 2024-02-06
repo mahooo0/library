@@ -1,10 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
-  getDatabase,
-  ref,
-  push,
-  onValue,
-  set,
+    getDatabase,
+    ref,
+    push,
+    onValue,
+    set,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
