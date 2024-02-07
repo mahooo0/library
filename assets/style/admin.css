@@ -8,12 +8,18 @@
   --Orange: #e16a00;
   --Black: #241400;
   --Background: #fffaf5;
+  --grayPlaceholder : #636769 ;
   --white: #fff;
   --fontMontserrat: 'Montserrat', sans-serif;
 }
 
 
 
+
+.isNewInput {
+  display: flex;
+  gap: 10px;
+}
 
 /* mahoo */
 
@@ -295,7 +301,7 @@
   padding: 0.5rem, 0.75rem;
 }
 ::placeholder {
-  color: var(--Black, #030102);
+  color: var(--grayPlaceholder);
   /* font-family: Roboto; */
   font-size: 1rem;
   font-style: normal;

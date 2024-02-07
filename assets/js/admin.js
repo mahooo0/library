@@ -1,4 +1,5 @@
 
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import {
   getDatabase,
@@ -15,12 +16,16 @@ const firebaseConfig = {
   appId: '1:498632706422:web:9d181dd4820520b7c01257',
   databaseURL:
     'https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app',
+
 };
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+// export const firebaseDatabase = getDatabase(firebaseApp);
+export const firebaseDatabase = database;
 
 // HTML elementleri
+
 const search_Input = document.querySelector('#search_Input');
 const search_Btn = document.querySelector('#search_Btn');
 const search_variant = document.querySelector('#search_variant');
@@ -34,23 +39,27 @@ const form_textarea = document.querySelector('#form_textarea');
 const form_section_type = document.querySelector('#form_section_type');
 
 // Google Books API'sinden kitapları alan fonksiyon
+
 async function getBooks(searchTerm) {
   try {
     const response = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
     );
     if (!response.ok) {
+
       throw new Error('API request failed');
     }
     return await response.json();
   } catch (error) {
     console.error('Error fetching books:', error);
+
     return null;
   }
 }
 
 // Kitap variyantlarini gosteren fonksiyon
 async function showBookVariants(books) {
+
   let bookdata = books.map((book) => {
     return `
       <div class="variant-details" id="variant">
@@ -190,4 +199,5 @@ function displayFunk(el) {
   if (class_List.contains('d-none')) {
     el.classList.remove('d-none');
   }
+
 }

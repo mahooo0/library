@@ -60,10 +60,15 @@
 
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  /* justify-content: space-between; */
  
-  gap: 72px;
+  /* gap: 72px; */
 
 }
+
+
 
 /* Mobile style */
 @media only screen and (max-width: 768px) {
