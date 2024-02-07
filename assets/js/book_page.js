@@ -45,3 +45,7 @@
   console.log(db)
   const book_ref=ref(db,'comments/')
   set(book_ref,"aaaaaa")
+
+
+// yuxardaki kod bele yazilsa daha yaxsi olar
+  // set(ref(db, 'comments/'), "aaaaaa");
