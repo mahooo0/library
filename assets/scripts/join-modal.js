@@ -22,44 +22,64 @@ window.addEventListener("click", function (event) {
   }
 });
 
-const Join_email_inp=document.querySelector("#Join_email")
-const Join_password_inp=document.querySelector("#Join_password")
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import {
+  getDatabase,
+  ref,
+  push,
+} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c',
+  authDomain: 'library-35b3c.firebaseapp.com',
+  projectId: 'library-35b3c',
+  storageBucket: 'library-35b3c.appspot.com',
+  messagingSenderId: '498632706422',
+  appId: '1:498632706422:web:9d181dd4820520b7c01257',
+  databaseURL:
+    'https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app',
+
+};
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+// export const firebaseDatabase = getDatabase(firebaseApp);
+export const firebaseDatabase = database;
+//join us HTML el
+
 const Join_btn=document.querySelector("#Join_btn")
+//join info fire base
+Join_btn.addEventListener("click",()=>{
+  const Join_name=document.querySelector("#Join_name").value
+  const Join_email=document.querySelector("#Join_email").value
+  if(!Join_name||!Join_email){
+    alert("please fill in all fields! ")
+    return
+  }
+  let join_info={
+    Join_name,
+    Join_email
+  }
+console.log(join_info);
+addJoinInfoToFirebase(join_info)
 
-//  join us fire bas
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCV_voaw0_yXKkpKGQF3oLjmaLCxiLhWMA",
-      authDomain: "library-auth-d42eb.firebaseapp.com",
-      projectId: "library-auth-d42eb",
-      storageBucket: "library-auth-d42eb.appspot.com",
-      messagingSenderId: "145737395628",
-      appId: "1:145737395628:web:89b70be0447b0a50a35e09"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    Join_btn.addEventListener("click",()=>{
-      let Join_email=Join_email_inp.value
-      let Join_password=Join_password_inp.value
-      createUserWithEmailAndPassword(auth, Join_email, Join_password)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        console.log("created");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-       console.log(errorCode + errorMessage);
-      });
 
-    })
-//  join us fire bas
+
+
+
+
+joinModal.style.display = "none";
+document.querySelector("#Join_email").value=""
+document.querySelector("#Join_name").value=""
+
+})
+
+async function addJoinInfoToFirebase(Data) {
+  try {
+    const joinRef = ref(database, 'join-info');
+    await push(joinRef, Data);
+    alert("join sucsesfully");
+  } catch (error) {
+    console.error('Error adding book to Firebase:', error);
+    throw error; // 
+  }
+}
