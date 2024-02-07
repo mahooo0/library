@@ -40,3 +40,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 
+
+const book_title_div=document.querySelector('#book_title_div')
+
+
