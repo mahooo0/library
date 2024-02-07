@@ -20,6 +20,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+// export const firebaseDatabase = getDatabase(firebaseApp);
+export const firebaseDatabase = database;
 
 // HTML elementleri
 const search_Input = document.querySelector("#search_Input");
