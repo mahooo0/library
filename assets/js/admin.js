@@ -1,3 +1,5 @@
+
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import {
   getDatabase,
@@ -26,14 +28,11 @@ const search_variant = document.querySelector('#search_variant');
 const book_add = document.querySelector('#book_add');
 const book_form_div = document.querySelector('#book_form_div');
 // HTML book form elementleri
-const form_section_title=document.querySelector('#form_section_title')
-const form_section_autor=document.querySelector('#form_section_autor')
-const form_section_img=document.querySelector('#form_section_img')
-const form_textarea=document.querySelector('#form_textarea')
-const form_section_type=document.querySelector('#form_section_type')
-
-
-
+const form_section_title = document.querySelector('#form_section_title');
+const form_section_autor = document.querySelector('#form_section_autor');
+const form_section_img = document.querySelector('#form_section_img');
+const form_textarea = document.querySelector('#form_textarea');
+const form_section_type = document.querySelector('#form_section_type');
 
 search_Input.addEventListener('input', async () => {
   const searchTerm = search_Input.value.trim();
@@ -77,26 +76,33 @@ async function showBookVariants(books) {
             </div>
         `;
   });
- search_variant.innerHTML = bookdata.join(' ');
+  search_variant.innerHTML = bookdata.join(' ');
 
   const variants = document.querySelectorAll('.variant-details');
-  variants.forEach(variant => {
-    variant.addEventListener('click', () => fillFormInputs(variant.textContent.trim(), books));
+  variants.forEach((variant) => {
+    variant.addEventListener('click', () =>
+      fillFormInputs(variant.textContent.trim(), books)
+    );
   });
 }
 
 // book formu dolduracaq funksiya
 function fillFormInputs(selectedTitle, books) {
-  const selectedBook = books.find(book => book.volumeInfo.title === selectedTitle);
+  const selectedBook = books.find(
+    (book) => book.volumeInfo.title === selectedTitle
+  );
 
   if (!selectedBook) {
     console.error('Selected book not found.');
+    alert('zehmet olmasa xanalari doldurun');
     return;
   }
 
   const titleInput = selectedBook.volumeInfo.title || 'Unknown Title';
-  const imageUrlInput = selectedBook.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png';
-  const descriptionInput = selectedBook.volumeInfo.description || 'No Description Available';
+  const imageUrlInput =
+    selectedBook.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png';
+  const descriptionInput =
+    selectedBook.volumeInfo.description || 'No Description Available';
   const authorInput = selectedBook.volumeInfo.authors || 'Unknown Author';
   const bookTypeInput = selectedBook.volumeInfo.categories || 'Unknown Type';
 
@@ -107,16 +113,20 @@ function fillFormInputs(selectedTitle, books) {
   form_section_type.value = bookTypeInput;
 }
 
-
 book_form_div.addEventListener('click', (event) => {
-
   if (!event.target.matches('.book_form_secion_btn')) return;
 
- 
   const formInputs = getFormInputs();
+  const bookType = formInputs.bookType;
 
   // Herhansi bir setr bossa xeta veren if sherti
-  if (!formInputs.title || !formInputs.author || !formInputs.imageUrl || !formInputs.description || !formInputs.bookType) {
+  if (
+    !formInputs.title ||
+    !formInputs.author ||
+    !formInputs.imageUrl ||
+    !formInputs.description ||
+    !formInputs.bookType
+  ) {
     alert('Please fill in all fields!');
     return;
   }
@@ -128,7 +138,7 @@ book_form_div.addEventListener('click', (event) => {
     imageUrl: formInputs.imageUrl,
     description: formInputs.description,
     bookType: formInputs.bookType,
-    Date: Date.now()
+    Date: Date.now(),
   };
 
   addBookToFirebase(bookData);
@@ -166,7 +176,7 @@ function getFormInputs() {
   const author = form_section_autor.value.trim();
   const imageUrl = form_section_img.value.trim();
   const description = form_textarea.value.trim();
-  const bookType = form_section_type.value.trim();
-
-  return { title, author, imageUrl, description, bookType };
+// Sətir üçün bookType-ı yoxlayır və əgər bu sadəcə bir sətirdirsə .trim() metodunu çağırır
+  const bookTypeValue = typeof form_section_type.value === 'string' ? form_section_type.value.trim() : form_section_type.value;
+  return { title, author, imageUrl, description, bookType: bookTypeValue };
 }
