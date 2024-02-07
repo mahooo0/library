@@ -1,5 +1,4 @@
 
-
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import {
   getDatabase,
@@ -34,21 +33,7 @@ const form_section_img = document.querySelector('#form_section_img');
 const form_textarea = document.querySelector('#form_textarea');
 const form_section_type = document.querySelector('#form_section_type');
 
-search_Input.addEventListener('input', async () => {
-  const searchTerm = search_Input.value.trim();
-  if (searchTerm.length == 0) {
-    search_variant.classList.add('d-none');
-  }
-  if (searchTerm.length > 0) {
-    const data = await getBooks(searchTerm);
-    if (data && data.items) {
-      showBookVariants(data.items);
-    }
-    displayFunk(search_variant);
-  }
-});
-
-// Google Books API'sinden kitapları alan funksiya
+// Google Books API'sinden kitapları alan fonksiyon
 async function getBooks(searchTerm) {
   try {
     const response = await fetch(
@@ -64,17 +49,14 @@ async function getBooks(searchTerm) {
   }
 }
 
-// Kitap variyantlarini gosteren funksiya
+// Kitap variyantlarini gosteren fonksiyon
 async function showBookVariants(books) {
   let bookdata = books.map((book) => {
     return `
-         
-            <div class="variant-details" id="variant">
-                <h3>${book.volumeInfo.title}</h3>
-            
-            
-            </div>
-        `;
+      <div class="variant-details" id="variant">
+        <h3>${book.volumeInfo.title}</h3>
+      </div>
+    `;
   });
   search_variant.innerHTML = bookdata.join(' ');
 
@@ -86,7 +68,7 @@ async function showBookVariants(books) {
   });
 }
 
-// book formu dolduracaq funksiya
+// Formu dolduran funksiya
 function fillFormInputs(selectedTitle, books) {
   const selectedBook = books.find(
     (book) => book.volumeInfo.title === selectedTitle
@@ -94,7 +76,7 @@ function fillFormInputs(selectedTitle, books) {
 
   if (!selectedBook) {
     console.error('Selected book not found.');
-    alert('zehmet olmasa xanalari doldurun');
+    alert('Please fill in all fields!');
     return;
   }
 
@@ -104,34 +86,63 @@ function fillFormInputs(selectedTitle, books) {
   const descriptionInput =
     selectedBook.volumeInfo.description || 'No Description Available';
   const authorInput = selectedBook.volumeInfo.authors || 'Unknown Author';
-  const bookTypeInput = selectedBook.volumeInfo.categories || 'Unknown Type';
+  const bookTypeInput = selectedBook.volumeInfo.categories && selectedBook.volumeInfo.categories.length > 0
+    ? selectedBook.volumeInfo.categories.join(', ') 
+    : 'Unknown Type';
 
   form_section_title.value = titleInput;
   form_section_autor.value = authorInput;
   form_section_img.value = imageUrlInput;
   form_textarea.value = descriptionInput;
   form_section_type.value = bookTypeInput;
+  console.log(form_section_type);
+}
+
+// Firebase'e kitap elave eden funksiya
+async function addBookToFirebase(bookData) {
+  try {
+    const booksRef = ref(database, 'books');
+    await push(booksRef, bookData);
+    alert('Kitab uğurla Firebase-ə əlavə edildi!');
+  } catch (error) {
+    console.error('Error adding book to Firebase:', error);
+    throw error; // 
+  }
+}
+
+// Formdaki setrleri temizleyen funksiya
+function clearFormInputs() {
+  form_section_title.value = '';
+  form_section_autor.value = '';
+  form_section_img.value = '';
+  form_textarea.value = '';
+  form_section_type.value = '';
+  search_Input.value='';
+}
+
+// Form setrlerini tesdiq eden funksiya
+function validateFormInputs(formInputs) {
+  return (
+    formInputs.title &&
+    formInputs.author &&
+    formInputs.imageUrl &&
+    formInputs.description &&
+    formInputs.bookType
+  );
 }
 
 book_form_div.addEventListener('click', (event) => {
-  if (!event.target.matches('.book_form_secion_btn')) return;
+  if (!event.target.matches('#book_add')) return;
 
   const formInputs = getFormInputs();
-  const bookType = formInputs.bookType;
 
-  // Herhansi bir setr bossa xeta veren if sherti
-  if (
-    !formInputs.title ||
-    !formInputs.author ||
-    !formInputs.imageUrl ||
-    !formInputs.description ||
-    !formInputs.bookType
-  ) {
+  // Form setrlerini tesdiqetme
+  if (!validateFormInputs(formInputs)) {
     alert('Please fill in all fields!');
     return;
   }
 
-  // butun setrler doludursa kitabi firebase elave eden
+  // butun setrler dogrudursa firebase kitab elave et
   const bookData = {
     title: formInputs.title,
     author: formInputs.author,
@@ -143,47 +154,40 @@ book_form_div.addEventListener('click', (event) => {
 
   addBookToFirebase(bookData);
 
-  // eger her sey qaydasidadisa formu temizleyir
+  // Her shey dogrudursa formu temizle
   clearFormInputs();
+  search_variant.style.display='none'
 });
 
-// Firebase'e kitap elave eden funksiya
-async function addBookToFirebase(bookData) {
-    try {
-      const booksRef = ref(database, 'books');
-      await push(booksRef, bookData);
-      alert('Kitab uğurla Firebase-ə əlavə edildi!');
-    } catch (error) {
-      console.error('Error adding book to Firebase:', error);
-      throw error; // 
-    }
-  }
-  
-  
-// Formdaki setrleri temizleyen funkisya
-function clearFormInputs() {
-  form_section_title.value = '';
-  form_section_autor.value = '';
-  form_section_img.value = '';
-  form_textarea.value = '';
-  form_section_type.value = '';
-}
-
-// Elementin görünmesi ucun funksiya
-function displayFunk(el) {
-  let class_List = el.classList;
-  if (class_List.contains('d-none')) {
-    el.classList.remove('d-none');
-  }
-}
-
-// Formdaki setrleri qebul eden funksiya
+// Formadan daxil olan məlumatları qəbul edən və qaytaran funksiya
 function getFormInputs() {
   const title = form_section_title.value.trim();
   const author = form_section_autor.value.trim();
   const imageUrl = form_section_img.value.trim();
   const description = form_textarea.value.trim();
-// Sətir üçün bookType-ı yoxlayır və əgər bu sadəcə bir sətirdirsə .trim() metodunu çağırır
+  // Sətir üçün bookType-ı yoxlayır və əgər bu sadəcə bir sətirdirsə .trim() metodunu çağırır
   const bookTypeValue = typeof form_section_type.value === 'string' ? form_section_type.value.trim() : form_section_type.value;
   return { title, author, imageUrl, description, bookType: bookTypeValue };
+}
+
+search_Input.addEventListener('input', async () => {
+  const searchTerm = search_Input.value.trim();
+  if (searchTerm.length == 0) {
+    search_variant.style.display='block'
+  }
+  if (searchTerm.length > 0) {
+    const data = await getBooks(searchTerm);
+    if (data && data.items) {
+      showBookVariants(data.items);
+    }
+    displayFunk(search_variant);
+  }
+});
+
+// Elementin görünmesi için fonksiyon
+function displayFunk(el) {
+  let class_List = el.classList;
+  if (class_List.contains('d-none')) {
+    el.classList.remove('d-none');
+  }
 }
