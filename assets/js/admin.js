@@ -148,11 +148,18 @@ book_form_div.addEventListener('click', (event) => {
 });
 
 // Firebase'e kitap elave eden funksiya
-function addBookToFirebase(bookData) {
-  const booksRef = ref(database, 'books');
-  push(booksRef, bookData);
-}
-
+async function addBookToFirebase(bookData) {
+    try {
+      const booksRef = ref(database, 'books');
+      await push(booksRef, bookData);
+      alert('Kitab uğurla Firebase-ə əlavə edildi!');
+    } catch (error) {
+      console.error('Error adding book to Firebase:', error);
+      throw error; // 
+    }
+  }
+  
+  
 // Formdaki setrleri temizleyen funkisya
 function clearFormInputs() {
   form_section_title.value = '';
