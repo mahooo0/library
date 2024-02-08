@@ -1,29 +1,15 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const swiper = new Swiper('.swiper', {
-    slidesPerView: 1,
-    spaceBetween: 10,
 
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  });
-});
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+// Firebase konfiqurasiyası və tətbiqin başlatılması
+
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
 import {
   getDatabase,
   ref,
-  push,
+  set,
+  onValue,
   get,
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+} from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c',
@@ -37,10 +23,76 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const database = getDatabase(app);
 
+// HTML-dən lazım olan elementlərin alınması
+const searchBtnEl = document.querySelector('#searchBtnEl');
+const inputSearchEl = document.querySelector('#inputSearchEl');
+const swiper_div = document.querySelector('#swiper_div');
+const book_img = document.querySelector('#book_img');
+const book_name_h2 = document.querySelector('#book_name_h2');
+const author_p = document.querySelector('#author_p');
+const title_p = document.querySelector('#title_p');
+// Axtarış düyməsinə klikləndikdə kitabları axtaran funksiya
+function searchBooks(query) {
+  // Firebase-dən kitabları almaq
+  const booksRef = ref(database, 'books');
 
+  get(booksRef).then((snapshot) => {
+    const data = snapshot.val();
+    const books = Object.values(data);
 
-const book_title_div=document.querySelector('#book_title_div')
+    const filteredBooks = books.filter((book) => {
+      const title = book.title.toLowerCase();
+      const author =
+        typeof book.author === 'string' ? book.author.toLowerCase() : '';
+      return (
+        title.includes(query.toLowerCase()) ||
+        author.includes(query.toLowerCase())
+      );
+    });
 
+  
 
+    renderBooks(filteredBooks);
+  });
+}
+
+function renderBooks(books) {
+  let swiperDiv = books.map((book) => {
+    return `
+ <div class="swiper-slide" >   <div class="box2" >
+      <div class="book1" >
+        <img
+          class="book" id="book_img"
+          src="${book.imageUrl}"
+          alt="book"
+        />
+      </div>
+      <div class="book_title" id="book_title_div">
+        <h2 class="book_name" id="book_name_h2">${book.title}</h2>
+        <p class="author" id="author_p">${book.author}</p>
+        <p class="title" id="title_p">${book.description}
+        </p>
+      </div>
+     
+    </div></div>
+  
+    `;
+  });
+  swiper_div.innerHTML = swiperDiv.join('');
+}
+// Axtarış düyməsinə klikləndikdə axtarış prosesini başlatma
+searchBtnEl.addEventListener('click', () => {
+  const searchTerm = inputSearchEl.value.trim();
+  searchBooks(searchTerm);
+});
+
+// Firebase-dəki məlumatı səhifə yüklənərkən göstərmək üçün renderBooks funksiyasını buraya əlavə edirik
+onValue(ref(database, 'books'), (snapshot) => {
+  const data = snapshot.val();
+  const books = Object.values(data);
+
+  renderBooks(books);
+});
