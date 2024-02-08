@@ -201,3 +201,32 @@ function displayFunk(el) {
   }
 
 }
+//  admin panel entering
+const admin_panel_btn= document.querySelector("#admin_panel_btn")
+let userName_inp=document.querySelector("#admin_panel_username")
+let Password_inp=document.querySelector("#admin_panel_pasword")
+let admin_auth=document.querySelector("#admin_auth")
+let admin_main=document.querySelector("#admin_main")
+let log_outh=document.querySelector("#log_outh")
+
+admin_panel_btn.addEventListener("click", ()=>{
+let userName=userName_inp.value
+let Password=Password_inp.value
+
+if(!userName||!Password){
+  alert('Please fill in all fields!')
+}
+if (userName==="admin"&&Password==="admin"){
+  admin_auth.classList.add("d-none")
+  admin_main.classList.remove("d-none")
+ 
+}else{
+  alert("u wrote somthing wrong")
+}
+
+})
+
+log_outh.addEventListener("click",()=>{
+  admin_auth.classList.remove("d-none")
+  admin_main.classList.add("d-none")
+})
