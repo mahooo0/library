@@ -140,7 +140,8 @@ function validateFormInputs(formInputs) {
     formInputs.author &&
     formInputs.imageUrl &&
     formInputs.description &&
-    formInputs.bookType
+    formInputs.bookType &&
+    formInputs.publicationYear
    
   );
 }
@@ -163,6 +164,7 @@ bookFormDiv.addEventListener("click", (event) => {
     imageUrl: formInputs.imageUrl,
     description: formInputs.description,
     bookType: formInputs.bookType,
+    publicationYear: formInputs.publicationYear,
     Date: Date.now(),
   };
 
