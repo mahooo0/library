@@ -48,9 +48,8 @@ function displayContactData() {
         // Iterate over each contact
         Object.keys(data).forEach((key, index) => {
           const contact = data[key];
-          // console.log(contact);
 
-          // Create a new table row
+          // Create a new table row for each contact
           const newRow = document.createElement("tr");
           newRow.innerHTML = `
             <td class="th_num">${index + 1}</td>
@@ -71,6 +70,8 @@ function displayContactData() {
   );
 }
 
+
 window.onload = function () {
   displayContactData();
 };
+
