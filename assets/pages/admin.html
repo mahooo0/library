@@ -148,20 +148,12 @@
             <div class="book_form" id="book_form_div">
                 <div class=" book_form_secion">
                     <h2 class="book_form_secion_title">Book Name</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_title" >
-                </div> 
-                 <div class=" book_form_secion">
-                    <h2 class="book_form_secion_title">Author Name</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_autor" >
+
                 </div>
                 <div class=" book_form_secion">
 
                     <h2 class="book_form_secion_title">Book Image Url</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_img" >
-                </div>
-                 <div class=" book_form_secion">
-                    <h2 class="book_form_secion_title">Description </h2>
-                    <textarea name="" id="form_textarea" cols="30" rows="10" class="description_inp" ></textarea>
+
                 </div> 
                 <div class=" book_form_secion d-flex flex-row">
 
@@ -172,8 +164,21 @@
                 </div>
                 <div class=" book_form_secion">
 
+
+                    <div class="add-type-book">
+                        <h2 class="book_form_secion_title">Book Type</h2>
+                    <button id="addTypeBtnForm">Add type</button>
+                    <div id="addTypeModal" class="modal-book-form">
+                    <input placeholder="booktype" />
+                    <button class="add-type-form-btn">Add</button>
+                    <button id="closeTypeBtn" class="close-type-form-btn">X</button>
+                </div>
+                </div>
+                    <input class="book_form_secion_inp" id="form_section_type" placeholder="book type" >
+
                     <h2 class="book_form_secion_title"  >Book Type</h2>
                     <input class="book_form_secion_inp" id="form_section_type">
+
 
                 </div>
                 
@@ -272,7 +277,7 @@
                      </tr>
                  </thead>
                  <tbody id="table_body" class="table_body">
-                     <tr class="b_tr">
+                     <tr id="cont_tr" class="b_tr">
                          <td class="th_num">1</td>
                          <td id="contactName0" class="th_book_title"> <p>Audrey Mckinney</p></td>
                          <td id="contactAdress0" class="th_book_description">1473 Ranchview Dr undefined San Jose</td>

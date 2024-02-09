@@ -230,3 +230,24 @@ log_outh.addEventListener("click",()=>{
   admin_auth.classList.remove("d-none")
   admin_main.classList.add("d-none")
 })
+
+
+
+let addTypeModal =  document.querySelector("#addTypeModal");
+let addTypeBtnForm = document.querySelector("#addTypeBtnForm");
+let closeTypeBtn = document.querySelector("#closeTypeBtn")
+
+
+// addTypeBtnForm.addEventListener('click',function(){ 
+
+// })
+
+function toggleModal() {
+  addTypeModal.style.visibility = addTypeModal.style.display === 'visible' ? 'hidden' : 'visible';
+}
+
+// Event listener to toggle modal when button is clicked
+addTypeBtnForm.addEventListener('click', toggleModal);
+closeTypeBtn.addEventListener('click', function(){  
+  addTypeModal.style.visibility = 'hidden'
+});

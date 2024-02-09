@@ -566,6 +566,58 @@
   line-height: normal;
 }
 
+
+.add-type-book  { 
+  display: flex;
+  gap: 20px;
+  visibility: visible;
+}
+
+
+.modal-book-form {
+  /* hidden by default, will be visible on click  */
+  visibility: hidden;
+}
+
+.add-type-book button {
+  border-radius: 9px;
+  border: none;
+  background-color: #0892268b;
+  width: 90px;
+  height: 30px;
+}
+.add-type-book .modal-book-form input 
+{ 
+  height: 30px;
+  border-radius: 9px;
+  border-color: rgba(191, 188, 188, 0.611);
+}
+
+.add-type-book input::placeholder{  
+  padding-left: 5px;
+}
+
+.add-type-book .add-type-form-btn { 
+  border-radius: 9px;
+  border: none;
+  background-color:var(--Orange);
+  width: 90px;
+  height: 30px;
+  color: var(--white);
+
+}
+
+
+.add-type-book .close-type-form-btn{
+  border-radius: 9px;
+  border: none;
+  background-color: rgba(139, 3, 3, 0.689);
+  width: 30px;
+  height: 30px;
+  color: var(--white);
+}
+
+
 @media only screen and (max-width: 768px) {
   
 .section1{
