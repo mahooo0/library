@@ -1,3 +1,6 @@
+
+
+
 // Anar's code start
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
@@ -24,17 +27,18 @@ export const firebaseDatabase = database;
 
 // HTML elementleri
 
-const search_Input = document.querySelector("#search_Input");
-const search_Btn = document.querySelector("#search_Btn");
-const search_variant = document.querySelector("#search_variant");
-const book_add = document.querySelector("#book_add");
-const book_form_div = document.querySelector("#book_form_div");
+const searchInput = document.querySelector("#search_Input");
+const searchBtn = document.querySelector("#search_Btn");
+const searchVariant = document.querySelector("#search_variant");
+const bookAddBtn = document.querySelector("#book_add");
+const bookFormDiv = document.querySelector("#book_form_div");
 // HTML book form elementleri
-const form_section_title = document.querySelector("#form_section_title");
-const form_section_autor = document.querySelector("#form_section_autor");
-const form_section_img = document.querySelector("#form_section_img");
-const form_textarea = document.querySelector("#form_textarea");
-const form_section_type = document.querySelector("#form_section_type");
+const formSectionTitle = document.querySelector("#form_section_title_input");
+const formSectionAuthor = document.querySelector("#form_section_author_input");
+const formSectionImg = document.querySelector("#form_section_img_url");
+const formSectionYear = document.querySelector("#form_section_publication_year");
+const formSectionType = document.querySelector("#form_section_type_input");
+const formSectionDescription = document.querySelector("#form_section_description_input");
 
 // Google Books API'sinden kitapları alan fonksiyon
 
@@ -63,7 +67,7 @@ async function showBookVariants(books) {
       </div>
     `;
   });
-  search_variant.innerHTML = bookdata.join(" ");
+  searchVariant.innerHTML = bookdata.join(" ");
 
   const variants = document.querySelectorAll(".variant-details");
   variants.forEach((variant) => {
@@ -86,23 +90,24 @@ function fillFormInputs(selectedTitle, books) {
   }
 
   const titleInput = selectedBook.volumeInfo.title || "Unknown Title";
+  const authorInput = selectedBook.volumeInfo.authors?.[0] || "Unknown Author";
   const imageUrlInput =
     selectedBook.volumeInfo.imageLinks?.thumbnail || "/assets/img/default.png";
+  const publicationYearInput = selectedBook.volumeInfo.publishedDate || "Unknown";
   const descriptionInput =
     selectedBook.volumeInfo.description || "No Description Available";
-  const authorInput = selectedBook.volumeInfo.authors || "Unknown Author";
   const bookTypeInput =
     selectedBook.volumeInfo.categories &&
     selectedBook.volumeInfo.categories.length > 0
       ? selectedBook.volumeInfo.categories.join(", ")
       : "Unknown Type";
 
-  form_section_title.value = titleInput;
-  form_section_autor.value = authorInput;
-  form_section_img.value = imageUrlInput;
-  form_textarea.value = descriptionInput;
-  form_section_type.value = bookTypeInput;
-  console.log(form_section_type);
+  formSectionTitle.value = titleInput;
+  formSectionAuthor.value = authorInput;
+  formSectionImg.value = imageUrlInput;
+  formSectionYear.value = publicationYearInput;
+  formSectionDescription.value = descriptionInput;
+  formSectionType.value = bookTypeInput;
 }
 
 // Firebase'e kitap elave eden funksiya
@@ -119,12 +124,13 @@ async function addBookToFirebase(bookData) {
 
 // Formdaki setrleri temizleyen funksiya
 function clearFormInputs() {
-  form_section_title.value = "";
-  form_section_autor.value = "";
-  form_section_img.value = "";
-  form_textarea.value = "";
-  form_section_type.value = "";
-  search_Input.value = "";
+  formSectionTitle.value = "";
+  formSectionAuthor.value = "";
+  formSectionImg.value = "";
+  formSectionYear.value = "";
+  formSectionDescription.value = "";
+  formSectionType.value = "";
+  searchInput.value = "";
 }
 
 // Form setrlerini tesdiq eden funksiya
@@ -135,10 +141,11 @@ function validateFormInputs(formInputs) {
     formInputs.imageUrl &&
     formInputs.description &&
     formInputs.bookType
+   
   );
 }
 
-book_form_div.addEventListener("click", (event) => {
+bookFormDiv.addEventListener("click", (event) => {
   if (!event.target.matches("#book_add")) return;
 
   const formInputs = getFormInputs();
@@ -163,34 +170,34 @@ book_form_div.addEventListener("click", (event) => {
 
   // Her shey dogrudursa formu temizle
   clearFormInputs();
-  search_variant.style.display = "none";
+  searchVariant.style.display = "none";
 });
 
 // Formadan daxil olan məlumatları qəbul edən və qaytaran funksiya
 function getFormInputs() {
-  const title = form_section_title.value.trim();
-  const author = form_section_autor.value.trim();
-  const imageUrl = form_section_img.value.trim();
-  const description = form_textarea.value.trim();
-  // Sətir üçün bookType-ı yoxlayır və əgər bu sadəcə bir sətirdirsə .trim() metodunu çağırır
+  const title = formSectionTitle.value.trim();
+  const author = formSectionAuthor.value.trim();
+  const imageUrl = formSectionImg.value.trim();
+  const publicationYear = formSectionYear.value.trim();
+  const description = formSectionDescription.value.trim();
   const bookTypeValue =
-    typeof form_section_type.value === "string"
-      ? form_section_type.value.trim()
-      : form_section_type.value;
-  return { title, author, imageUrl, description, bookType: bookTypeValue };
+    typeof formSectionType.value === "string"
+      ? formSectionType.value.trim()
+      : formSectionType.value;
+  return { title, author, imageUrl, publicationYear, description, bookType: bookTypeValue };
 }
 
-search_Input.addEventListener("input", async () => {
-  const searchTerm = search_Input.value.trim();
+searchInput.addEventListener("input", async () => {
+  const searchTerm = searchInput.value.trim();
   if (searchTerm.length == 0) {
-    search_variant.style.display = "block";
+    searchVariant.style.display = "block";
   }
   if (searchTerm.length > 0) {
     const data = await getBooks(searchTerm);
     if (data && data.items) {
       showBookVariants(data.items);
     }
-    displayFunk(search_variant);
+    displayFunk(searchVariant);
   }
 });
 
