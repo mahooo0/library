@@ -1,5 +1,5 @@
 
-
+// Anar's code start
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import {
   getDatabase,
@@ -193,13 +193,13 @@ search_Input.addEventListener('input', async () => {
   }
 });
 
-// Elementin görünmesi için fonksiyon
+// Elementin görünmesi ucun funksiya
 function displayFunk(el) {
   let class_List = el.classList;
   if (class_List.contains('d-none')) {
     el.classList.remove('d-none');
   }
-
+// Anar's code finish 
 }
 //  admin panel entering
 const admin_panel_btn= document.querySelector("#admin_panel_btn")
