@@ -62,7 +62,8 @@ function searchBooks(query) {
 function renderBooks(books) {
   let swiperDiv = books.map((book) => {
     return `
- <div class="swiper-slide" >   <div class="box2" >
+ <div class="swiper-slide" >  
+  <div class="box2" >
       <div class="book1" >
         <img
           class="book" id="book_img"
@@ -77,7 +78,8 @@ function renderBooks(books) {
         </p>
       </div>
      
-    </div></div>
+    </div>
+    </div>
   
     `;
   });
@@ -86,6 +88,7 @@ function renderBooks(books) {
 // Axtarış düyməsinə klikləndikdə axtarış prosesini başlatma
 searchBtnEl.addEventListener('click', () => {
   const searchTerm = inputSearchEl.value.trim();
+ 
   searchBooks(searchTerm);
 });
 
