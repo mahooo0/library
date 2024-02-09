@@ -190,7 +190,7 @@ body {
 
 .secondSection {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 390px;
 }
 
 .catalog {
@@ -213,7 +213,7 @@ body {
 .secondContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
+  gap: 19px;
   justify-items: center;
   align-items: center;
   width: 798px;
@@ -223,7 +223,7 @@ body {
 
 .box {
   width: 242px;
-  height: 76px;
+  height: 96px;
   background: white;
   box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -231,7 +231,9 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  /* gap: 5px; */
   text-decoration: none;
+
 }
 
 .box h2 {
