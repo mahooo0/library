@@ -267,6 +267,7 @@ addBtnCategorie.addEventListener("click", function (event) {
   })
     .then(() => {
       alert("data sended");
+      document.querySelector("#bookCategorie").value = ""; // Clear input value
     
 
     })
