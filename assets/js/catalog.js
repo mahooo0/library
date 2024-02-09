@@ -51,8 +51,8 @@ const firebaseConfig = {
   const db = getDatabase(app);
 //catalog el
 const swiper_wrapper=document.querySelector("#swiper_wrapper")
-const button_prev=document.querySelector("#button_prev")
-const button_next=document.querySelector("#button_next")
+const best_seller_swippwr=document.querySelector("#best_seller_swippwr")
+
 
   function displayAllBookstData() {
     const dbref = ref(db, "books/");
@@ -62,8 +62,11 @@ const button_next=document.querySelector("#button_next")
       (snapshot) => {
         const data = snapshot.val();
         let result = Object.values(data)
+        
+        //all books
         let s=Math.floor(result.length/5)
         let SLIDES_arr=[]
+
         for( let i=0;i<s;i++){
           if(result.length>4){
             let slide_arr=[]
@@ -102,6 +105,53 @@ const button_next=document.querySelector("#button_next")
         })
         let slider_html=slider_html_arr.join("")
         swiper_wrapper.innerHTML=slider_html
+        //all books
+
+        //best sellers
+        let best_html_arr=SLIDES_arr.map((item,i,list)=>{
+
+           let slide_obj=item.filter(item=>{
+            if(item.bookType==="best seller"){
+              return true
+            }
+            return false
+          })
+          let slide=slide_obj.map(item=>{
+            result=`
+            <div class="book_box">
+          
+        <img src="${item.imageUrl}" alt="" class="box_book_img">
+        <h4 class="box_book_name"${item.title}</h4>
+        <h5 class="box_book_autor">${item.author}</h5>
+        <button class="box_book_btn">Read more</button>
+        <!-- add id to button in catalog js-->
+          </div>
+            `
+            return result
+
+          })
+          
+          
+          let slide_el_result=slide.join("")
+         
+          let SLIDER_result=`
+          <div class="swiper-slide">
+          ${slide_el_result}
+          </div>
+          `
+          return SLIDER_result
+        })
+        let best_html=best_html_arr.join("")
+       
+        best_seller_swippwr.innerHTML=best_html
+     
+        
+        
+        
+
+        
+        
+        //best sellers
         
       },
       (error) => {
