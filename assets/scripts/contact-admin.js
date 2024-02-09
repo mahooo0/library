@@ -36,39 +36,47 @@ function displayContactData() {
   const tableBody = document.getElementById("table_body");
 
   onValue(
-    dbref,
-    (snapshot) => {
-      const data = snapshot.val();
+      dbref,
+      (snapshot) => {
+          const data = snapshot.val();
 
-      // Clear existing table rows
-      tableBody.innerHTML = "";
+          // Clear existing table rows
+          tableBody.innerHTML = "";
 
-      // Check if data exists
-      if (data) {
-        // Iterate over each contact
-        Object.keys(data).forEach((key, index) => {
-          const contact = data[key];
+          // Check if data exists
+          if (data) {
+              // Create tbody outside the loop
+              const tbody = document.createElement("tbody");
+              tbody.className = "table_body";
 
-          // Create a new table row for each contact
-          const newRow = document.createElement("tr");
-          newRow.innerHTML = `
-            <td class="th_num">${index + 1}</td>
-            <td class="th_book_title">${contact.fullname}</td>
-            <td class="th_book_description">${contact.address}</td>
-            <td class="th_book_Category">${contact.email}</td>
-            <td class="th_book_author">${contact.phone}</td>
-          `;
+              // Append tbody to table
+              tableBody.appendChild(tbody);
 
-          // Append the new row to the table body
-          tableBody.appendChild(newRow);
-        });
+              // Iterate over each contact
+              Object.keys(data).forEach((key, index) => {
+                  const contact = data[key];
+
+                  const rowCont = `
+                      <tr class="b_tr">
+                          <th class="th_num">${index + 1}</th>
+                          <td class="th_book_title">${contact.fullname}</td>
+                          <td class="th_book_description">${contact.address}</td>
+                          <td class="th_book_Category">${contact.email}</td>
+                          <td class="th_book_author">${contact.phone}</td>
+                      </tr>
+                  `;
+
+                  // Append rowCont to tbody
+                  tbody.innerHTML += rowCont;
+              });
+          }
+      },
+      (error) => {
+          console.error("Error fetching data:", error);
       }
-    },
-    (error) => {
-      console.error("Error fetching data:", error);
-    }
   );
 }
+
 
 
 window.onload = function () {
