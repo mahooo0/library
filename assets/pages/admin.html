@@ -25,7 +25,7 @@
 <!-- logo start -->
 
   <body  class="body">
-    <div class="main d-none" id="admin_main">
+    <div class="main " id="admin_main">
                     <!-- menu -->
             <div class="menu">
                 <div class="logo">
@@ -148,22 +148,22 @@
             <div class="book_form" id="book_form_div">
                 <div class=" book_form_secion">
                     <h2 class="book_form_secion_title">Book Name</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_title" placeholder="Angels">
-                </div> 
-                 <div class=" book_form_secion">
-                    <h2 class="book_form_secion_title">Author name</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_autor" placeholder="Dan Brown">
+
                 </div>
                 <div class=" book_form_secion">
 
                     <h2 class="book_form_secion_title">Book Image Url</h2>
-                    <input type="text" class="book_form_secion_inp" id="form_section_img" placeholder="Alex Smith">
-                </div>
-                 <div class=" book_form_secion">
-                    <h2 class="book_form_secion_title">Description</h2>
-                    <textarea name="" id="form_textarea" cols="30" rows="10" class="description_inp"  placeholder="We work without holidays and weekends! Resident...We work without holidays and weekends! Resident...We work without holidays and weekends! Resident..."></textarea>
+
                 </div> 
+                <div class=" book_form_secion d-flex flex-row">
+
+                    <input type="checkbox" id=""> 
+                    <P>NEW</P>
+                    
+
+                </div>
                 <div class=" book_form_secion">
+
 
                     <div class="add-type-book">
                         <h2 class="book_form_secion_title">Book Type</h2>
@@ -176,7 +176,12 @@
                 </div>
                     <input class="book_form_secion_inp" id="form_section_type" placeholder="book type" >
 
+                    <h2 class="book_form_secion_title"  >Book Type</h2>
+                    <input class="book_form_secion_inp" id="form_section_type">
+
+
                 </div>
+                
                 <button class="book_form_secion_btn" id="book_add">add</button>
             </div> 
 
@@ -205,37 +210,38 @@
 
                     <!-- join_us -->
             <h1 class="table_title">Join Us</h1>
-            <table class="table_">
+            <table class="table_" id="table_us">
                 <thead class="table_head">
                     <tr>
                         <th class="th_num">#</th>
                         <th class="th_text">Full Name</th>
                         <th class="th_text2">Email Address</th>
                     </tr>
-                  
                 </thead>
-                <tr class="table_body">
-                    <th class="th_num">1</th>
-                    <th class="th_text">Audrey Mckinney</th>
-                    <th class="th_text2">lisa.watson@example.com</th>
-                </tr>
-                <tr class="table_body">
-                    <th class="th_num">2</th>
-                    <th class="th_text">Audrey Mckinney</th>
-                    <th class="th_text2">lisa.watson@example.com</th>
-                </tr>
-                <tr class="table_body">
-                    <th class="th_num">3</th>
-                    <th class="th_text">Audrey Mckinney</th>
-                    <th class="th_text2">lisa.watson@example.com</th>
-                </tr>
-                <tr class="table_body">
-                    <th class="th_num">4</th>
-                    <th class="th_text">Audrey Mckinney</th>
-                    <th class="th_text2">lisa.watson@example.com</th>
-                </tr>
-           
+                <tbody id="table_body_us">
+                    <tr class="table_body">
+                        <th class="th_num">1</th>
+                        <td class="th_text">Audrey Mckinney</td>
+                        <td class="th_text2">lisa.watson@example.com</td>
+                    </tr>
+                    <tr class="table_body">
+                        <th class="th_num">2</th>
+                        <td class="th_text">Audrey Mckinney</td>
+                        <td class="th_text2">lisa.watson@example.com</td>
+                    </tr>
+                    <tr class="table_body">
+                        <th class="th_num">3</th>
+                        <td class="th_text">Audrey Mckinney</td>
+                        <td class="th_text2">lisa.watson@example.com</td>
+                    </tr>
+                    <tr class="table_body">
+                        <th class="th_num">4</th>
+                        <td class="th_text">Audrey Mckinney</td>
+                        <td class="th_text2">lisa.watson@example.com</td>
+                    </tr>
+                </tbody>
             </table>
+            
                     <!-- join_us -->
             <h1 class="table_title">Books</h1>
             <table class="books">
@@ -293,7 +299,7 @@
 
 
 <!-- logo start -->
- <div class="body2 d-flex justify-content-center align-items-center w-100 " id="admin_auth">
+ <div class="body2 d-flex justify-content-center align-items-center w-100 d-none" id="admin_auth">
 <!-- logo start -->
 
 <section class="section1">
@@ -329,7 +335,7 @@
     </script>
 </body>
 </html>
-
+<script type="module" src="../js/joinus.js"></script>
 <script type="module" src="/assets/scripts/contact-admin.js"></script>
    
   <script type="module" src="/assets/scripts/admin-about.js"></script>
