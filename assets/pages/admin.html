@@ -146,55 +146,44 @@
                     <!-- book form -->
             <h3 class="right_side_h3">Book form</h3>
             <div class="book_form" id="book_form_div">
-                <div class=" book_form_secion">
-                    <h2 class="book_form_secion_title">Book Name</h2>
-                    <input class="book_form_secion_inp" id="form_section_type" placeholder="Book name" >
-
-
+                <div class="book_form_secion">
+                    <h2 class="book_form_secion_title" id="form_section_title">Book Name</h2>
+                    <input class="book_form_secion_inp" id="form_section_title_input" placeholder="Book Name">
                 </div>
-                <div class=" book_form_secion">
-
-                    <h2 class="book_form_secion_title">Book Image Url</h2>
-                    <input class="book_form_secion_inp" id="form_section_type" placeholder="Book Image Url" >
-
-
-                </div> 
-                <div class=" book_form_secion">
-
-                    <h2 class="book_form_secion_title">Publication Year</h2>
-                    <input class="book_form_secion_inp" id="form_section_type" placeholder="Publication Year" >
-
-
-                </div> 
-                <div class=" book_form_secion d-flex flex-row">
-
-                    <input type="checkbox" id=""> 
-                    <P>NEW</P>
-                    
-
+                <div class="book_form_secion">
+                    <h2 class="book_form_secion_title" id="form_section_author">Author Name</h2>
+                    <input class="book_form_secion_inp" id="form_section_author_input" placeholder="Author Name">
                 </div>
-                <div class=" book_form_secion">
-
-
+                <div class="book_form_secion">
+                    <h2 class="book_form_secion_title" id="form_section_img">Book Image Url</h2>
+                    <input class="book_form_secion_inp" id="form_section_img_url" placeholder="Book Image Url">
+                </div> 
+                <div class="book_form_secion">
+                    <h2 class="book_form_secion_title" id="form_section_year">Publication Year</h2>
+                    <input class="book_form_secion_inp" id="form_section_publication_year" placeholder="Publication Year">
+                </div> 
+                <div class="book_form_secion d-flex flex-row">
+                    <input type="checkbox" id="new_book_checkbox"> 
+                    <p>NEW</p>
+                </div>
+                <div class="book_form_secion">
                     <div class="add-type-book">
                         <h2 class="book_form_secion_title">Book Type</h2>
-                    <button id="addTypeBtnForm">Add type</button>
-                    <div id="addTypeModal" class="modal-book-form">
-                    <input id="bookCategorie" placeholder="booktype" />
-                    <button id="addBtnCategorie" class="add-type-form-btn">Add</button>
-                    <button id="closeTypeBtn" class="close-type-form-btn">X</button>
+                        <button id="addTypeBtnForm">Add type</button>
+                        <div id="addTypeModal" class="modal-book-form">
+                            <input id="bookCategorie" placeholder="booktype" />
+                            <button id="addBtnCategorie" class="add-type-form-btn">Add</button>
+                            <button id="closeTypeBtn" class="close-type-form-btn">X</button>
+                        </div>
+                    </div>
+                    <input class="book_form_secion_inp" id="form_section_type_input" placeholder="Book Type">
+                    <h2 class="book_form_secion_title" id="form_section_description">Description</h2>
+                    <textarea placeholder="Description" class="book_form_secion_inp" id="form_section_description_input"></textarea>
                 </div>
-                </div>
-                    <input class="book_form_secion_inp" id="form_section_type" placeholder="book type" >
-
-                    <h2 class="book_form_secion_title"  >Description</h2>
-                    <input placeholder="Description" form="textarea" class="book_form_secion_inp"  id="form_section_type">
-
-
-                </div>
-                
-                <button class="book_form_secion_btn" id="book_add">add</button>
-            </div> 
+                <button class="book_form_secion_btn" id="book_add">Add</button>
+            </div>
+            
+            
 
             <!-- ABOUT  -->
             <h1 class="right_side_h1">About Store</h1>
