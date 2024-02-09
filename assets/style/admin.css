@@ -25,7 +25,8 @@
 
 .menu {
   width: 22.1875rem;
-  height: 223.4375rem;
+  height: 100%;
+  position: fixed;
   flex-shrink: 0;
   background: #720418;
   display: flex;
@@ -137,7 +138,11 @@
   display: flex;
   flex-direction: row;
 }
+.right_side{
+  margin-left:22.1875rem ;
+}
 .right_side_h1 {
+  
   color: #333;
  font-family: var(--fontMontserrat);
   font-size: 1.875rem;
