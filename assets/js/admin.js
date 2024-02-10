@@ -264,23 +264,21 @@ addBtnCategorie.addEventListener("click", function (event) {
   event.preventDefault();
 
   let bookCategorie = document.querySelector("#bookCategorie").value;
-  let categorieData = {
-    bookCategorie: bookCategorie,
-  };
 
-  console.log(bookCategorie);
-
-  const databaseRef = ref(database, "book-type/");
-  push(databaseRef, {
-    bookCategorie: bookCategorie,
-  })
-    .then(() => {
-      alert("data sended");
-      document.querySelector("#bookCategorie").value = ""; // Clear input value
-    
-
+  // Check if bookCategorie is not empty
+  if (bookCategorie.trim() !== "") {
+    const databaseRef = ref(database, "book-type/");
+    push(databaseRef, {
+      bookCategorie: bookCategorie,
     })
-    .catch((err) => {
-      alert("err", err);
-    });
+      .then(() => {
+        alert("data sent");
+        document.querySelector("#bookCategorie").value = ""; // Clear input value
+      })
+      .catch((err) => {
+        alert("Error:", err);
+      });
+  } else {
+    alert("Please enter a valid book category.");
+  }
 });

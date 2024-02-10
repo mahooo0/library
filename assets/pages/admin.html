@@ -176,14 +176,19 @@
                             <button id="closeTypeBtn" class="close-type-form-btn">X</button>
                         </div>
                     </div>
-                    <input class="book_form_secion_inp" id="form_section_type_input" placeholder="Book Type">
+                    <!-- <input  id="form_section_type_input" placeholder="Book Type"> -->
+                    <select class="book_form_secion_inp" id="form_section_type_input"  class="form-select form-select-sm" aria-label="Small select example">
+                        <option selected="">Book Type</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    
                     <h2 class="book_form_secion_title" id="form_section_description">Description</h2>
                     <textarea placeholder="Description" class="book_form_secion_inp" id="form_section_description_input"></textarea>
                 </div>
                 <button class="book_form_secion_btn" id="book_add">Add</button>
             </div>
-            
-            
 
             <!-- ABOUT  -->
             <h1 class="right_side_h1">About Store</h1>
