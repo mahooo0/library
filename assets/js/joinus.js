@@ -29,7 +29,7 @@ function displayJoinUsData() {
     snapshot.forEach((childSnapshot) => {
       const data = childSnapshot.val();
       const row = `
-        <tr class="table_body">
+        <tr class="table_body_join">
           <th class="th_num">${index}</th>
           <td class="th_text">${data.Join_name}</td>
           <td class="th_text2">${data.Join_email}</td>
