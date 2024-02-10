@@ -37,8 +37,9 @@ const formSectionTitle = document.querySelector("#form_section_title_input");
 const formSectionAuthor = document.querySelector("#form_section_author_input");
 const formSectionImg = document.querySelector("#form_section_img_url");
 const formSectionYear = document.querySelector("#form_section_publication_year");
-const formSectionType = document.querySelector("#form_section_type_input");
+const formSectionType = document.querySelector("#bookCategorie");
 const formSectionDescription = document.querySelector("#form_section_description_input");
+
 
 // Google Books API'sinden kitapları alan fonksiyon
 
@@ -165,6 +166,7 @@ bookFormDiv.addEventListener("click", (event) => {
     description: formInputs.description,
     bookType: formInputs.bookType,
     publicationYear: formInputs.publicationYear,
+    isNew: isNew, //  checkbox value'sunu bookData gonderirik
     Date: Date.now(),
   };
 
@@ -265,7 +267,7 @@ addBtnCategorie.addEventListener("click", function (event) {
 
   let bookCategorie = document.querySelector("#bookCategorie").value;
 
-  // Check if bookCategorie is not empty
+  // Check edirik inputun value boshdursa
   if (bookCategorie.trim() !== "") {
     const databaseRef = ref(database, "book-type/");
     push(databaseRef, {
@@ -282,3 +284,19 @@ addBtnCategorie.addEventListener("click", function (event) {
     alert("Please enter a valid book category.");
   }
 });
+
+
+// new checkbox secilib ya yox gosteren funksiya
+function isCheckboxSelected() {
+  let checkbox = document.querySelector("#new_book_checkbox");
+
+  if (checkbox.checked) {
+    return true; // Checkbox is selected
+  } else {
+    return false; // Checkbox is not selected
+  }
+}
+
+
+  // checkbox boolean value olaraq gotururuk
+  let isNew = isCheckboxSelected();
