@@ -167,7 +167,7 @@ bookFormDiv.addEventListener("click", (event) => {
     description: formInputs.description,
     bookType: formInputs.bookType,
     publicationYear: formInputs.publicationYear,
-    isNew: isNew, //  checkbox value'sunu bookData gonderirik
+    isNew: formInputs.isNew, //  checkbox value'sunu bookData gonderirik
     Date: Date.now(),
   };
 
@@ -185,7 +185,10 @@ function getFormInputs() {
   const imageUrl = formSectionImg.value.trim();
   const publicationYear = formSectionYear.value.trim();
   const description = formSectionDescription.value.trim();
+  // checkbox boolean value olaraq gotururuk
+let isNew = isCheckboxSelected();
   const bookTypeValue =
+  
     typeof formSectionType.value === "string"
       ? formSectionType.value.trim()
       : formSectionType.value;
@@ -197,6 +200,7 @@ function getFormInputs() {
     publicationYear,
     description,
     bookType: bookTypeValue,
+    isNew:isNew
   };
 }
 
@@ -305,8 +309,7 @@ function isCheckboxSelected() {
   }
 }
 
-// checkbox boolean value olaraq gotururuk
-let isNew = isCheckboxSelected();
+
 
 
 // book type menuda categorieleri gosteren funskiya
