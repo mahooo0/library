@@ -24,22 +24,21 @@ export const firebaseDatabase = database;
 
 // HTML elementleri
 
-const searchInput = document.querySelector('#search_Input');
-const searchBtn = document.querySelector('#search_Btn');
-const searchVariant = document.querySelector('#search_variant');
-const bookAddBtn = document.querySelector('#book_add');
-const bookFormDiv = document.querySelector('#book_form_div');
+const searchInput = document.querySelector("#search_Input");
+const searchBtn = document.querySelector("#search_Btn");
+const searchVariant = document.querySelector("#search_variant");
+const bookAddBtn = document.querySelector("#book_add");
+const bookFormDiv = document.querySelector("#book_form_div");
 // HTML book form elementleri
-const formSectionTitle = document.querySelector('#form_section_title_input');
-const formSectionAuthor = document.querySelector('#form_section_author_input');
-const formSectionImg = document.querySelector('#form_section_img_url');
-const formSectionYear = document.querySelector(
-  '#form_section_publication_year'
-);
-const formSectionType = document.querySelector('#form_section_type_input');
-const formSectionDescription = document.querySelector(
-  '#form_section_description_input'
-);
+const formSectionTitle = document.querySelector("#form_section_title_input");
+const formSectionAuthor = document.querySelector("#form_section_author_input");
+const formSectionImg = document.querySelector("#form_section_img_url");
+const formSectionYear = document.querySelector("#form_section_publication_year");
+const formSectionType = document.querySelector("#bookCategorie");
+const formSectionDescription = document.querySelector("#form_section_description_input");
+
+
+
 
 // Google Books API'sinden kitapları alan fonksiyon
 
@@ -166,6 +165,7 @@ bookFormDiv.addEventListener('click', (event) => {
     description: formInputs.description,
     bookType: formInputs.bookType,
     publicationYear: formInputs.publicationYear,
+    isNew: isNew, //  checkbox value'sunu bookData gonderirik
     Date: Date.now(),
   };
 
@@ -272,30 +272,38 @@ let addBtnCategorie = document.querySelector('#addBtnCategorie');
 addBtnCategorie.addEventListener('click', function (event) {
   event.preventDefault();
 
-  // Modal bağlandıqda və giriş boş olduqda xəbərdarlıq və öldürmə prosesini göstərin
-  if (addTypeModal.style.visibility === 'hidden') {
-    alert('Please open the modal to add a category.');
-    return;
-  }
 
-  let bookCategorie = document.querySelector('#bookCategorie').value;
+  let bookCategorie = document.querySelector("#bookCategorie").value;
 
-  // Xəbərdarlıq göstərmek və giriş boş olduqda prosesi dayandirmaq
-  if (!bookCategorie.trim()) {
-    alert('Please enter a category name.');
-    return;
-  }
-
-  const databaseRef = ref(database, 'book-type/');
-  push(databaseRef, {
-    bookCategorie: bookCategorie,
-  })
-    .then(() => {
-      alert('data sent');
-      document.querySelector('#bookCategorie').value = '';
+  // Check edirik inputun value boshdursa
+  if (bookCategorie.trim() !== "") {
+    const databaseRef = ref(database, "book-type/");
+    push(databaseRef, {
+      bookCategorie: bookCategorie,
     })
-    .catch((err) => {
-      console.error('Error sending data:', err);
-      alert('An error occurred while sending data.');
-    });
-});
+      .then(() => {
+        alert("data sent");
+        document.querySelector("#bookCategorie").value = ""; // Clear input value
+      })
+      .catch((err) => {
+        alert("Error:", err);
+      });
+  } else {
+    alert("Please enter a valid book category.");
+  }
+
+
+// new checkbox secilib ya yox gosteren funksiya
+function isCheckboxSelected() {
+  let checkbox = document.querySelector("#new_book_checkbox");
+
+  if (checkbox.checked) {
+    return true; // Checkbox is selected
+  } else {
+    return false; // Checkbox is not selected
+  }
+}
+
+
+  // checkbox boolean value olaraq gotururuk
+  let isNew = isCheckboxSelected();
