@@ -252,7 +252,7 @@
 }
 .book_form {
   display: flex;
-  width: 69.1875rem;
+  width: 66rem;
   height: auto;
   padding: 1rem 1.875rem 1.875rem 1.875rem;
   flex-direction: column;
@@ -279,6 +279,19 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.book_form_secion_textarea{
+  display: flex;
+  min-height:2.5rem ;
+  height:auto ;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  border: 1px solid #e2e6ee;
+  background: #fff;
+  box-shadow: 0px 4px 18px 0px rgba(158, 168, 189, 0.31);
 }
 .book_form_secion_inp {
   display: flex;
@@ -374,9 +387,17 @@
   justify-content: center;
   align-items: center;
 }
-.table_body {
+.table_body_join{
   display: flex;
   flex-direction: row;
+  background: #fff;
+
+  /* table-item/border-top-bottom */
+  box-shadow: 0px -1px 0px 0px #e6e7e9 inset, 0px 1px 0px 0px #e6e7e9 inset;
+}
+.table_body {
+  display: flex;
+  flex-direction: column;
   background: #fff;
 
   /* table-item/border-top-bottom */
@@ -456,6 +477,7 @@
 }
 .books {
   margin: 0.63rem 0 0 2rem;
+  margin-bottom: 4rem;
 }
 /* mahoo */
 /* anar */
