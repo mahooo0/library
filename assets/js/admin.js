@@ -1,20 +1,21 @@
 // Anar's code start
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
   getDatabase,
   ref,
   push,
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+  onValue,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c',
-  authDomain: 'library-35b3c.firebaseapp.com',
-  projectId: 'library-35b3c',
-  storageBucket: 'library-35b3c.appspot.com',
-  messagingSenderId: '498632706422',
-  appId: '1:498632706422:web:9d181dd4820520b7c01257',
+  apiKey: "AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c",
+  authDomain: "library-35b3c.firebaseapp.com",
+  projectId: "library-35b3c",
+  storageBucket: "library-35b3c.appspot.com",
+  messagingSenderId: "498632706422",
+  appId: "1:498632706422:web:9d181dd4820520b7c01257",
   databaseURL:
-    'https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app',
+    "https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -33,12 +34,13 @@ const bookFormDiv = document.querySelector("#book_form_div");
 const formSectionTitle = document.querySelector("#form_section_title_input");
 const formSectionAuthor = document.querySelector("#form_section_author_input");
 const formSectionImg = document.querySelector("#form_section_img_url");
-const formSectionYear = document.querySelector("#form_section_publication_year");
+const formSectionYear = document.querySelector(
+  "#form_section_publication_year"
+);
 const formSectionType = document.querySelector("#bookCategorie");
-const formSectionDescription = document.querySelector("#form_section_description_input");
-
-
-
+const formSectionDescription = document.querySelector(
+  "#form_section_description_input"
+);
 
 // Google Books API'sinden kitapları alan fonksiyon
 
@@ -48,11 +50,11 @@ async function getBooks(searchTerm) {
       `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
     );
     if (!response.ok) {
-      throw new Error('API request failed');
+      throw new Error("API request failed");
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching books:', error);
+    console.error("Error fetching books:", error);
 
     return null;
   }
@@ -67,11 +69,11 @@ async function showBookVariants(books) {
       </div>
     `;
   });
-  searchVariant.innerHTML = bookdata.join(' ');
+  searchVariant.innerHTML = bookdata.join(" ");
 
-  const variants = document.querySelectorAll('.variant-details');
+  const variants = document.querySelectorAll(".variant-details");
   variants.forEach((variant) => {
-    variant.addEventListener('click', () =>
+    variant.addEventListener("click", () =>
       fillFormInputs(variant.textContent.trim(), books)
     );
   });
@@ -84,24 +86,24 @@ function fillFormInputs(selectedTitle, books) {
   );
 
   if (!selectedBook) {
-    console.error('Selected book not found.');
-    alert('Please fill in all fields!');
+    console.error("Selected book not found.");
+    alert("Please fill in all fields!");
     return;
   }
 
-  const titleInput = selectedBook.volumeInfo.title || 'Unknown Title';
-  const authorInput = selectedBook.volumeInfo.authors?.[0] || 'Unknown Author';
+  const titleInput = selectedBook.volumeInfo.title || "Unknown Title";
+  const authorInput = selectedBook.volumeInfo.authors?.[0] || "Unknown Author";
   const imageUrlInput =
-    selectedBook.volumeInfo.imageLinks?.thumbnail || '/assets/img/default.png';
+    selectedBook.volumeInfo.imageLinks?.thumbnail || "/assets/img/default.png";
   const publicationYearInput =
-    selectedBook.volumeInfo.publishedDate || 'Unknown';
+    selectedBook.volumeInfo.publishedDate || "Unknown";
   const descriptionInput =
-    selectedBook.volumeInfo.description || 'No Description Available';
+    selectedBook.volumeInfo.description || "No Description Available";
   const bookTypeInput =
     selectedBook.volumeInfo.categories &&
     selectedBook.volumeInfo.categories.length > 0
-      ? selectedBook.volumeInfo.categories.join(', ')
-      : 'Unknown Type';
+      ? selectedBook.volumeInfo.categories.join(", ")
+      : "Unknown Type";
 
   formSectionTitle.value = titleInput;
   formSectionAuthor.value = authorInput;
@@ -114,24 +116,24 @@ function fillFormInputs(selectedTitle, books) {
 // Firebase'e kitap elave eden funksiya
 async function addBookToFirebase(bookData) {
   try {
-    const booksRef = ref(database, 'books');
+    const booksRef = ref(database, "books");
     await push(booksRef, bookData);
-    alert('Kitab uğurla Firebase-ə əlavə edildi!');
+    alert("Kitab uğurla Firebase-ə əlavə edildi!");
   } catch (error) {
-    console.error('Error adding book to Firebase:', error);
+    console.error("Error adding book to Firebase:", error);
     throw error; //
   }
 }
 
 // Formdaki setrleri temizleyen funksiya
 function clearFormInputs() {
-  formSectionTitle.value = '';
-  formSectionAuthor.value = '';
-  formSectionImg.value = '';
-  formSectionYear.value = '';
-  formSectionDescription.value = '';
-  formSectionType.value = '';
-  searchInput.value = '';
+  formSectionTitle.value = "";
+  formSectionAuthor.value = "";
+  formSectionImg.value = "";
+  formSectionYear.value = "";
+  formSectionDescription.value = "";
+  formSectionType.value = "";
+  searchInput.value = "";
 }
 
 // Form setrlerini tesdiq eden funksiya
@@ -146,14 +148,14 @@ function validateFormInputs(formInputs) {
   );
 }
 
-bookFormDiv.addEventListener('click', (event) => {
-  if (!event.target.matches('#book_add')) return;
+bookFormDiv.addEventListener("click", (event) => {
+  if (!event.target.matches("#book_add")) return;
 
   const formInputs = getFormInputs();
 
   // Form setrlerini tesdiqetme
   if (!validateFormInputs(formInputs)) {
-    alert('Please fill in all fields!');
+    alert("Please fill in all fields!");
     return;
   }
 
@@ -173,7 +175,7 @@ bookFormDiv.addEventListener('click', (event) => {
 
   // Her shey dogrudursa formu temizle
   clearFormInputs();
-  searchVariant.style.display = 'none';
+  searchVariant.style.display = "none";
 });
 
 // Formadan daxil olan məlumatları qəbul edən və qaytaran funksiya
@@ -184,7 +186,7 @@ function getFormInputs() {
   const publicationYear = formSectionYear.value.trim();
   const description = formSectionDescription.value.trim();
   const bookTypeValue =
-    typeof formSectionType.value === 'string'
+    typeof formSectionType.value === "string"
       ? formSectionType.value.trim()
       : formSectionType.value;
 
@@ -198,10 +200,10 @@ function getFormInputs() {
   };
 }
 
-searchInput.addEventListener('input', async () => {
+searchInput.addEventListener("input", async () => {
   const searchTerm = searchInput.value.trim();
   if (searchTerm.length == 0) {
-    searchVariant.style.display = 'block';
+    searchVariant.style.display = "block";
   }
   if (searchTerm.length > 0) {
     const data = await getBooks(searchTerm);
@@ -215,63 +217,62 @@ searchInput.addEventListener('input', async () => {
 // Elementin görünmesi ucun funksiya
 function displayFunk(el) {
   let class_List = el.classList;
-  if (class_List.contains('d-none')) {
-    el.classList.remove('d-none');
+  if (class_List.contains("d-none")) {
+    el.classList.remove("d-none");
   }
   // Anar's code finish
 }
 //  admin panel entering
-const admin_panel_btn = document.querySelector('#admin_panel_btn');
-let userName_inp = document.querySelector('#admin_panel_username');
-let Password_inp = document.querySelector('#admin_panel_pasword');
-let admin_auth = document.querySelector('#admin_auth');
-let admin_main = document.querySelector('#admin_main');
-let log_outh = document.querySelector('#log_outh');
+const admin_panel_btn = document.querySelector("#admin_panel_btn");
+let userName_inp = document.querySelector("#admin_panel_username");
+let Password_inp = document.querySelector("#admin_panel_pasword");
+let admin_auth = document.querySelector("#admin_auth");
+let admin_main = document.querySelector("#admin_main");
+let log_outh = document.querySelector("#log_outh");
 
-admin_panel_btn.addEventListener('click', () => {
+admin_panel_btn.addEventListener("click", () => {
   let userName = userName_inp.value;
   let Password = Password_inp.value;
 
   if (!userName || !Password) {
-    alert('Please fill in all fields!');
+    alert("Please fill in all fields!");
   }
-  if (userName === 'admin' && Password === 'admin') {
-    admin_auth.classList.add('d-none');
-    admin_main.classList.remove('d-none');
+  if (userName === "admin" && Password === "admin") {
+    admin_auth.classList.add("d-none");
+    admin_main.classList.remove("d-none");
   } else {
-    alert('u wrote somthing wrong');
+    alert("u wrote somthing wrong");
   }
 });
 
-log_outh.addEventListener('click', () => {
-  admin_auth.classList.remove('d-none');
-  admin_main.classList.add('d-none');
+log_outh.addEventListener("click", () => {
+  admin_auth.classList.remove("d-none");
+  admin_main.classList.add("d-none");
 });
 
 // jalya
 
 // book formda add type bolmesinin funksionalligi
-let addTypeModal = document.querySelector('#addTypeModal');
-let addTypeBtnForm = document.querySelector('#addTypeBtnForm');
-let closeTypeBtn = document.querySelector('#closeTypeBtn');
+let addTypeModal = document.querySelector("#addTypeModal");
+let addTypeBtnForm = document.querySelector("#addTypeBtnForm");
+let closeTypeBtn = document.querySelector("#closeTypeBtn");
 
 function toggleModal() {
   addTypeModal.style.visibility =
-    addTypeModal.style.display === 'visible' ? 'hidden' : 'visible';
+    addTypeModal.style.display === "visible" ? "hidden" : "visible";
 }
 
-addTypeBtnForm.addEventListener('click', toggleModal);
-closeTypeBtn.addEventListener('click', function () {
-  addTypeModal.style.visibility = 'hidden';
+addTypeBtnForm.addEventListener("click", toggleModal);
+closeTypeBtn.addEventListener("click", function () {
+  addTypeModal.style.visibility = "hidden";
 });
 
 //add type inputuna daxil olan data'nin firebase oturulmesi
 
-let addBtnCategorie = document.querySelector('#addBtnCategorie');
+let addBtnCategorie = document.querySelector("#addBtnCategorie");
 
-addBtnCategorie.addEventListener('click', function (event) {
+addBtnCategorie.addEventListener("click", function (event) {
   event.preventDefault();
-
 
   let bookCategorie = document.querySelector("#bookCategorie").value;
 
@@ -290,8 +291,8 @@ addBtnCategorie.addEventListener('click', function (event) {
       });
   } else {
     alert("Please enter a valid book category.");
-  }})
-
+  }
+});
 
 // new checkbox secilib ya yox gosteren funksiya
 function isCheckboxSelected() {
@@ -304,6 +305,26 @@ function isCheckboxSelected() {
   }
 }
 
+// checkbox boolean value olaraq gotururuk
+let isNew = isCheckboxSelected();
 
-  // checkbox boolean value olaraq gotururuk
-  let isNew = isCheckboxSelected() ;
+
+// book type menuda categorieleri gosteren funskiya
+function displayCategorieInMenu() {
+  const dbref = ref(database, "book-type/");
+  onValue(dbref, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+
+    const options = Object.values(data).map(
+      (dataValue) => `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
+    ).join("");
+
+    const menuTypeSect = document.getElementById("form_section_type_input");
+    menuTypeSect.innerHTML = options;
+  });
+}
+
+window.onload = function () {
+  displayCategorieInMenu();
+};
