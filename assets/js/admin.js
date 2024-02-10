@@ -290,7 +290,7 @@ addBtnCategorie.addEventListener('click', function (event) {
       });
   } else {
     alert("Please enter a valid book category.");
-  }
+  }})
 
 
 // new checkbox secilib ya yox gosteren funksiya
@@ -306,4 +306,4 @@ function isCheckboxSelected() {
 
 
   // checkbox boolean value olaraq gotururuk
-  let isNew = isCheckboxSelected();
+  let isNew = isCheckboxSelected() ;
