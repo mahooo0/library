@@ -87,7 +87,7 @@ const NEWbook=document.querySelector("#NEWbook")
         <img src="${item.imageUrl}" alt="" class="box_book_img">
         <h4 class="box_book_name"${item.title}</h4>
         <h5 class="box_book_autor">${item.author}</h5>
-        <button class="box_book_btn"><a href=".//book-page.html" class="a" >Read more</a></button>
+        <button data-id="${item.Date}" class="readMoreBtn box_book_btn"><a href="#" class="a" >Read more</a></button>
         <!-- add id to button in catalog js-->
           </div>
             `
@@ -144,20 +144,18 @@ function giveHTMLbyCondition ( condition,SLIDES_arr){
   //   return
   //  }
    
-   let slide=slide_obj.map(item=>{
-     let result=`
-     <div class="book_box">
-   
- <img src="${item.imageUrl}" alt="" class="box_book_img">
- <h4 class="box_book_name"${item.title}</h4>
- <h5 class="box_book_autor">${item.author}</h5>
- <button class="box_book_btn"><a href=".//book-page.html" class="a" >Read more</a></button>
- <!-- add id to button in catalog js-->
-   </div>
-     `
-     return result
+  let slide = slide_obj.map(item => {
+    let result = `
+    <div class="book_box">
+        <img src="${item.imageUrl}" alt="" class="box_book_img">
+        <h4 class="box_book_name"${item.title}</h4>
+        <h5 class="box_book_autor">${item.author}</h5>
+        <button data-id="${item.Date}" class="readMoreBtn box_book_btn"><a href="#" class="a" >Read more</a></button>
+    </div>
+    `;
+    return result;
+});
 
-   })
   //  console.log(slide);
    
    
@@ -175,3 +173,26 @@ function giveHTMLbyCondition ( condition,SLIDES_arr){
  let html=html_arr.join("")
  return html
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  function displayAllBookstData() {
+     document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('readMoreBtn')) {
+          const bookId = event.target.getAttribute('data-id');
+          console.log('Clicked on book with ID:', bookId);
+          localStorage.setItem('selectedBookId', bookId);
+          event.preventDefault();
+          
+      }
+  });  
+  }
+
+  displayAllBookstData();
+
+
+
+});
+
+// .//book-page.html
+// .//book-page.html
