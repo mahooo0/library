@@ -87,6 +87,10 @@ font-style: normal;
 font-weight: 700;
 line-height: 196.187%; /* 1.71663rem */
   }
+.a{
+  text-decoration: none;
+  color:#FFF ;
+}
   .swiper-button-prev{
     color: #720418;
   }

@@ -52,7 +52,7 @@ const firebaseConfig = {
 //catalog el
 const swiper_wrapper=document.querySelector("#swiper_wrapper")
 const best_seller_swippwr=document.querySelector("#best_seller_swippwr")
-
+const NEWbook=document.querySelector("#NEWbook")
 
   function displayAllBookstData() {
     const dbref = ref(db, "books/");
@@ -87,7 +87,7 @@ const best_seller_swippwr=document.querySelector("#best_seller_swippwr")
         <img src="${item.imageUrl}" alt="" class="box_book_img">
         <h4 class="box_book_name"${item.title}</h4>
         <h5 class="box_book_autor">${item.author}</h5>
-        <button class="box_book_btn">Read more</button>
+        <button class="box_book_btn"><a href=".//book-page.html" class="a" >Read more</a></button>
         <!-- add id to button in catalog js-->
           </div>
             `
@@ -108,51 +108,17 @@ const best_seller_swippwr=document.querySelector("#best_seller_swippwr")
         //all books
 
         //best sellers
-        let best_html_arr=SLIDES_arr.map((item,i,list)=>{
-
-           let slide_obj=item.filter(item=>{
-            if(item.bookType==="best seller"){
-              return true
-            }
-            return false
-          })
-          let slide=slide_obj.map(item=>{
-            result=`
-            <div class="book_box">
-          
-        <img src="${item.imageUrl}" alt="" class="box_book_img">
-        <h4 class="box_book_name"${item.title}</h4>
-        <h5 class="box_book_autor">${item.author}</h5>
-        <button class="box_book_btn">Read more</button>
-        <!-- add id to button in catalog js-->
-          </div>
-            `
-            return result
-
-          })
-          
-          
-          let slide_el_result=slide.join("")
-         
-          let SLIDER_result=`
-          <div class="swiper-slide">
-          ${slide_el_result}
-          </div>
-          `
-          return SLIDER_result
-        })
-        let best_html=best_html_arr.join("")
-       
+        let BestSellerCondition=(item)=>item.bookType==="best seller" ? true :false ;
+        let best_html=giveHTMLbyCondition(BestSellerCondition,SLIDES_arr)
         best_seller_swippwr.innerHTML=best_html
-     
-        
-        
-        
-
-        
-        
         //best sellers
-        
+
+        //new book
+        let isNewCondition=(item)=>item.isNew==true ? true :false ;
+         let NewHtml=giveHTMLbyCondition(isNewCondition,SLIDES_arr)
+         NEWbook.innerHTML=NewHtml
+        //new book
+
       },
       (error) => {
         console.error("Error fetching data:", error);
@@ -162,3 +128,50 @@ const best_seller_swippwr=document.querySelector("#best_seller_swippwr")
   displayAllBookstData()
   
   // console.log(books);
+function giveHTMLbyCondition ( condition,SLIDES_arr){
+  let html_arr=SLIDES_arr.map( item=>{
+
+    let slide_obj=item.filter(item=>{
+     if(condition(item)){
+       return true
+     }else{
+      return false
+     }
+     
+   })
+   
+  //  if(slide_obj){
+  //   return
+  //  }
+   
+   let slide=slide_obj.map(item=>{
+     let result=`
+     <div class="book_box">
+   
+ <img src="${item.imageUrl}" alt="" class="box_book_img">
+ <h4 class="box_book_name"${item.title}</h4>
+ <h5 class="box_book_autor">${item.author}</h5>
+ <button class="box_book_btn"><a href=".//book-page.html" class="a" >Read more</a></button>
+ <!-- add id to button in catalog js-->
+   </div>
+     `
+     return result
+
+   })
+  //  console.log(slide);
+   
+   
+   let slide_el_result=slide.join("")
+  if(slide_el_result===``){
+    return
+  }
+   let SLIDER_result=`
+   <div class="swiper-slide">
+   ${slide_el_result}
+   </div>
+   `
+   return SLIDER_result
+ })
+ let html=html_arr.join("")
+ return html
+}
