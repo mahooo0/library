@@ -82,7 +82,7 @@ const NEWbook=document.querySelector("#NEWbook")
           let slide=item.map((item)=>{
           
             result=`
-            <div class="book_box">
+            <div class="book_box"  >
           
         <img src="${item.imageUrl}" alt="" class="box_book_img">
         <h4 class="box_book_name"${item.title}</h4>

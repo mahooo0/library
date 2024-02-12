@@ -329,7 +329,7 @@ function displayCategorieInMenu() {
   const dbref = ref(database, "book-type/");
   onValue(dbref, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
+    
 
     const options = Object.values(data).map(
       (dataValue) => `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
