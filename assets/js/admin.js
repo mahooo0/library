@@ -1,11 +1,13 @@
 // Anar's code start
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
   getDatabase,
   ref,
   push,
   onValue,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c",
@@ -20,6 +22,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+console.log(auth);
 // export const firebaseDatabase = getDatabase(firebaseApp);
 export const firebaseDatabase = database;
 
@@ -253,18 +257,31 @@ admin_panel_btn.addEventListener("click", () => {
   if (!userName || !Password) {
     alert("Please fill in all fields!");
   }
-  if (userName === "admin" && Password === "admin") {
+  signIn(userName,Password)
+
+});
+
+
+export async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log('Sign-in successful');
     admin_auth.classList.add("d-none");
     admin_main.classList.remove("d-none");
-  } else {
+    return userCredential.user;
+  } catch (error) {
     alert("u wrote somthing wrong");
-  }
-});
+    console.error('Error signing in:', error.message);
+    return null;
+  }}
+
 
 log_outh.addEventListener("click", () => {
   admin_auth.classList.remove("d-none");
   admin_main.classList.add("d-none");
 });
+
+
 
 // jalya
 
