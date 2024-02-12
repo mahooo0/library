@@ -178,7 +178,7 @@
                     </div>
                     <input class="book_form_secion_inp" id="form_section_type_input" placeholder="Book Type">
                     <h2 class="book_form_secion_title" id="form_section_description">Description</h2>
-                    <textarea placeholder="Description" class="book_form_secion_inp" id="form_section_description_input"></textarea>
+                    <textarea placeholder="Description" class="book_form_secion_textarea" id="form_section_description_input"></textarea>
                 </div>
                 <button class="book_form_secion_btn" id="book_add">Add</button>
             </div>
@@ -243,6 +243,9 @@
             </table>
             
                     <!-- join_us -->
+
+
+                    <!-- all books -->
             <h1 class="table_title">Books</h1>
             <table class="books">
                 <thead class="table_head">
@@ -254,16 +257,22 @@
                         <th class="th_book_author">Author</th>
                     </tr>
                 </thead>
-                <tbody class="table_body">
+                <tbody class="table_body scrol_bar" id="all_books_table">
                     <tr class="b_tr">
                         <th class="th_num">1</th>
                         <th class="th_book_title_b"><img src="/assets/img/image 8.png" alt=""> <p>Angels</p></th>
                         <th class="th_book_description">Lorem impus test...</th>
                         <th class="th_book_Category">Dedectiv</th>
-                        <th class="th_book_author">Dan Brown</th> 
+                        <th class="th_book_author">Dan Brown </th> 
+                        <th class="th_book_icons">
+                            <div  id="corection_button"><img src="../img/icons8-pencil-64.png"  class="delete_svg"> </div>
+                        <div id="delete_icon"><img src="../img/delete.svg" class="delete_svg"  alt=""></div>
+                        </th>
                     </tr>
                 </tbody>
             </table>
+                    <!-- all books -->
+
              <!-- Contact Us -->
              <h1 class="table_title">Contact Us</h1>
              <table id="contactTable" class="books">
@@ -318,7 +327,7 @@
 
 <!-- admin panel start-->
 <div class="admin_panel">
-  <h1 class="admin_panel_text">Welcome Admin</h1>
+  <h1 class="admin_panel_text" >Welcome Admin</h1>
   <input type="text" class="admin_panel_inpt" placeholder="Username" id="admin_panel_username">
   <input type="text" class="admin_panel_inpt" placeholder="Password" id="admin_panel_pasword">
   <button class="admin_panel_btn" id="admin_panel_btn">Join</button>
@@ -326,8 +335,40 @@
 
 <!-- admin panel finish -->
 
+</div >
+<div class="book_coorektion_panel d-none" id="Correct_panel">
+    <div class="book_form" id="book_form_div">
+        <div class="book_form_secion">
+            <h2 class="book_form_secion_title" id="form_section_title">Book Name</h2>
+            <input class="book_form_secion_inp" id="correct_title" placeholder="Book Name">
+        </div>
+        <div class="book_form_secion">
+            <h2 class="book_form_secion_title" id="form_section_author">Author Name</h2>
+            <input class="book_form_secion_inp" id="correct_author" placeholder="Author Name">
+        </div>
+        <div class="book_form_secion">
+            <h2 class="book_form_secion_title" id="form_section_img">Book Image Url</h2>
+            <input class="book_form_secion_inp" id="correct_img_url" placeholder="Book Image Url">
+        </div> 
+        <div class="book_form_secion">
+            <h2 class="book_form_secion_title" id="form_section_year">Publication Year</h2>
+            <input class="book_form_secion_inp" id="correct_publication_year" placeholder="Publication Year">
+        </div> 
+        <div class="book_form_secion d-flex flex-row">
+            <input type="checkbox" id="correct_checkbox"> 
+            <p>NEW</p>
+        </div>
+        <div class="book_form_secion">
+            <div class="add-type-book">
+                <h2 class="book_form_secion_title">Book Type</h2>
+            </div>
+            <input class="book_form_secion_inp" id="coorecy_type_input" placeholder="Book Type">
+            <h2 class="book_form_secion_title" id="form_section_description">Description</h2>
+            <textarea placeholder="Description" class="book_form_secion_textarea" id="correct_description"></textarea>
+        </div>
+        <button class="book_form_secion_btn" id="correct_btn">Correct</button>
+    </div>
 </div>
-
 
 
   
@@ -335,6 +376,7 @@
     </script>
 </body>
 </html>
+<script type="module" src="../scripts/admin-books.js"></script>
 <script type="module" src="../js/joinus.js"></script>
 <script type="module" src="/assets/scripts/contact-admin.js"></script>
    
