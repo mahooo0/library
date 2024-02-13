@@ -61,63 +61,66 @@ const NEWbook=document.querySelector("#NEWbook")
       dbref,
       (snapshot) => {
         const data = snapshot.val();
-        let result = Object.values(data)
-        
-        //all books
-        let s=Math.floor(result.length/5)
-        let SLIDES_arr=[]
-
-        for( let i=0;i<s;i++){
-          if(result.length>4){
-            let slide_arr=[]
-            slide_arr.push(result[0],result[1],result[2],result[3],result[4])
-            SLIDES_arr.push(slide_arr)
-            result= result.slice(5)
+        let all_values=Object.values(data)
+        // all books inner 
+        let all_books_slides_thml= get_books(all_values,"all_books_read")
+        swiper_wrapper.innerHTML=all_books_slides_thml
+        // all books inner 
+        for (let i=0;i<all_values.length;i++){
+          let el = document.querySelector(`#all_books_read_${i}`)
+          if(el!=null){
+            
+            el.addEventListener("click",(()=>{
+              let obj=all_values[i]
+              console.log(obj);
+              //JALƏ KODU BURA YAZ
+            }))
           }
-       
           
         }
-        let slider_html_arr=SLIDES_arr.map((item,i,list)=>{
+        
 
-          let slide=item.map((item)=>{
-          
-            result=`
-            <div class="book_box"  >
-          
-        <img src="${item.imageUrl}" alt="" class="box_book_img">
-        <h4 class="box_book_name"${item.title}</h4>
-        <h5 class="box_book_autor">${item.author}</h5>
-        <button data-id="${item.Date}" class="readMoreBtn box_book_btn"><a href="#" class="a" >Read more</a></button>
-        <!-- add id to button in catalog js-->
-          </div>
-            `
-            return result
+        //best sellers inner
 
-          })
-          
-          let slide_el_result=slide.join("")
-          let SLIDER_result=`
-          <div class="swiper-slide">
-          ${slide_el_result}
-          </div>
-          `
-          return SLIDER_result
+        let best_seller_arr=all_values.filter((item,i)=>{
+          return item.bookType==="best seller" ? true :false ;
         })
-        let slider_html=slider_html_arr.join("")
-        swiper_wrapper.innerHTML=slider_html
-        //all books
+        let best_seller_slides_thml= get_books(best_seller_arr,"best_seller_read")
+        best_seller_swippwr.innerHTML=best_seller_slides_thml
+        for (let i=0;i<all_values.length;i++){
+          let el = document.querySelector(`#best_seller_read_${i}`)
+          if(el!=null){
+            
+            el.addEventListener("click",(()=>{
+              let obj=all_values[i]
+              console.log(obj);
+              //JALƏ KODU BURA YAZ
+            }))
+          } 
+        }
+        //best sellers inner
 
-        //best sellers
-        let BestSellerCondition=(item)=>item.bookType==="best seller" ? true :false ;
-        let best_html=giveHTMLbyCondition(BestSellerCondition,SLIDES_arr)
-        best_seller_swippwr.innerHTML=best_html
-        //best sellers
+        
 
         //new book
+        let new_arr=all_values.filter((item,i)=>{
+          return item.isNew==true ? true :false ;
+        })
+        let new_slides_thml= get_books(new_arr,"new_read")
+        NEWbook.innerHTML=new_slides_thml
+        for (let i=0;i<all_values.length;i++){
+          let el = document.querySelector(`#new_read_${i}`)
+          if(el!=null){
+            
+            el.addEventListener("click",(()=>{
+              let obj=all_values[i]
+              console.log(obj);
+              //JALƏ KODU BURA YAZ
+            }))
+          } 
+        }
         let isNewCondition=(item)=>item.isNew==true ? true :false ;
-         let NewHtml=giveHTMLbyCondition(isNewCondition,SLIDES_arr)
-         NEWbook.innerHTML=NewHtml
-        //new book
+
 
       },
       (error) => {
@@ -128,71 +131,76 @@ const NEWbook=document.querySelector("#NEWbook")
   displayAllBookstData()
   
   // console.log(books);
-function giveHTMLbyCondition ( condition,SLIDES_arr){
-  let html_arr=SLIDES_arr.map( item=>{
 
-    let slide_obj=item.filter(item=>{
-     if(condition(item)){
-       return true
-     }else{
-      return false
-     }
-     
-   })
-   
-  //  if(slide_obj){
-  //   return
-  //  }
-   
-  let slide = slide_obj.map(item => {
-    let result = `
-    <div class="book_box">
-        <img src="${item.imageUrl}" alt="" class="box_book_img">
-        <h4 class="box_book_name"${item.title}</h4>
-        <h5 class="box_book_autor">${item.author}</h5>
-        <button data-id="${item.Date}" class="readMoreBtn box_book_btn"><a href="#" class="a" >Read more</a></button>
-    </div>
-    `;
-    return result;
-});
 
-  //  console.log(slide);
-   
-   
-   let slide_el_result=slide.join("")
-  if(slide_el_result===``){
-    return
-  }
-   let SLIDER_result=`
-   <div class="swiper-slide">
-   ${slide_el_result}
-   </div>
-   `
-   return SLIDER_result
- })
- let html=html_arr.join("")
- return html
-}
+// document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  function displayAllBookstData() {
-     document.addEventListener('click', function (event) {
-      if (event.target.classList.contains('readMoreBtn')) {
-          const bookId = event.target.getAttribute('data-id');
-          console.log('Clicked on book with ID:', bookId);
-          localStorage.setItem('selectedBookId', bookId);
-          event.preventDefault();
+//   // function displayAllBookstData() {
+//   //    document.addEventListener('click', function (event) {
+//   //     if (event.target.classList.contains('readMoreBtn')) {
+//   //         const bookId = event.target.getAttribute('data-id');
+//   //         console.log('Clicked on book with ID:', bookId);
+//   //         localStorage.setItem('selectedBookId', bookId);
+//   //         event.preventDefault();
           
-      }
-  });  
-  }
+//   //     }
+//   // });  
+//   // }
 
-  displayAllBookstData();
+//   // displayAllBookstData();
 
 
 
-});
+// });
+function get_books(obj_arr,id){
 
+        //all books
+        let books_html_arr=obj_arr.map((item,i)=>{
+          
+          let button_id=`${id}_${i}`
+          let result=`
+              <div class="book_box"  >
+            
+          <img src="${item.imageUrl}" alt="" class="box_book_img">
+          <h4 class="box_book_name"${item.title}</h4>
+          <h5 class="box_book_autor">${item.author}</h5>
+          <button id="${button_id}" class="readMoreBtn box_book_btn">Read more</button>
+          <!-- add id to button in catalog js-->
+            </div>
+              `
+          return result 
+        })
+        
+        let s=Math.floor(books_html_arr.length/5)
+        let SLIDES_arr=[]
+
+        for( let i=0;i<s;i++){
+          if(books_html_arr.length>4){
+            let slide_arr=[]
+            slide_arr.push(books_html_arr[0],books_html_arr[1],books_html_arr[2],books_html_arr[3],books_html_arr[4])
+            SLIDES_arr.push(slide_arr)
+            books_html_arr= books_html_arr.slice(5)
+          }
+        }
+        
+
+        let SLIDES_html_arr=SLIDES_arr.map(item=>{
+          let books_html_5=item.join("")
+          let SLIDER_result=`
+             <div class="swiper-slide">
+             ${books_html_5}
+             </div>
+             `
+          return SLIDER_result
+        })
+        let slides_thml=SLIDES_html_arr.join("")
+        return slides_thml
+}
 // .//book-page.html
+
+
+function book_to_book_page(obj){
+//JALƏ koudu bura yaz
+console.log(obj);
+}
 // .//book-page.html
