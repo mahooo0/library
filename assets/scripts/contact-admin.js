@@ -82,4 +82,3 @@ function displayContactData() {
 window.onload = function () {
   displayContactData();
 };
-
