@@ -31,10 +31,11 @@ let contactAdress = document.querySelector("#contactAdress");
 let contactEmail = document.querySelector("#contactEmail");
 let contactNum = document.querySelector("#contactNum");
 
+
 function displayContactData() {
   const dbref = ref(db, "contact-us/");
   const tableBody = document.getElementById("table_body");
-
+  console.log(tableBody);
   onValue(
       dbref,
       (snapshot) => {
@@ -65,9 +66,11 @@ function displayContactData() {
                           <td class="th_book_author">${contact.phone}</td>
                       </tr>
                   `;
+                  
 
                   // Append rowCont to tbody
                   tbody.innerHTML += rowCont;
+                  console.log(tbody);
               });
           }
       },
