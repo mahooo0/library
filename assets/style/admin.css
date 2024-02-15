@@ -76,6 +76,7 @@
   flex-shrink: 0;
 }
 .logo {
+  margin-top: 2rem;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
@@ -699,16 +700,62 @@ background: #000000a6;
 }
 
 
-@media only screen and (max-width: 768px) {
-  
-.section1{
-  width: 100%;
 
-  display: flex;
-  justify-content: center;
+/*  responsive design */
+@media screen and (max-width: 768px) {
+  .section1 {
+    top: 35px; 
+    left: 15px;
+  }
+  .logo_container {
+    width: 200px; 
+    height: 60px; 
+  }
+  .logo_text {
+    width: 150px; 
+  }
+  .library {
+    font-size: 12px; 
+  }
+  .admin_panel {
+    width: 90%; 
+    margin-top: 80px; 
+  }
+  .admin_panel_text {
+    width: 100%; 
+    font-size: 32px; 
+  }
+  .admin_panel_inpt,
+  .admin_panel_btn {
+    width: 90%; 
+  }
 }
 
-  
+/* mobile responsive design */
+@media screen and (max-width: 480px) {
+  .section1 {
+    top: 15px; 
+    left: 10px; 
   }
-
-
+  .logo_container {
+    width: 150px; 
+    height: 50px; 
+  }
+  .logo_text {
+    width: 120px;
+  }
+  .library {
+    font-size: 10px; 
+  }
+  .admin_panel {
+    width: 95%; 
+    margin-top: 60px; 
+  }
+  .admin_panel_text {
+    font-size: 24px; 
+  }
+  .admin_panel_inpt,
+  .admin_panel_btn {
+    width: 95%; 
+  }
+}

@@ -1,13 +1,14 @@
-// Anar's code start
-import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
   getDatabase,
   ref,
   push,
   onValue,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c",
@@ -23,18 +24,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
-console.log(auth);
-// export const firebaseDatabase = getDatabase(firebaseApp);
-export const firebaseDatabase = database;
 
-// HTML elementleri
+export const firebaseDatabase = database;
 
 const searchInput = document.querySelector("#search_Input");
 const searchBtn = document.querySelector("#search_Btn");
 const searchVariant = document.querySelector("#search_variant");
 const bookAddBtn = document.querySelector("#book_add");
 const bookFormDiv = document.querySelector("#book_form_div");
-// HTML book form elementleri
 const formSectionTitle = document.querySelector("#form_section_title_input");
 const formSectionAuthor = document.querySelector("#form_section_author_input");
 const formSectionImg = document.querySelector("#form_section_img_url");
@@ -45,8 +42,6 @@ const formSectionType = document.querySelector("#bookCategorie");
 const formSectionDescription = document.querySelector(
   "#form_section_description_input"
 );
-
-// Google Books API'sinden kitapları alan fonksiyon
 
 async function getBooks(searchTerm) {
   try {
@@ -59,12 +54,10 @@ async function getBooks(searchTerm) {
     return await response.json();
   } catch (error) {
     console.error("Error fetching books:", error);
-
     return null;
   }
 }
 
-// Kitap variyantlarini gosteren fonksiyon
 async function showBookVariants(books) {
   let bookdata = books.map((book) => {
     return `
@@ -83,7 +76,6 @@ async function showBookVariants(books) {
   });
 }
 
-// Formu dolduran funksiya
 function fillFormInputs(selectedTitle, books) {
   const selectedBook = books.find(
     (book) => book.volumeInfo.title === selectedTitle
@@ -91,7 +83,7 @@ function fillFormInputs(selectedTitle, books) {
 
   if (!selectedBook) {
     console.error("Selected book not found.");
-    alert("Please fill in all fields!");
+    displayNotification("Selected book not found.", "error");
     return;
   }
 
@@ -117,31 +109,28 @@ function fillFormInputs(selectedTitle, books) {
   formSectionType.value = bookTypeInput;
 }
 
-// Firebase'e kitap elave eden funksiya
 async function addBookToFirebase(bookData) {
   bookData.Date = getCurrentDate();
   try {
     const booksRef = ref(database, "books");
     await push(booksRef, bookData);
-    alert("Kitab uğurla Firebase-ə əlavə edildi!");
+    displaySuccessNotification("Kitab uğurla Firebase-ə əlavə edildi.");
   } catch (error) {
     console.error("Error adding book to Firebase:", error);
-    throw error; //
+    displayNotification("Error adding book to Firebase", "error");
+    throw error;
   }
 }
 
-// firebasede ayin tarixini gosteren fuksiya
 function getCurrentDate() {
-  const currentDate=new Date()
-  const day =String(currentDate.getDate()).padStart(2,'0')
-  const month=String(currentDate.getMonth()+1).padStart(2.,'0')
-  const year=currentDate.getFullYear()
+  const currentDate = new Date();
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const year = currentDate.getFullYear();
   return `${day}/${month}/${year}`;
-  
 }
-const currentDate=getCurrentDate
+const currentDate = getCurrentDate;
 
-// Formdaki setrleri temizleyen funksiya
 function clearFormInputs() {
   formSectionTitle.value = "";
   formSectionAuthor.value = "";
@@ -152,7 +141,6 @@ function clearFormInputs() {
   searchInput.value = "";
 }
 
-// Form setrlerini tesdiq eden funksiya
 function validateFormInputs(formInputs) {
   return (
     formInputs.title &&
@@ -169,13 +157,11 @@ bookFormDiv.addEventListener("click", (event) => {
 
   const formInputs = getFormInputs();
 
-  // Form setrlerini tesdiqetme
   if (!validateFormInputs(formInputs)) {
-    alert("Please fill in all fields!");
+    displayNotification("Please fill in all fields!", "error");
     return;
   }
 
-  // butun setrler dogrudursa firebase kitab elave et
   const bookData = {
     title: formInputs.title,
     author: formInputs.author,
@@ -183,28 +169,24 @@ bookFormDiv.addEventListener("click", (event) => {
     description: formInputs.description,
     bookType: formInputs.bookType,
     publicationYear: formInputs.publicationYear,
-    isNew: formInputs.isNew, //  checkbox value'sunu bookData gonderirik
-    // Date: Date.now(),
+    isNew: formInputs.isNew,
   };
 
   addBookToFirebase(bookData);
 
-  // Her shey dogrudursa formu temizle
   clearFormInputs();
   searchVariant.style.display = "none";
 });
 
-// Formadan daxil olan məlumatları qəbul edən və qaytaran funksiya
 function getFormInputs() {
   const title = formSectionTitle.value.trim();
   const author = formSectionAuthor.value.trim();
   const imageUrl = formSectionImg.value.trim();
   const publicationYear = formSectionYear.value.trim();
   const description = formSectionDescription.value.trim();
-  // checkbox boolean value olaraq gotururuk
-let isNew = isCheckboxSelected();
+  let isNew = isCheckboxSelected();
+
   const bookTypeValue =
-  
     typeof formSectionType.value === "string"
       ? formSectionType.value.trim()
       : formSectionType.value;
@@ -216,7 +198,7 @@ let isNew = isCheckboxSelected();
     publicationYear,
     description,
     bookType: bookTypeValue,
-    isNew:isNew
+    isNew: isNew,
   };
 }
 
@@ -234,15 +216,13 @@ searchInput.addEventListener("input", async () => {
   }
 });
 
-// Elementin görünmesi ucun funksiya
 function displayFunk(el) {
   let class_List = el.classList;
   if (class_List.contains("d-none")) {
     el.classList.remove("d-none");
   }
-  // Anar's code finish
 }
-//  admin panel entering
+
 const admin_panel_btn = document.querySelector("#admin_panel_btn");
 let userName_inp = document.querySelector("#admin_panel_username");
 let Password_inp = document.querySelector("#admin_panel_pasword");
@@ -255,37 +235,34 @@ admin_panel_btn.addEventListener("click", () => {
   let Password = Password_inp.value;
 
   if (!userName || !Password) {
-    alert("Please fill in all fields!");
+    displayNotification("Please fill in all fields!", "error");
   }
-  signIn(userName,Password)
-
+  signIn(userName, Password);
 });
-
 
 export async function signIn(email, password) {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log('Sign-in successful');
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log("Sign-in successful");
     admin_auth.classList.add("d-none");
     admin_main.classList.remove("d-none");
     return userCredential.user;
   } catch (error) {
-    alert("u wrote somthing wrong");
-    console.error('Error signing in:', error.message);
+    displayNotification("You wrote something wrong.", "error");
+    console.error("Error signing in:", error.message);
     return null;
-  }}
-
+  }
+}
 
 log_outh.addEventListener("click", () => {
   admin_auth.classList.remove("d-none");
   admin_main.classList.add("d-none");
 });
 
-
-
-// jalya
-
-// book formda add type bolmesinin funksionalligi
 let addTypeModal = document.querySelector("#addTypeModal");
 let addTypeBtnForm = document.querySelector("#addTypeBtnForm");
 let closeTypeBtn = document.querySelector("#closeTypeBtn");
@@ -300,8 +277,6 @@ closeTypeBtn.addEventListener("click", function () {
   addTypeModal.style.visibility = "hidden";
 });
 
-//add type inputuna daxil olan data'nin firebase oturulmesi
-
 let addBtnCategorie = document.querySelector("#addBtnCategorie");
 
 addBtnCategorie.addEventListener("click", function (event) {
@@ -309,48 +284,44 @@ addBtnCategorie.addEventListener("click", function (event) {
 
   let bookCategorie = document.querySelector("#bookCategorie").value;
 
-  // Check edirik inputun value boshdursa
   if (bookCategorie.trim() !== "") {
     const databaseRef = ref(database, "book-type/");
     push(databaseRef, {
       bookCategorie: bookCategorie,
     })
       .then(() => {
-        alert("data sent");
-        document.querySelector("#bookCategorie").value = ""; // Clear input value
+        displaySuccessNotification("Data sent successfully.");
+        document.querySelector("#bookCategorie").value = "";
       })
       .catch((err) => {
-        alert("Error:", err);
+        displayNotification("Error occurred: " + err.message, "error");
       });
   } else {
-    alert("Please enter a valid book category.");
+    displayNotification("Please enter a valid book category.", "error");
   }
 });
 
-// new checkbox secilib ya yox gosteren funksiya
 function isCheckboxSelected() {
   let checkbox = document.querySelector("#new_book_checkbox");
 
   if (checkbox.checked) {
-    return true; // Checkbox is selected
+    return true;
   } else {
-    return false; // Checkbox is not selected
+    return false;
   }
 }
 
-
-
-
-// book type menuda categorieleri gosteren funskiya
 function displayCategorieInMenu() {
   const dbref = ref(database, "book-type/");
   onValue(dbref, (snapshot) => {
     const data = snapshot.val();
-    
 
-    const options = Object.values(data).map(
-      (dataValue) => `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
-    ).join("");
+    const options = Object.values(data)
+      .map(
+        (dataValue) =>
+          `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
+      )
+      .join("");
 
     const menuTypeSect = document.getElementById("form_section_type_input");
     menuTypeSect.innerHTML = options;
@@ -360,3 +331,40 @@ function displayCategorieInMenu() {
 window.onload = function () {
   displayCategorieInMenu();
 };
+
+function displayNotification(message, type, callback) {
+  const notificationContainer = document.createElement("div");
+  notificationContainer.className = "notification-container";
+
+  const notification = document.createElement("div");
+  notification.className =
+    "notification" + (type === "success" ? " success-notification" : ""); // Added success-notification class if type is 'success'
+  notification.innerHTML = message;
+
+  const timerBar = document.createElement("div");
+  timerBar.className = "timer-bar";
+  notification.appendChild(timerBar);
+
+  notificationContainer.appendChild(notification);
+  document.body.appendChild(notificationContainer);
+
+  let countdown = 5;
+  const timerInterval = setInterval(() => {
+    countdown--;
+
+    if (countdown <= 0) {
+      clearInterval(timerInterval);
+      notification.remove();
+      notificationContainer.remove();
+      if (typeof callback === "function") {
+        callback(); // Invoke callback function upon notification dismissal
+      }
+    } else {
+      timerBar.style.width = (countdown / 5) * 100 + "%";
+    }
+  }, 1000);
+}
+
+function displaySuccessNotification(message, callback) {
+  displayNotification(message, "success", callback);
+}

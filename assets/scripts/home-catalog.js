@@ -26,7 +26,7 @@ function displayCatalogData() {
     const dbref = ref(db, "book-type/");
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
-      const categories = Object.values(data).map(dataValue => `<h2 class="box">${dataValue.bookCategorie}</h2>`).join('');
+      const categories = Object.values(data).map(dataValue => `<h2 class="box"><a href="../pages/catalog.html">${dataValue.bookCategorie}</a></h2>`).join('');
   
       const catalogSection = document.getElementById('catalogSect');
       const secondContainer = catalogSection.querySelector('.secondContainer');

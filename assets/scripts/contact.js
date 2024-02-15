@@ -24,7 +24,63 @@ initializeApp(firebaseConfig);
 const db = getDatabase();
 // console.log(db);
 
-//client side contact
+function displayNotification(message, type) {
+  const notificationContainer = document.createElement("div");
+  notificationContainer.className = "notification-container";
+
+  const notification = document.createElement("div");
+  notification.className = "notification";
+  notification.innerHTML = message;
+
+  const timerBar = document.createElement("div");
+  timerBar.className = "timer-bar";
+  notification.appendChild(timerBar);
+
+  notificationContainer.appendChild(notification);
+  document.body.appendChild(notificationContainer);
+
+  let countdown = 5;
+  const timerInterval = setInterval(() => {
+    countdown--;
+
+    if (countdown <= 0) {
+      clearInterval(timerInterval);
+      notification.remove();
+      notificationContainer.remove();
+    } else {
+      timerBar.style.width = (countdown / 5) * 100 + "%";
+    }
+  }, 1000);
+}
+
+function displaySuccessNotification(message, type) {
+  const notificationContainer = document.createElement("div");
+  notificationContainer.className = "notification-container";
+
+  const notification = document.createElement("div");
+  notification.className = "notification success-notification"; // Added success-notification class
+  notification.innerHTML = message;
+
+  const timerBar = document.createElement("div");
+  timerBar.className = "timer-bar";
+  notification.appendChild(timerBar);
+
+  notificationContainer.appendChild(notification);
+  document.body.appendChild(notificationContainer);
+
+  let countdown = 5;
+  const timerInterval = setInterval(() => {
+    countdown--;
+
+    if (countdown <= 0) {
+      clearInterval(timerInterval);
+      notification.remove();
+      notificationContainer.remove();
+    } else {
+      timerBar.style.width = (countdown / 5) * 100 + "%";
+    }
+  }, 1000);
+}
 
 document.getElementById("sendBtn").addEventListener("click", function (event) {
   event.preventDefault();
@@ -36,7 +92,7 @@ document.getElementById("sendBtn").addEventListener("click", function (event) {
   var note = document.getElementById("note").value;
 
   if (!fullname || !email || !address || !phone || !note) {
-    alert("Please fill in all fields!");
+    displayNotification("Please fill in all fields!", "danger");
     console.log("err");
   } else {
     var formData = {
@@ -46,22 +102,16 @@ document.getElementById("sendBtn").addEventListener("click", function (event) {
       phone: phone,
       note: note,
     };
-    // alert("data sended")
     console.log(formData);
 
     const dbref = ref(db, "contact-us/");
-    push(dbref, {
-      fullname: fullname,
-      email: email,
-      address: address,
-      phone: phone,
-      note: note,
-    })
+    push(dbref, formData)
       .then(() => {
-        alert("data sended");
+        displaySuccessNotification("Data sent successfully!", "success"); // Changed to displaySuccessNotification
       })
       .catch((err) => {
-        alert("err", err);
+        displayNotification("Error sending data!", "danger");
+        console.error("Error sending data:", err);
       });
   }
 });
