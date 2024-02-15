@@ -30,7 +30,7 @@ body {
     align-items: center;
     margin: auto;
     width: 80%;
-    margin-bottom: 80px;
+    /* margin-bottom: 80px; */
     border-bottom: 2px solid whitesmoke;
 }
 
