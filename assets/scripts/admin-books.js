@@ -116,6 +116,7 @@ function displayAllBooks() {
     for (let i = 0; i < All_books_obj.length; i++) {
       delete_from_fireBase(`delete${i}`, i);
       correct_el_in_fireBase(`correct${i}`, i);
+
     }
 
     function delete_from_fireBase(id, i) {
@@ -139,6 +140,7 @@ function displayAllBooks() {
       let el = document.querySelector(`#${id}`);
       el.addEventListener("click", () => {
         Correct_panel.classList.remove("d-none");
+        
         let obj = All_books_obj[i];
 
         // Filling form
@@ -203,6 +205,7 @@ function displayAllBooks() {
         });
       });
     }
+
   });
 }
 
@@ -229,3 +232,8 @@ export async function deleteData(path) {
     displayErrorNotification("Error deleting data");
   }
 }
+window.addEventListener("click", (event) => {
+  if (event.target === Correct_panel) {
+    Correct_panel.classList.add("d-none");
+  }
+});

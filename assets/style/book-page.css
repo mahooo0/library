@@ -56,7 +56,7 @@ body {
   align-items: center;
   margin: auto;
   width: 80%;
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
   border-bottom: 2px solid whitesmoke;
 }
 
@@ -154,6 +154,7 @@ body {
 
 .about-book {
   display: flex;
+  margin-top: 6rem;
 }
 
 .about-text button {
@@ -495,10 +496,7 @@ justify-content: start;
   cursor: pointer;
 }
 
-.new-modal p 
-{
-  margin-top: 15px;
-}
+
 
 
 .menu-mobile {

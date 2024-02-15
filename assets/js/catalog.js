@@ -99,10 +99,12 @@ function displayAllBookstData() {
       }
     }
 
+
     // new books inner
     let new_arr = all_values.filter((item) => item.isNew === true);
     let new_slides_html = get_books(new_arr, "new_read");
     NEWbook.innerHTML = new_slides_html;
+
 
     for (let i = 0; i < new_arr.length; i++) {
       let el = document.querySelector(`#new_read_${i}`);
@@ -157,6 +159,7 @@ function displayBookDetails(book) {
 
   const dateAdded = new Date(book.Date);
 
+
   // nece gun evvel elave olundugunu gosteren
   dateWhenBookAdded.textContent = formatTimeSinceAdded(dateAdded);
 
@@ -209,6 +212,22 @@ function get_books(obj_arr, id) {
   let books_html_arr = obj_arr.map((item, i) => {
     let button_id = `${id}_${i}`;
     // console.log(button_id);
+    if(item.isNew==true){
+      let resultN = `
+              <div class="book_box"  >
+            
+          <img src="${item.imageUrl}" alt="" class="box_book_img">
+          <h4 class="box_book_name"${item.title}</h4>
+          <h5 class="box_book_autor">${item.author}</h5>
+          <button id="${button_id}" class="readMoreBtn box_book_btn">Read more</button>
+          <!-- add id to button in catalog js-->
+          <div class="NEW">
+            <p>NEW</p>
+          </div>
+            </div>
+              `;
+            return resultN
+    }
     let result = `
               <div class="book_box"  >
             
@@ -239,6 +258,7 @@ function get_books(obj_arr, id) {
       books_html_arr = books_html_arr.slice(5);
     }
   }
+
 
   let SLIDES_html_arr = SLIDES_arr.map((item) => {
     let books_html_5 = item.join("");
