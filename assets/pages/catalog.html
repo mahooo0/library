@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/catalog.css">
+    <link rel="stylesheet" href="../style/book-page.css">
     <link rel="stylesheet" href="/assets/style/joinUs.css">
   </head>
   <body class="body">
@@ -80,7 +81,7 @@
 
 
 
-<main class="main">
+<main id="catalogBooksContainer" class="main">
   <div class="random_books_section">
     <div class="cotalog_text">
       <h2 class="cotalog_text_h2" >All books</h2>
@@ -186,6 +187,115 @@
     </div>
   </div>
 </main>
+
+
+
+
+<section id="aboutBookContainer" class="about-book container">
+  <div class="about-text">
+    <button id="backButtonAbout">&lt; Back</button>
+    <div class="book-year">
+      <p id="bookYearAbout">2017</p>
+    </div>
+    <div class="book-text">
+      <h2 id="bookNameAbout" >Order in Chaos</h2>
+      <h5 id="dateWhenBookAdded" >2 days ago added</h5>
+      <h6 id="bookAuthorAbout" >Konstantin Koptelov</h6>
+      <p id="bookDescriptionAbout">
+        s of Kiev can receive an order on the day of its registration.
+        Customers from other cities of Ukraine can receive an order within
+        1-5 days, depending on the location of the settlement and the
+        selected delivery method. Orders over UAH 1000 are delivered free of
+        charge *. You can see the available methods, exact terms and cost of
+        delivery during checkout in the order basket, after selecting the
+        delivery city. More details
+      </p>
+    </div>
+  </div>
+
+  <div class="about-img">
+    <img id="bookImgAbout" src="/assets/images/book-page1.svg" alt="book" />
+    <div class="new-modal">
+      <p>New</p>
+    </div>
+  </div>
+  <div class="book-year-mobile">
+    <p>2017</p>
+  </div>
+</section>
+
+<div class="book-text-mob">
+  <h2>Order in Chaos</h2>
+
+  <h6>Konstantin Koptelov</h6>
+  <p>
+    s of Kiev can receive an order on the day of its registration. Customers
+    from other cities of Ukraine can receive an order within 1-5 days,
+    depending on the location of the settlement and the selected delivery
+    method. Orders over UAH 1000 are delivered free of charge *. You can see
+    the available methods, exact terms and cost of delivery during checkout
+    in the order basket, after selecting the delivery city. More details
+  </p>
+</div>
+<div id="commentsAbout" class="comments_area container ">
+<div class="comments">
+<div class="input-btn">
+  <input placeholder="your anonim comment..." />
+  <button class="send-button">
+    <svg
+      class="send-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="29"
+      viewBox="0 0 30 29"
+      fill="none"
+    >
+      <g clip-path="url(#clip0_2416_3382)">
+        <path
+          d="M3.06707 24.9259L28.038 14.3704L3.06707 3.81482L3.05518 12.0247L20.9 14.3704L3.05518 16.7161L3.06707 24.9259Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_2416_3382">
+          <path
+            d="M0.675781 5.29627C0.675781 2.53484 2.91436 0.296265 5.67578 0.296265H24.2276C26.989 0.296265 29.2276 2.53484 29.2276 5.29626V23.4444C29.2276 26.2058 26.989 28.4444 24.2276 28.4444H5.67578C2.91435 28.4444 0.675781 26.2058 0.675781 23.4444V5.29627Z"
+            fill="white"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  </button>
+</div>
+
+<div class="anonim-comments">
+  <div class="comm1">
+    <div class="user1-info">
+      <h2>anonim</h2>
+      <p>18:32 today</p>
+    </div>
+    <p>
+      Woah, your project looks awesome! How long have you been coding for?
+      I’m still new, but think I want to dive into React as well soon.
+      Perhaps you can give me an insight on where I can learn React?
+      Thanks!
+    </p>
+  </div>
+
+  <div class="comm2">
+    <div class="user2-info">
+      <h2>anonim</h2>
+      <p>2 days ago</p>
+    </div>
+    <p>
+      Woah, your project looks awesome! How long have you been coding for?
+      I’m still new, but think I want to dive into
+    </p>
+  </div>
+</div>
+</div>
+
+</div>
      <!-- SOCIAL MEDIA  -->
       
      <section class="socialContainer">
