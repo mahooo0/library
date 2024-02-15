@@ -116,6 +116,7 @@ function displayAllBooks() {
     for (let i = 0; i < All_books_obj.length; i++) {
       delete_from_fireBase(`delete${i}`, i);
       correct_el_in_fireBase(`correct${i}`, i);
+
     }
 
     function delete_from_fireBase(id, i) {
@@ -204,6 +205,7 @@ function displayAllBooks() {
         });
       });
     }
+
   });
 }
 

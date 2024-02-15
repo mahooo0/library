@@ -99,10 +99,12 @@ function displayAllBookstData() {
       }
     }
 
+
     // new books inner
     let new_arr = all_values.filter((item) => item.isNew === true);
     let new_slides_html = get_books(new_arr, "new_read");
     NEWbook.innerHTML = new_slides_html;
+
 
     for (let i = 0; i < new_arr.length; i++) {
       let el = document.querySelector(`#new_read_${i}`);
@@ -156,6 +158,7 @@ function displayBookDetails(book) {
   }
 
   const dateAdded = new Date(book.Date);
+
 
   // nece gun evvel elave olundugunu gosteren
   dateWhenBookAdded.textContent = formatTimeSinceAdded(dateAdded);
@@ -255,6 +258,7 @@ function get_books(obj_arr, id) {
       books_html_arr = books_html_arr.slice(5);
     }
   }
+
 
   let SLIDES_html_arr = SLIDES_arr.map((item) => {
     let books_html_5 = item.join("");
