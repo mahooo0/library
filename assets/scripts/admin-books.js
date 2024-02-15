@@ -223,7 +223,7 @@ export async function deleteData(path) {
   try {
     await remove(ref(db, path));
     console.log("Data deleted successfully");
-    displaySuccessNotification("Data deleted successfully");
+    displaySuccessNotification("Data deleted");
   } catch (error) {
     console.error("Error deleting data:", error.message);
     displayErrorNotification("Error deleting data");
