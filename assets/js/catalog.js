@@ -29,6 +29,7 @@ import {
   get,
   child,
   set,
+
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -49,6 +50,10 @@ const db = getDatabase(app);
 const swiper_wrapper = document.querySelector("#swiper_wrapper");
 const best_seller_swippwr = document.querySelector("#best_seller_swippwr");
 const NEWbook = document.querySelector("#NEWbook");
+const type_buttons_div = document.querySelector("#type_buttons_div");
+const books_by_type = document.querySelector("#books_by_type");
+const text_1 = document.querySelector("#text_1");
+const new_div = document.querySelector("#new_div");
 
 const commentsAbout = document.querySelector("#commentsAbout");
 commentsAbout.style.display = "none";
@@ -57,10 +62,16 @@ aboutBookContainer.style.display = "none";
 
 function displayAllBookstData() {
   const dbref = ref(db, "books/");
+  const typeref=ref(db, "book-type/");
+  let books_arr=[]
+  
 
   onValue(dbref, (snapshot) => {
     const data = snapshot.val();
     let all_values = Object.values(data);
+   for (let i =0;i<all_values.length;i++){
+    books_arr.push(all_values[i])   }
+    
 
     let all_books_slides_html = get_books(all_values, "all_books_read");
     swiper_wrapper.innerHTML = all_books_slides_html;
@@ -114,6 +125,52 @@ function displayAllBookstData() {
       }
     }
   });
+  
+  onValue(typeref,(snapshot)=>{
+    const data =snapshot.val()
+    console.log(books_arr);
+    const all_values = Object.values(data);
+    let butons_arr=[]
+    for (let i=0;i<all_values.length;i++){
+      let el =`<button id="type_button_${i}">${all_values[i].bookCategorie}</button>`
+      butons_arr.push(el)
+    }
+    let type_buttons=butons_arr.join("")
+    type_buttons_div.innerHTML=type_buttons
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    
+    for (let s=0;s<all_values.length;s++){
+      let button_el=document.querySelector(`#type_button_${s}`)
+      button_el.addEventListener("click",()=>{
+        if (button_el.classList.contains("active")) {
+          button_el.classList.remove("active") 
+          
+        }else{
+          button_el.classList.add("active") 
+          
+          let books_bytype=books_arr.filter(item=> {
+            console.log(item.bookType,all_values[s].bookCategorie);
+            
+            if(item.bookType===all_values[s].bookCategorie){
+              return true
+            }
+           
+            return false
+          })
+          let html_1=get_books(books_bytype,`${all_values[s].bookCategorie}_${s}`)
+          
+        
+          swiper_wrapper.innerHTML=html_1
+          text_1.innerHTML=all_values[s].bookCategorie
+        }
+      })
+    }
+    
+  })
+  
+  
+
+
 }
 
 function displayBookDetails(book) {
