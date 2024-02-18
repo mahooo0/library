@@ -85,7 +85,7 @@
   <div class="random_books_section">
     <div class="cotalog_text">
       <h2 class="cotalog_text_h2" >All books</h2>
-      <div>
+      <div id="type_buttons_div">
         <button>Fantastic</button>
         <button>Self-development</button>
         <button>Baby</button>
@@ -93,8 +93,10 @@
       </div>
     </div>
     <!-- Slider main container -->
-    <div class="swiper">
+    <h2 class="category_title" id="text_1"></h2>
+      <div class="swiper" id="books_by_type">
       <!-- Additional required wrapper -->
+
       <div class="swiper-wrapper" id="swiper_wrapper">
         <!-- Slides -->
         <div class="swiper-slide">Loadin...</div>
@@ -136,10 +138,12 @@
       <!-- If we need scrollbar -->
       <!-- <div class="swiper-scrollbar"></div> -->
     </div>
+  
+    
   </div>
 
   <div class="swiper_by_category">
-    <h2 class="category_title">Besteller</h2>
+    <h2 class="category_title" >Besteller</h2>
     <div class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper" id="best_seller_swippwr">
@@ -162,7 +166,7 @@
       <!-- <div class="swiper-scrollbar">id="NEWbook"</div> -->
     </div>
   </div>
-  <div class="swiper_by_category">
+  <div class="swiper_by_category"id="swiper3" >
     <h2 class="category_title">New releases</h2>
     <div class="swiper">
       <!-- Additional required wrapper -->
