@@ -147,7 +147,6 @@ function validateFormInputs(formInputs) {
     formInputs.author &&
     formInputs.imageUrl &&
     formInputs.description &&
-    formInputs.bookType &&
     formInputs.publicationYear
   );
 }
@@ -315,18 +314,59 @@ function displayCategorieInMenu() {
   const dbref = ref(database, "book-type/");
   onValue(dbref, (snapshot) => {
     const data = snapshot.val();
+    console.log(data);
 
-    const options = Object.values(data)
-      .map(
-        (dataValue) =>
-          `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
-      )
-      .join("");
+    const options = Object.values(data).map(
+      (dataValue) => `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
+    ).join("");
 
     const menuTypeSect = document.getElementById("form_section_type_input");
     menuTypeSect.innerHTML = options;
   });
 }
+
+// Get the input field
+const bookCategoryInput = document.getElementById("bookCategorie");
+
+// Get the select element
+const selectElement = document.getElementById("form_section_type_input");
+
+// Listen for input changes
+bookCategoryInput.addEventListener("input", function() {
+  // Get the entered value
+  const enteredValue = bookCategoryInput.value.trim();
+  
+  // Create a new option element
+  const newOption = document.createElement("option");
+  newOption.value = enteredValue;
+  newOption.textContent = enteredValue;
+
+  // Add the new option to the select element
+  selectElement.appendChild(newOption);
+});
+
+
+
+// function filterFunction() {
+//   var input, filter, ul, li, a, i;
+//   input = document.getElementById("myInput");
+//   filter = input.value.toUpperCase();
+//   div = document.getElementById("myDropdown");
+//   a = div.getElementsByTagName("a");
+//   for (i = 0; i < a.length; i++) {
+//     txtValue = a[i].textContent || a[i].innerText;
+//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//       a[i].style.display = "";
+//     } else {
+//       a[i].style.display = "none";
+//     }
+//   }
+// }
+
+
+
+
+
 
 window.onload = function () {
   displayCategorieInMenu();
@@ -368,3 +408,6 @@ function displayNotification(message, type, callback) {
 function displaySuccessNotification(message, callback) {
   displayNotification(message, "success", callback);
 }
+
+
+
