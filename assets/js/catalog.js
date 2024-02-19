@@ -113,6 +113,7 @@ function displayAllBookstData() {
 
     // new books inner
     let new_arr = all_values.filter((item) => item.isNew === true);
+    // console.log(new_arr);
     let new_slides_html = get_books(new_arr, "new_read");
     NEWbook.innerHTML = new_slides_html;
 
@@ -187,6 +188,7 @@ function displayBookDetails(book) {
   const bookDescriptionAbout = document.querySelector("#bookDescriptionAbout");
   const bookImgAbout = document.querySelector("#bookImgAbout");
   const dateWhenBookAdded = document.querySelector("#dateWhenBookAdded");
+  const newIconAbout = document.querySelector(".NEW"); // New icon element
 
   // kitabin hansi gun  elave edildiyini gosteren
   function formatTimeSinceAdded(addedDate) {
@@ -228,6 +230,9 @@ function displayBookDetails(book) {
   bookAuthorAbout.textContent = book.author;
   bookDescriptionAbout.textContent = book.description;
   bookImgAbout.src = book.imageUrl;
+
+
+
 
   // kitablarin olcusunu about pagede deyishirik
   bookImgAbout.style.width = "379px";

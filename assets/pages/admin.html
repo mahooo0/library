@@ -15,6 +15,28 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/admin.css">
+    <style>
+        .dropdown select {
+          /* Your custom styles for the dropdown select */
+          width: 990px; /* Example width */
+          height: 40px;
+          padding: 10px; /* Example padding */
+          font-size: 16px; /* Example font size */
+          border: 1px solid #ccc; /* Example border */
+          border-radius: 5px; /* Example border radius */
+          background-color: #fff; /* Example background color */
+          color: #333; /* Example text color */
+        }
+      
+        /* Optional: Style for the dropdown arrow */
+        .dropdown select::after {
+          content: '\25BC'; /* Unicode character for the down arrow */
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          transform: translateY(-50%);
+        }
+      </style>
   </head>
 
 
@@ -175,8 +197,16 @@
                             <button id="addBtnCategorie" class="add-type-form-btn">Add</button>
                             <button id="closeTypeBtn" class="close-type-form-btn">X</button>
                         </div>
-                    </div>
-                    <input class="book_form_secion_inp" id="form_section_type_input" placeholder="Book Type">
+                    </div> 
+                    <!-- id="form_section_type_input" -->
+                    <div class="dropdown">
+                        <select id="form_section_type_input"  >
+                            <option value="watermelon">Watermelon</option>
+                            <option value="honeydew">Honeydew</option>
+                            <option value="cantaloupe">Cantaloupe</option>
+                          </select>
+                      </div>
+                      
                     <h2 class="book_form_secion_title" id="form_section_description">Description</h2>
                     <textarea placeholder="Description" class="book_form_secion_textarea" id="form_section_description_input"></textarea>
                 </div>
