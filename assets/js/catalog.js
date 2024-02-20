@@ -181,14 +181,28 @@ function displayBookDetails(book) {
     "#catalogBooksContainer"
   );
   catalogBooksContainer.style.display = "none";
-  console.log(book);
+
+
   const bookYearAbout = document.querySelector("#bookYearAbout");
   const bookNameAbout = document.querySelector("#bookNameAbout");
   const bookAuthorAbout = document.querySelector("#bookAuthorAbout");
   const bookDescriptionAbout = document.querySelector("#bookDescriptionAbout");
   const bookImgAbout = document.querySelector("#bookImgAbout");
   const dateWhenBookAdded = document.querySelector("#dateWhenBookAdded");
-  const newIconAbout = document.querySelector(".NEW"); // New icon element
+  const newIconAbout = document.querySelector("#newIcon"); 
+  // const newIconTitle = document.querySelector("#newIconTitle")
+  // newIconTitle.style.textAlign = 'center'
+  if (book.isNew === 'true' || book.isNew === true) { // Check for string 'true' or boolean true
+    newIconAbout.style.display = 'block';
+    // newIconAbout.style.width = '100%'; 
+    // newIconAbout.style.textAlign = 'right';
+ 
+} else { 
+    newIconAbout.style.display = 'none';
+}
+
+
+  console.log(book.isNew);
 
   // kitabin hansi gun  elave edildiyini gosteren
   function formatTimeSinceAdded(addedDate) {
@@ -237,6 +251,14 @@ function displayBookDetails(book) {
   // kitablarin olcusunu about pagede deyishirik
   bookImgAbout.style.width = "379px";
   bookImgAbout.style.height = "529px";
+
+  // console.log(this.all_values);
+
+
+
+
+  
+
 
   // 250den cox oldugda ... ile evez edirik
   if (book.description.length > 250) {
