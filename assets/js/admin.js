@@ -325,25 +325,7 @@ function displayCategorieInMenu() {
   });
 }
 
-// Get the input field
-const bookCategoryInput = document.getElementById("bookCategorie");
 
-// Get the select element
-const selectElement = document.getElementById("form_section_type_input");
-
-// Listen for input changes
-bookCategoryInput.addEventListener("input", function() {
-  // Get the entered value
-  const enteredValue = bookCategoryInput.value.trim();
-  
-  // Create a new option element
-  const newOption = document.createElement("option");
-  newOption.value = enteredValue;
-  newOption.textContent = enteredValue;
-
-  // Add the new option to the select element
-  selectElement.appendChild(newOption);
-});
 
 
 

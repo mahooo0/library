@@ -19,6 +19,8 @@ body {
 
 .header {
   width: 100%;
+  position: relative;
+  z-index: 99;
 }
 
 .headerContainer {

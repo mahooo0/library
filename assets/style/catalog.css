@@ -7,6 +7,12 @@
 .cotalog_text div button{
     color:  #241400;
 
+.newIconTitle {
+  display: flex;
+  text-align: center;
+}
+
+
 /* Текст в параграфах */
 font-family: Montserrat;
 font-size: 0.8125rem;
@@ -154,6 +160,30 @@ position: absolute;
 right: 0;
 border-radius: 4px;
 }
+
+.newIconTitle {
+  height: 0.84863rem;
+  flex-shrink: 0;
+  text-align: center;
+  background-color: #EB5757;
+  filter: drop-shadow(0px 3px 8px rgba(225, 106, 0, 0.19));
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 0.5625rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 196.187%; 
+  text-transform: uppercase;
+  border-radius: 4px;
+  margin-left: 1.5rem; 
+  margin-top: 0.3rem; 
+}
+
+
+
+
+
+
 .swiper-slide{
     display: flex;
     flex-direction: row;
