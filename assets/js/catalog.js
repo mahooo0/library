@@ -141,18 +141,26 @@ function displayAllBookstData() {
     let type_buttons=butons_arr.join("")
     type_buttons_div.innerHTML=type_buttons
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-    
+    let buttons_arr=[]
     for (let s=0;s<all_values.length;s++){
       let button_el=document.querySelector(`#type_button_${s}`)
+      buttons_arr.push(button_el)
       button_el.addEventListener("click",()=>{
         if (button_el.classList.contains("active")) {
           button_el.classList.remove("active") 
           
         }else{
           button_el.classList.add("active") 
+          buttons_arr.map((item,i)=>{
+            
+            if(s!=i){
+              item.classList.remove("active")
+            }
+          })
+
           
           let books_bytype=books_arr.filter(item=> {
-            console.log(item.bookType,all_values[s].bookCategorie);
+           
             
             if(item.bookType===all_values[s].bookCategorie){
               return true
@@ -166,6 +174,9 @@ function displayAllBookstData() {
           swiper_wrapper.innerHTML=html_1
           text_1.innerHTML=all_values[s].bookCategorie
         }
+        
+        
+        
       })
     }
     
