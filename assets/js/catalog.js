@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const swiper = new Swiper(".swiper", {
-    // Swiper ayarları buraya gelecek
     slidesPerView: 1,
     spaceBetween: 10,
-    // Diğer ayarlar...
+
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -16,6 +15,100 @@ document.addEventListener("DOMContentLoaded", function () {
       el: ".swiper-scrollbar",
     },
   });
+
+  // comments
+  let comments = [];
+  const sendButton = document.querySelector(".send-button");
+  sendButton.addEventListener("click", () => {
+    const commentInput = document.querySelector("#commentInput");
+    const comment = commentInput.value;
+    const commentData = {
+      postId: 1,
+      name: "Anonim",
+      body: comment,
+      timestamp: getCurrentTimestamp(),
+    };
+
+    // API
+    fetch("https://blog-api-t6u0.onrender.com/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        comments.unshift(result);
+
+        // Update commentSection
+        renderComments();
+      })
+      .catch((error) => console.log("error", error));
+  });
+
+  //  render comments
+  function renderComments() {
+    const commentSection = document.querySelector("#commentSection");
+    commentSection.innerHTML = ""; // Clear commentSection
+
+    comments.forEach((comment) => {
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comm1");
+
+      const userInfoDiv = document.createElement("div");
+      userInfoDiv.classList.add("user1-info");
+
+      const userName = document.createElement("h2");
+      userName.textContent = comment.name;
+
+      const timestamp = document.createElement("p");
+      timestamp.textContent = formatTimestamp(comment.timestamp); // Format timestamp
+
+      const commentContent = document.createElement("p");
+      commentContent.textContent = comment.body;
+
+      userInfoDiv.appendChild(userName);
+      userInfoDiv.appendChild(timestamp);
+
+      commentDiv.appendChild(userInfoDiv);
+      commentDiv.appendChild(commentContent);
+
+      commentSection.appendChild(commentDiv);
+    });
+  }
+
+  // Function  timestamp
+  function formatTimestamp(commentTimestamp) {
+    const currentDate = new Date();
+    const commentDate = new Date(commentTimestamp);
+
+    const timeDifference = currentDate.getTime() - commentDate.getTime();
+    const secondsDifference = timeDifference / 1000;
+    const minutesDifference = secondsDifference / 60;
+    const hoursDifference = minutesDifference / 60;
+    const daysDifference = hoursDifference / 24;
+
+    if (daysDifference < 1) {
+      // Less than 24 hours
+      const hours = String(commentDate.getHours()).padStart(2, "0");
+      const minutes = String(commentDate.getMinutes()).padStart(2, "0");
+      return `${hours}:${minutes} today`;
+    } else {
+      // More than 24 hours
+      const daysAgo = Math.floor(daysDifference);
+      return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
+    }
+  }
+
+  function getCurrentTimestamp() {
+    return new Date().toISOString();
+  }
+
+  const commentSection = document.querySelector("#commentSection");
+
+  renderComments();
 });
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -29,7 +122,6 @@ import {
   get,
   child,
   set,
-
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -62,16 +154,15 @@ aboutBookContainer.style.display = "none";
 
 function displayAllBookstData() {
   const dbref = ref(db, "books/");
-  const typeref=ref(db, "book-type/");
-  let books_arr=[]
-  
+  const typeref = ref(db, "book-type/");
+  let books_arr = [];
 
   onValue(dbref, (snapshot) => {
     const data = snapshot.val();
     let all_values = Object.values(data);
-   for (let i =0;i<all_values.length;i++){
-    books_arr.push(all_values[i])   }
-    
+    for (let i = 0; i < all_values.length; i++) {
+      books_arr.push(all_values[i]);
+    }
 
     let all_books_slides_html = get_books(all_values, "all_books_read");
     swiper_wrapper.innerHTML = all_books_slides_html;
@@ -110,13 +201,11 @@ function displayAllBookstData() {
       }
     }
 
-
     // new books inner
     let new_arr = all_values.filter((item) => item.isNew === true);
     // console.log(new_arr);
     let new_slides_html = get_books(new_arr, "new_read");
     NEWbook.innerHTML = new_slides_html;
-
 
     for (let i = 0; i < new_arr.length; i++) {
       let el = document.querySelector(`#new_read_${i}`);
@@ -128,63 +217,52 @@ function displayAllBookstData() {
       }
     }
   });
-  
-  onValue(typeref,(snapshot)=>{
-    const data =snapshot.val()
+
+  onValue(typeref, (snapshot) => {
+    const data = snapshot.val();
     console.log(books_arr);
     const all_values = Object.values(data);
-    let butons_arr=[]
-    for (let i=0;i<all_values.length;i++){
-      let el =`<button id="type_button_${i}">${all_values[i].bookCategorie}</button>`
-      butons_arr.push(el)
+    let butons_arr = [];
+    for (let i = 0; i < all_values.length; i++) {
+      let el = `<button id="type_button_${i}">${all_values[i].bookCategorie}</button>`;
+      butons_arr.push(el);
     }
-    let type_buttons=butons_arr.join("")
-    type_buttons_div.innerHTML=type_buttons
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-    let buttons_arr=[]
-    for (let s=0;s<all_values.length;s++){
-      let button_el=document.querySelector(`#type_button_${s}`)
-      buttons_arr.push(button_el)
-      button_el.addEventListener("click",()=>{
+    let type_buttons = butons_arr.join("");
+    type_buttons_div.innerHTML = type_buttons;
+
+    let buttons_arr = [];
+    for (let s = 0; s < all_values.length; s++) {
+      let button_el = document.querySelector(`#type_button_${s}`);
+      buttons_arr.push(button_el);
+      button_el.addEventListener("click", () => {
         if (button_el.classList.contains("active")) {
-          button_el.classList.remove("active") 
-          
-        }else{
-          button_el.classList.add("active") 
-          buttons_arr.map((item,i)=>{
-            
-            if(s!=i){
-              item.classList.remove("active")
+          button_el.classList.remove("active");
+        } else {
+          button_el.classList.add("active");
+          buttons_arr.map((item, i) => {
+            if (s != i) {
+              item.classList.remove("active");
             }
-          })
+          });
 
-          
-          let books_bytype=books_arr.filter(item=> {
-           
-            
-            if(item.bookType===all_values[s].bookCategorie){
-              return true
+          let books_bytype = books_arr.filter((item) => {
+            if (item.bookType === all_values[s].bookCategorie) {
+              return true;
             }
-           
-            return false
-          })
-          let html_1=get_books(books_bytype,`${all_values[s].bookCategorie}_${s}`)
-          
-        
-          swiper_wrapper.innerHTML=html_1
-          text_1.innerHTML=all_values[s].bookCategorie
+
+            return false;
+          });
+          let html_1 = get_books(
+            books_bytype,
+            `${all_values[s].bookCategorie}_${s}`
+          );
+
+          swiper_wrapper.innerHTML = html_1;
+          text_1.innerHTML = all_values[s].bookCategorie;
         }
-        
-        
-        
-      })
+      });
     }
-    
-  })
-  
-  
-
-
+  });
 }
 
 function displayBookDetails(book) {
@@ -193,25 +271,23 @@ function displayBookDetails(book) {
   );
   catalogBooksContainer.style.display = "none";
 
-
   const bookYearAbout = document.querySelector("#bookYearAbout");
   const bookNameAbout = document.querySelector("#bookNameAbout");
   const bookAuthorAbout = document.querySelector("#bookAuthorAbout");
   const bookDescriptionAbout = document.querySelector("#bookDescriptionAbout");
   const bookImgAbout = document.querySelector("#bookImgAbout");
   const dateWhenBookAdded = document.querySelector("#dateWhenBookAdded");
-  const newIconAbout = document.querySelector("#newIcon"); 
+  const newIconAbout = document.querySelector("#newIcon");
   // const newIconTitle = document.querySelector("#newIconTitle")
   // newIconTitle.style.textAlign = 'center'
-  if (book.isNew === 'true' || book.isNew === true) { // Check for string 'true' or boolean true
-    newIconAbout.style.display = 'block';
-    // newIconAbout.style.width = '100%'; 
+  if (book.isNew === "true" || book.isNew === true) {
+    // Check for string 'true' or boolean true
+    newIconAbout.style.display = "block";
+    // newIconAbout.style.width = '100%';
     // newIconAbout.style.textAlign = 'right';
- 
-} else { 
-    newIconAbout.style.display = 'none';
-}
-
+  } else {
+    newIconAbout.style.display = "none";
+  }
 
   console.log(book.isNew);
 
@@ -243,7 +319,6 @@ function displayBookDetails(book) {
 
   const dateAdded = new Date(book.Date);
 
-
   // nece gun evvel elave olundugunu gosteren
   dateWhenBookAdded.textContent = formatTimeSinceAdded(dateAdded);
 
@@ -256,20 +331,11 @@ function displayBookDetails(book) {
   bookDescriptionAbout.textContent = book.description;
   bookImgAbout.src = book.imageUrl;
 
-
-
-
   // kitablarin olcusunu about pagede deyishirik
   bookImgAbout.style.width = "379px";
   bookImgAbout.style.height = "529px";
 
   // console.log(this.all_values);
-
-
-
-
-  
-
 
   // 250den cox oldugda ... ile evez edirik
   if (book.description.length > 250) {
@@ -307,7 +373,7 @@ function get_books(obj_arr, id) {
   let books_html_arr = obj_arr.map((item, i) => {
     let button_id = `${id}_${i}`;
     // console.log(button_id);
-    if(item.isNew==true){
+    if (item.isNew == true) {
       let resultN = `
               <div class="book_box"  >
             
@@ -321,7 +387,7 @@ function get_books(obj_arr, id) {
           </div>
             </div>
               `;
-            return resultN
+      return resultN;
     }
     let result = `
               <div class="book_box"  >
@@ -353,7 +419,6 @@ function get_books(obj_arr, id) {
       books_html_arr = books_html_arr.slice(5);
     }
   }
-
 
   let SLIDES_html_arr = SLIDES_arr.map((item) => {
     let books_html_5 = item.join("");
