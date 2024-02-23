@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+      
         comments.unshift(result);
 
         // Update commentSection
@@ -147,7 +147,7 @@ const NEWbook = document.querySelector("#NEWbook");
 const type_buttons_div = document.querySelector("#type_buttons_div");
 const books_by_type = document.querySelector("#books_by_type");
 const text_1 = document.querySelector("#text_1");
-const new_div = document.querySelector("#new_div");
+const Allllll = document.querySelector("#Allllll");
 
 const commentsAbout = document.querySelector("#commentsAbout");
 commentsAbout.style.display = "none";
@@ -180,7 +180,24 @@ function displayAllBookstData() {
         });
       }
     }
+    Allllll.addEventListener("click",()=>{
+      let all_books_slides_html = get_books(all_values, "all_books_read");
+      swiper_wrapper.innerHTML = all_books_slides_html;
+  
+      // Adding event listeners for "read more"
+      for (let i = 0; i < all_values.length; i++) {
+        let el = document.querySelector(`#all_books_read_${i}`);
+  
+        if (el != null) {
+          el.addEventListener("click", (event) => {
+            event.preventDefault();
+            displayBookDetails(all_values[i]);
+          });
+        }
+      }
+      text_1.innerHTML =""
 
+    })
     // best sellers inner
     let best_seller_arr = all_values.filter(
       (item) => item.bookType === "best seller"
@@ -222,7 +239,7 @@ function displayAllBookstData() {
 
   onValue(typeref, (snapshot) => {
     const data = snapshot.val();
-    console.log(books_arr);
+    
     const all_values = Object.values(data);
     let butons_arr = [];
     for (let i = 0; i < all_values.length; i++) {
@@ -231,7 +248,7 @@ function displayAllBookstData() {
     }
     let type_buttons = butons_arr.join("");
     type_buttons_div.innerHTML = type_buttons;
-
+    
     let buttons_arr = [];
     for (let s = 0; s < all_values.length; s++) {
       let button_el = document.querySelector(`#type_button_${s}`);
@@ -245,6 +262,9 @@ function displayAllBookstData() {
             if (s != i) {
               item.classList.remove("active");
             }
+            Allllll.addEventListener("click",()=>{
+              item.classList.remove("active");
+            })
           });
 
           let books_bytype = books_arr.filter((item) => {
@@ -254,16 +274,24 @@ function displayAllBookstData() {
 
             return false;
           });
+          
           let html_1 = get_books(
             books_bytype,
             `${all_values[s].bookCategorie}_${s}`
           );
-
+            
           swiper_wrapper.innerHTML = html_1;
+          
+          read_more_buttons(books_bytype,`${all_values[s].bookCategorie}_${s}`)
           text_1.innerHTML = all_values[s].bookCategorie;
+          
+
+          
         }
       });
+      
     }
+    
   });
 }
 
@@ -291,7 +319,7 @@ function displayBookDetails(book) {
     newIconAbout.style.display = "none";
   }
 
-  console.log(book.isNew);
+  
 
   // kitabin hansi gun  elave edildiyini gosteren
   function formatTimeSinceAdded(addedDate) {
@@ -426,7 +454,7 @@ function get_books(obj_arr, id) {
       let slide_arr = [];
       slide_arr.push(books_html_arr)
       SLIDES_arr.push(slide_arr);
-      console.log(SLIDES_arr);
+      
       
     }
   }
@@ -443,6 +471,7 @@ function get_books(obj_arr, id) {
   let slides_thml = SLIDES_html_arr.join("");
   return slides_thml;
 }
+
 
 
 const menuMobileBtn = document.querySelector("#menuMobile");
@@ -462,3 +491,21 @@ closebtn.addEventListener('click' , function(){
   myNav.style.width = '0%'
 
 })
+
+ function read_more_buttons( arr,id){
+  for (let i = 0; i < arr.length; i++) {
+    let el = document.querySelector(`#${id}_${i}`);
+    console.log(`${id}_${i}`);
+    console.log(el);
+    if (el != null) {
+      console.log(el);
+      el.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(arr[i]);
+        displayBookDetails(arr[i]);
+      });
+    }
+  }
+
+ }
+

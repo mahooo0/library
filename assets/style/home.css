@@ -451,3 +451,211 @@ body {
 }
 /* JALYA  */
 
+/* MOBILE */
+
+/* Define your global styles here */
+
+/* Styles for screens smaller than 600px */
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .headerContainer {
+    width: 90%;
+  }
+
+  .menuNav li a {
+    margin-right: 15px;
+    font-size: 12px;
+  }
+
+  .firstContainer {
+    width: 90%;
+    padding-top: 60px;
+  }
+
+  .firstSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .firstLeft, .firstRight {
+    width: 100%;
+  }
+
+  .firstLeft h1 {
+    font-size: 24px;
+  }
+
+  .firstLeft p {
+    font-size: 12px;
+  }
+
+  .firstLeft a {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .firstRight img {
+    width: 100%;
+  }
+
+  .secondContainer {
+    width: 90%;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 40px;
+  }
+
+  .box {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .box h2 {
+    font-size: 16px;
+  }
+
+  /* .about-sect {
+    margin-top: 40px;
+  } */
+
+  .statistics .statistic-box h1 {
+    font-size: 36px;
+  }
+
+  .statistics .statistic-box p {
+    font-size: 10px;
+  }
+
+  /* .deliv-sect {
+    margin-top: 60px;
+  } */
+
+  .deliv-text {
+    width: 90%;
+    font-size: 10px;
+    margin-bottom: 80px;
+  }
+
+  .social-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .social-sect .media-logos {
+    margin-left: 0;
+  }
+
+  .footerContainer {
+    padding: 20px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footerNav {
+    margin-right: 0;
+  }
+
+  .footerNav ul li a {
+    font-size: 12px;
+  }
+
+  .copyright {
+    font-size: 10px;
+  }
+
+  .about-sect {
+    margin-top: 580px; 
+  }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 1000px) {
+  body {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .headerContainer {
+    width: 80%;
+  }
+
+  .menuNav li a {
+    margin-right: 20px;
+    font-size: 14px;
+  }
+
+  .firstContainer {
+    width: 80%;
+    padding-top: 80px;
+  }
+
+  .firstLeft h1 {
+    font-size: 28px;
+  }
+
+  .firstLeft p {
+    font-size: 14px;
+  }
+
+  .firstLeft a {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .secondContainer {
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 80px;
+  }
+
+  .box h2 {
+    font-size: 20px;
+  }
+
+  .statistics .statistic-box h1 {
+    font-size: 42px;
+  }
+
+  .statistics .statistic-box p {
+    font-size: 14px;
+  }
+
+  .deliv-text {
+    width: 80%;
+    font-size: 14px;
+    margin-bottom: 100px;
+  }
+
+  .social-text {
+    font-size: 24px;
+  }
+
+  .footerContainer {
+    padding: 30px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+
+  .about-sect {
+    margin-top: 280px; 
+  }
+}
+
+
