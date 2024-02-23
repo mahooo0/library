@@ -206,6 +206,52 @@ body {
   }
 }
 
+
+.menu-mobile {  
+  display: none;
+}
+
+.mobileNav {
+  display: none;
+}
+
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  background: rgba(36, 20, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+
+.overlay a {
+  margin-right: 30px;
+  padding: 8px;
+  padding-bottom: 12px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 400;
+  display: block;
+  transition: 0.3s;
+  color: #F2F2F2;
+  
+}
+
+.overlay .closebtn {
+  /* position: absolute; */
+  /* top: 0px; */
+  /* right: 0px; */
+  font-size: 60px;
+}
+.menu-mobile {
+  display: none;
+}
+
 /* !!! */
 /* ADD ON HTML SIDE MENU SVG AFTER LOGO IN YOUR PAGE!!!  */
 /* ADD THIS :  */
@@ -217,16 +263,23 @@ body {
   </svg> */
 
 @media only screen and (max-width: 800px) {
+  .menu-mobile {
+    display: block;
+  }
   .menuNav {
     display: none;
+
   }
 
   .joinUs {
     display: none;
   }
-  .menu-mobile {
-    display: block;
-  }
+
+.menu-mobile {
+  display: block;
+  
+}
+
 
   .headerContainer {
     display: flex;
