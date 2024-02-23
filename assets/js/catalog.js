@@ -44,10 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Update commentSection
         renderComments();
+
+        // Clear comment input
+        commentInput.value = "";
       })
       .catch((error) => console.log("error", error));
   });
-
   //  render comments
   function renderComments() {
     const commentSection = document.querySelector("#commentSection");
