@@ -471,6 +471,27 @@ function get_books(obj_arr, id) {
   let slides_thml = SLIDES_html_arr.join("");
   return slides_thml;
 }
+
+
+
+const menuMobileBtn = document.querySelector("#menuMobile");
+const myNav = document.querySelector("#myNav")
+const closebtn = document.querySelector(".closebtn")
+
+menuMobileBtn.addEventListener("click", () => {
+  myNav.style.display = 'block' ;
+  myNav.style.width = '100%'
+  // menuMobileBtn.style.display = 'none'
+});
+
+closebtn.addEventListener('click' , function(){ 
+  closebtn.style.width = 'none' ;
+  // menuMobileBtn.style.display = 'block'
+  myNav.style.display = 'none'
+  myNav.style.width = '0%'
+
+})
+
  function read_more_buttons( arr,id){
   for (let i = 0; i < arr.length; i++) {
     let el = document.querySelector(`#${id}_${i}`);
@@ -487,3 +508,4 @@ function get_books(obj_arr, id) {
   }
 
  }
+
