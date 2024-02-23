@@ -230,6 +230,17 @@ let Password_inp = document.querySelector("#admin_panel_pasword");
 let admin_auth = document.querySelector("#admin_auth");
 let admin_main = document.querySelector("#admin_main");
 let log_outh = document.querySelector("#log_outh");
+let aside_icon = document.querySelector("#aside_icon");
+let menu_cansel = document.querySelector("#menu_cansel");
+let menu = document.querySelector("#menu");
+
+
+aside_icon.addEventListener("click",()=>{
+  menu.style.display="block"
+})
+menu_cansel.addEventListener("click",()=>{
+  menu.style.display="none"
+})
 
 admin_panel_btn.addEventListener("click", () => {
   let userName = userName_inp.value;

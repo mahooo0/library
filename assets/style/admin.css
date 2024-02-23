@@ -763,3 +763,67 @@ background: #000000a6;
     width: 95%; 
   }
 }
+.aside_icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  display: none;
+}
+.cansel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  display: none;
+}
+@media only screen and (max-width: 1000px) and (min-width: 300px) {
+.right_side{
+  margin-left: 0;
+}
+.main{
+  margin-left: 0;
+}
+.person_section{
+  display:none ;
+}
+.search_section input{
+  width: 260px;
+}
+.search_variants{
+  width: 260px;
+}
+.book_form{
+  width: 290px;
+}
+.dropdown select{
+  width: 230px;
+}
+.dropdown{
+  display: none;
+}
+.table_ , .table_title ,.books{
+  display: none;
+}
+.body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}
+.aside_icon{
+  display: block;
+}
+.menu{
+  width: 290px;
+}
+.logo_text_1{
+  width: 100px;
+}
+.cansel{
+  display: block;
+}
+.menu{
+  display: none;
+}
+}
