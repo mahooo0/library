@@ -1,25 +1,23 @@
-
-
 // Firebase konfiqurasiyası və tətbiqin başlatılması
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
 import {
   getDatabase,
   ref,
   set,
   onValue,
   get,
-} from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js';
+} from "https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c',
-  authDomain: 'library-35b3c.firebaseapp.com',
-  projectId: 'library-35b3c',
-  storageBucket: 'library-35b3c.appspot.com',
-  messagingSenderId: '498632706422',
-  appId: '1:498632706422:web:9d181dd4820520b7c01257',
+  apiKey: "AIzaSyCmrBszyLIOb3kPxG_ou9O99qTBV9s7M3c",
+  authDomain: "library-35b3c.firebaseapp.com",
+  projectId: "library-35b3c",
+  storageBucket: "library-35b3c.appspot.com",
+  messagingSenderId: "498632706422",
+  appId: "1:498632706422:web:9d181dd4820520b7c01257",
   databaseURL:
-    'https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app',
+    "https://library-35b3c-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -27,17 +25,17 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 // HTML-dən lazım olan elementlərin alınması
-const searchBtnEl = document.querySelector('#searchBtnEl');
-const inputSearchEl = document.querySelector('#inputSearchEl');
-const swiper_div = document.querySelector('#swiper_div');
-const book_img = document.querySelector('#book_img');
-const book_name_h2 = document.querySelector('#book_name_h2');
-const author_p = document.querySelector('#author_p');
-const title_p = document.querySelector('#title_p');
+const searchBtnEl = document.querySelector("#searchBtnEl");
+const inputSearchEl = document.querySelector("#inputSearchEl");
+const swiper_div = document.querySelector("#swiper_div");
+const book_img = document.querySelector("#book_img");
+const book_name_h2 = document.querySelector("#book_name_h2");
+const author_p = document.querySelector("#author_p");
+const title_p = document.querySelector("#title_p");
 // Axtarış düyməsinə klikləndikdə kitabları axtaran funksiya
 function searchBooks(query) {
   // Firebase-dən kitabları almaq
-  const booksRef = ref(database, 'books');
+  const booksRef = ref(database, "books");
 
   get(booksRef).then((snapshot) => {
     const data = snapshot.val();
@@ -46,18 +44,53 @@ function searchBooks(query) {
     const filteredBooks = books.filter((book) => {
       const title = book.title.toLowerCase();
       const author =
-        typeof book.author === 'string' ? book.author.toLowerCase() : '';
+        typeof book.author === "string" ? book.author.toLowerCase() : "";
       return (
         title.includes(query.toLowerCase()) ||
         author.includes(query.toLowerCase())
       );
     });
-
-  
-
-    renderBooks(filteredBooks);
+    if (filteredBooks.length === 0) {
+      displayNotification("No books found with the given search criteria");
+    } else {
+      renderBooks(filteredBooks);
+    }
   });
 }
+
+function displayNotification(message, type = "error") {
+  const notificationContainer = document.createElement("div");
+  notificationContainer.classList.add("notification-container");
+
+  const notification = document.createElement("div");
+  notification.classList.add("notification");
+  if (type === "error") {
+    notification.textContent = message;
+  } else if (type === "success") {
+    notification.textContent = message;
+    notification.classList.add("success-notification");
+  }
+
+  const timerBar = document.createElement("div");
+  timerBar.classList.add("timer-bar");
+
+  notification.appendChild(timerBar);
+  notificationContainer.appendChild(notification);
+  document.body.appendChild(notificationContainer);
+
+  setTimeout(() => {
+    notificationContainer.remove();
+  }, 5000); // Remove the notification after 5 seconds
+}
+
+searchBtnEl.addEventListener("click", () => {
+  const searchTerm = inputSearchEl.value.trim();
+  if (searchTerm === "") {
+    displayNotification("Please enter a search term", "error");
+  } else {
+    searchBooks(searchTerm);
+  }
+});
 
 function renderBooks(books) {
   let swiperDiv = books.map((book) => {
@@ -83,17 +116,17 @@ function renderBooks(books) {
   
     `;
   });
-  swiper_div.innerHTML = swiperDiv.join('');
+  swiper_div.innerHTML = swiperDiv.join("");
 }
 // Axtarış düyməsinə klikləndikdə axtarış prosesini başlatma
-searchBtnEl.addEventListener('click', () => {
+searchBtnEl.addEventListener("click", () => {
   const searchTerm = inputSearchEl.value.trim();
- 
+
   searchBooks(searchTerm);
 });
 
 // Firebase-dəki məlumatı səhifə yüklənərkən göstərmək üçün renderBooks funksiyasını buraya əlavə edirik
-onValue(ref(database, 'books'), (snapshot) => {
+onValue(ref(database, "books"), (snapshot) => {
   const data = snapshot.val();
   const books = Object.values(data);
 
