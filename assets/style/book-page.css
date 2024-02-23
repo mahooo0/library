@@ -871,9 +871,7 @@ justify-content: start;
     height: 9px;
   }
 
-  .comments {
-    display: none;
-  }
+ 
   .book-text-mob {
     display: block;
     display: flex;
