@@ -21,9 +21,12 @@ body {
 
 .header {
   width: 100%;
-  position: relative;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: var(--Background); /* Add background color as needed */
+  z-index: 1000; /* Set a higher z-index to ensure it stays above other elements */
 }
+
 
 .headerContainer {
     display: flex;

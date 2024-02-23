@@ -15,7 +15,7 @@ body {
   font-family: var(--fontMontserrat);
 }
 
-/* HEADER */
+/* HEADER
 
 .header {
   width: 100%;
@@ -30,7 +30,6 @@ body {
   align-items: center;
   margin: auto;
   width: 80%;
-  margin-bottom: 80px;
   border-bottom: 2px solid whitesmoke;
 }
 
@@ -125,7 +124,7 @@ body {
   color: #fff;
   text-align: center;
   padding-bottom: 20px;
-}
+} */
 
 /* Home FIRST Line (Books from A to Z) */
 
@@ -136,6 +135,7 @@ body {
 .firstContainer {
   width: 80%;
   margin: auto;
+  padding-top: 80px;
 }
 
 .firstSection {
@@ -193,7 +193,7 @@ body {
 
 .secondSection {
   position: relative;
-  margin-bottom: 390px;
+  margin-bottom: 190px;
 }
 
 .catalog {
