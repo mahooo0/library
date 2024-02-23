@@ -204,9 +204,10 @@ function getFormInputs() {
 searchInput.addEventListener("input", async () => {
   const searchTerm = searchInput.value.trim();
   if (searchTerm.length == 0) {
-    searchVariant.style.display = "block";
+    searchVariant.style.display = "none";
   }
   if (searchTerm.length > 0) {
+    searchVariant.style.display = "block";
     const data = await getBooks(searchTerm);
     if (data && data.items) {
       showBookVariants(data.items);
