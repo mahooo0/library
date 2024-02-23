@@ -38,7 +38,8 @@ const formSectionImg = document.querySelector("#form_section_img_url");
 const formSectionYear = document.querySelector(
   "#form_section_publication_year"
 );
-const formSectionType = document.querySelector("#bookCategorie");
+// const formSectionType = document.querySelector("#bookCategorie");
+const formSectionType = document.querySelector("#form_section_type_input");
 const formSectionDescription = document.querySelector(
   "#form_section_description_input"
 );
