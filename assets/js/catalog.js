@@ -17,100 +17,105 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // comments
-  let comments = [];
-  const sendButton = document.querySelector(".send-button");
-  sendButton.addEventListener("click", () => {
-    const commentInput = document.querySelector("#commentInput");
-    const comment = commentInput.value;
-    const commentData = {
-      postId: 1,
-      name: "Anonim",
-      body: comment,
-      timestamp: getCurrentTimestamp(),
-    };
+ // Initialize comments array from local storage or empty array if not present
+let comments = JSON.parse(localStorage.getItem('comments')) || [];
 
-    // API
-    fetch("https://blog-api-t6u0.onrender.com/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        comments.unshift(result);
+const sendButton = document.querySelector(".send-button");
+sendButton.addEventListener("click", () => {
+  const commentInput = document.querySelector("#commentInput");
+  const comment = commentInput.value;
+  const commentData = {
+    postId: 1,
+    name: "Anonim",
+    body: comment,
+    timestamp: getCurrentTimestamp(),
+  };
+  
+  // API
+  fetch("https://blog-api-t6u0.onrender.com/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentData),
+  })
+  .then((response) => response.json())
+  .then((result) => {
+    comments.unshift(result);
+    updateLocalStorage(); // Update local storage
+    renderComments(); // Update commentSection
+    commentInput.value = ""; // Clear comment input
+  })
+  .catch((error) => console.log("error", error));
+});
 
-        // Update commentSection
-        renderComments();
-
-        // Clear comment input
-        commentInput.value = "";
-      })
-      .catch((error) => console.log("error", error));
-  });
-  //  render comments
-  function renderComments() {
-    const commentSection = document.querySelector("#commentSection");
-    commentSection.innerHTML = ""; // Clear commentSection
-
-    comments.forEach((comment) => {
-      const commentDiv = document.createElement("div");
-      commentDiv.classList.add("comm1");
-
-      const userInfoDiv = document.createElement("div");
-      userInfoDiv.classList.add("user1-info");
-
-      const userName = document.createElement("h2");
-      userName.textContent = comment.name;
-
-      const timestamp = document.createElement("p");
-      timestamp.textContent = formatTimestamp(comment.timestamp); // Format timestamp
-
-      const commentContent = document.createElement("p");
-      commentContent.textContent = comment.body;
-
-      userInfoDiv.appendChild(userName);
-      userInfoDiv.appendChild(timestamp);
-
-      commentDiv.appendChild(userInfoDiv);
-      commentDiv.appendChild(commentContent);
-
-      commentSection.appendChild(commentDiv);
-    });
-  }
-
-  // Function  timestamp
-  function formatTimestamp(commentTimestamp) {
-    const currentDate = new Date();
-    const commentDate = new Date(commentTimestamp);
-
-    const timeDifference = currentDate.getTime() - commentDate.getTime();
-    const secondsDifference = timeDifference / 1000;
-    const minutesDifference = secondsDifference / 60;
-    const hoursDifference = minutesDifference / 60;
-    const daysDifference = hoursDifference / 24;
-
-    if (daysDifference < 1) {
-      // Less than 24 hours
-      const hours = String(commentDate.getHours()).padStart(2, "0");
-      const minutes = String(commentDate.getMinutes()).padStart(2, "0");
-      return `${hours}:${minutes} today`;
-    } else {
-      // More than 24 hours
-      const daysAgo = Math.floor(daysDifference);
-      return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
-    }
-  }
-
-  function getCurrentTimestamp() {
-    return new Date().toISOString();
-  }
-
+// Function to render comments
+function renderComments() {
   const commentSection = document.querySelector("#commentSection");
+  commentSection.innerHTML = ""; // Clear commentSection
 
-  renderComments();
+  comments.forEach((comment) => {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comm1");
+
+    const userInfoDiv = document.createElement("div");
+    userInfoDiv.classList.add("user1-info");
+
+    const userName = document.createElement("h2");
+    userName.textContent = comment.name;
+
+    const timestamp = document.createElement("p");
+    timestamp.textContent = formatTimestamp(comment.timestamp); // Format timestamp
+
+    const commentContent = document.createElement("p");
+    commentContent.textContent = comment.body;
+
+    userInfoDiv.appendChild(userName);
+    userInfoDiv.appendChild(timestamp);
+
+    commentDiv.appendChild(userInfoDiv);
+    commentDiv.appendChild(commentContent);
+
+    commentSection.appendChild(commentDiv);
+  });
+}
+
+// Function to format timestamp
+function formatTimestamp(commentTimestamp) {
+  const currentDate = new Date();
+  const commentDate = new Date(commentTimestamp);
+
+  const timeDifference = currentDate.getTime() - commentDate.getTime();
+  const secondsDifference = timeDifference / 1000;
+  const minutesDifference = secondsDifference / 60;
+  const hoursDifference = minutesDifference / 60;
+  const daysDifference = hoursDifference / 24;
+
+  if (daysDifference < 1) {
+    // Less than 24 hours
+    const hours = String(commentDate.getHours()).padStart(2, "0");
+    const minutes = String(commentDate.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes} today`;
+  } else {
+    // More than 24 hours
+    const daysAgo = Math.floor(daysDifference);
+    return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
+  }
+}
+
+// Function to get current timestamp
+function getCurrentTimestamp() {
+  return new Date().toISOString();
+}
+
+// Function to update local storage with comments data
+function updateLocalStorage() {
+  localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// Initial rendering of comments
+renderComments();
+
 });
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -147,7 +152,7 @@ const NEWbook = document.querySelector("#NEWbook");
 const type_buttons_div = document.querySelector("#type_buttons_div");
 const books_by_type = document.querySelector("#books_by_type");
 const text_1 = document.querySelector("#text_1");
-const new_div = document.querySelector("#new_div");
+const Allllll = document.querySelector("#Allllll");
 
 const commentsAbout = document.querySelector("#commentsAbout");
 commentsAbout.style.display = "none";
@@ -180,7 +185,24 @@ function displayAllBookstData() {
         });
       }
     }
+    Allllll.addEventListener("click",()=>{
+      let all_books_slides_html = get_books(all_values, "all_books_read");
+      swiper_wrapper.innerHTML = all_books_slides_html;
+  
+      // Adding event listeners for "read more"
+      for (let i = 0; i < all_values.length; i++) {
+        let el = document.querySelector(`#all_books_read_${i}`);
+  
+        if (el != null) {
+          el.addEventListener("click", (event) => {
+            event.preventDefault();
+            displayBookDetails(all_values[i]);
+          });
+        }
+      }
+      text_1.innerHTML =""
 
+    })
     // best sellers inner
     let best_seller_arr = all_values.filter(
       (item) => item.bookType === "best seller"
@@ -222,7 +244,7 @@ function displayAllBookstData() {
 
   onValue(typeref, (snapshot) => {
     const data = snapshot.val();
-    console.log(books_arr);
+    
     const all_values = Object.values(data);
     let butons_arr = [];
     for (let i = 0; i < all_values.length; i++) {
@@ -231,7 +253,7 @@ function displayAllBookstData() {
     }
     let type_buttons = butons_arr.join("");
     type_buttons_div.innerHTML = type_buttons;
-
+    
     let buttons_arr = [];
     for (let s = 0; s < all_values.length; s++) {
       let button_el = document.querySelector(`#type_button_${s}`);
@@ -245,6 +267,9 @@ function displayAllBookstData() {
             if (s != i) {
               item.classList.remove("active");
             }
+            Allllll.addEventListener("click",()=>{
+              item.classList.remove("active");
+            })
           });
 
           let books_bytype = books_arr.filter((item) => {
@@ -254,16 +279,24 @@ function displayAllBookstData() {
 
             return false;
           });
+          
           let html_1 = get_books(
             books_bytype,
             `${all_values[s].bookCategorie}_${s}`
           );
-
+            
           swiper_wrapper.innerHTML = html_1;
+          
+          read_more_buttons(books_bytype,`${all_values[s].bookCategorie}_${s}`)
           text_1.innerHTML = all_values[s].bookCategorie;
+          
+
+          
         }
       });
+      
     }
+    
   });
 }
 
@@ -291,7 +324,7 @@ function displayBookDetails(book) {
     newIconAbout.style.display = "none";
   }
 
-  console.log(book.isNew);
+  
 
   // kitabin hansi gun  elave edildiyini gosteren
   function formatTimeSinceAdded(addedDate) {
@@ -426,7 +459,7 @@ function get_books(obj_arr, id) {
       let slide_arr = [];
       slide_arr.push(books_html_arr)
       SLIDES_arr.push(slide_arr);
-      console.log(SLIDES_arr);
+      
       
     }
   }
@@ -443,3 +476,41 @@ function get_books(obj_arr, id) {
   let slides_thml = SLIDES_html_arr.join("");
   return slides_thml;
 }
+
+
+
+const menuMobileBtn = document.querySelector("#menuMobile");
+const myNav = document.querySelector("#myNav")
+const closebtn = document.querySelector(".closebtn")
+
+menuMobileBtn.addEventListener("click", () => {
+  myNav.style.display = 'block' ;
+  myNav.style.width = '100%'
+  // menuMobileBtn.style.display = 'none'
+});
+
+closebtn.addEventListener('click' , function(){ 
+  closebtn.style.width = 'none' ;
+  // menuMobileBtn.style.display = 'block'
+  myNav.style.display = 'none'
+  myNav.style.width = '0%'
+
+})
+
+ function read_more_buttons( arr,id){
+  for (let i = 0; i < arr.length; i++) {
+    let el = document.querySelector(`#${id}_${i}`);
+    console.log(`${id}_${i}`);
+    console.log(el);
+    if (el != null) {
+      console.log(el);
+      el.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(arr[i]);
+        displayBookDetails(arr[i]);
+      });
+    }
+  }
+
+ }
+
