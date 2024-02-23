@@ -17,100 +17,105 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // comments
-  let comments = [];
-  const sendButton = document.querySelector(".send-button");
-  sendButton.addEventListener("click", () => {
-    const commentInput = document.querySelector("#commentInput");
-    const comment = commentInput.value;
-    const commentData = {
-      postId: 1,
-      name: "Anonim",
-      body: comment,
-      timestamp: getCurrentTimestamp(),
-    };
+ // Initialize comments array from local storage or empty array if not present
+let comments = JSON.parse(localStorage.getItem('comments')) || [];
 
-    // API
-    fetch("https://blog-api-t6u0.onrender.com/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-      
-        comments.unshift(result);
+const sendButton = document.querySelector(".send-button");
+sendButton.addEventListener("click", () => {
+  const commentInput = document.querySelector("#commentInput");
+  const comment = commentInput.value;
+  const commentData = {
+    postId: 1,
+    name: "Anonim",
+    body: comment,
+    timestamp: getCurrentTimestamp(),
+  };
+  
+  // API
+  fetch("https://blog-api-t6u0.onrender.com/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentData),
+  })
+  .then((response) => response.json())
+  .then((result) => {
+    comments.unshift(result);
+    updateLocalStorage(); // Update local storage
+    renderComments(); // Update commentSection
+    commentInput.value = ""; // Clear comment input
+  })
+  .catch((error) => console.log("error", error));
+});
 
-        // Update commentSection
-        renderComments();
-
-        // Clear comment input
-        commentInput.value = "";
-      })
-      .catch((error) => console.log("error", error));
-  });
-  //  render comments
-  function renderComments() {
-    const commentSection = document.querySelector("#commentSection");
-    commentSection.innerHTML = ""; // Clear commentSection
-
-    comments.forEach((comment) => {
-      const commentDiv = document.createElement("div");
-      commentDiv.classList.add("comm1");
-
-      const userInfoDiv = document.createElement("div");
-      userInfoDiv.classList.add("user1-info");
-
-      const userName = document.createElement("h2");
-      userName.textContent = comment.name;
-
-      const timestamp = document.createElement("p");
-      timestamp.textContent = formatTimestamp(comment.timestamp); // Format timestamp
-
-      const commentContent = document.createElement("p");
-      commentContent.textContent = comment.body;
-
-      userInfoDiv.appendChild(userName);
-      userInfoDiv.appendChild(timestamp);
-
-      commentDiv.appendChild(userInfoDiv);
-      commentDiv.appendChild(commentContent);
-
-      commentSection.appendChild(commentDiv);
-    });
-  }
-
-  // Function  timestamp
-  function formatTimestamp(commentTimestamp) {
-    const currentDate = new Date();
-    const commentDate = new Date(commentTimestamp);
-
-    const timeDifference = currentDate.getTime() - commentDate.getTime();
-    const secondsDifference = timeDifference / 1000;
-    const minutesDifference = secondsDifference / 60;
-    const hoursDifference = minutesDifference / 60;
-    const daysDifference = hoursDifference / 24;
-
-    if (daysDifference < 1) {
-      // Less than 24 hours
-      const hours = String(commentDate.getHours()).padStart(2, "0");
-      const minutes = String(commentDate.getMinutes()).padStart(2, "0");
-      return `${hours}:${minutes} today`;
-    } else {
-      // More than 24 hours
-      const daysAgo = Math.floor(daysDifference);
-      return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
-    }
-  }
-
-  function getCurrentTimestamp() {
-    return new Date().toISOString();
-  }
-
+// Function to render comments
+function renderComments() {
   const commentSection = document.querySelector("#commentSection");
+  commentSection.innerHTML = ""; // Clear commentSection
 
-  renderComments();
+  comments.forEach((comment) => {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comm1");
+
+    const userInfoDiv = document.createElement("div");
+    userInfoDiv.classList.add("user1-info");
+
+    const userName = document.createElement("h2");
+    userName.textContent = comment.name;
+
+    const timestamp = document.createElement("p");
+    timestamp.textContent = formatTimestamp(comment.timestamp); // Format timestamp
+
+    const commentContent = document.createElement("p");
+    commentContent.textContent = comment.body;
+
+    userInfoDiv.appendChild(userName);
+    userInfoDiv.appendChild(timestamp);
+
+    commentDiv.appendChild(userInfoDiv);
+    commentDiv.appendChild(commentContent);
+
+    commentSection.appendChild(commentDiv);
+  });
+}
+
+// Function to format timestamp
+function formatTimestamp(commentTimestamp) {
+  const currentDate = new Date();
+  const commentDate = new Date(commentTimestamp);
+
+  const timeDifference = currentDate.getTime() - commentDate.getTime();
+  const secondsDifference = timeDifference / 1000;
+  const minutesDifference = secondsDifference / 60;
+  const hoursDifference = minutesDifference / 60;
+  const daysDifference = hoursDifference / 24;
+
+  if (daysDifference < 1) {
+    // Less than 24 hours
+    const hours = String(commentDate.getHours()).padStart(2, "0");
+    const minutes = String(commentDate.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes} today`;
+  } else {
+    // More than 24 hours
+    const daysAgo = Math.floor(daysDifference);
+    return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
+  }
+}
+
+// Function to get current timestamp
+function getCurrentTimestamp() {
+  return new Date().toISOString();
+}
+
+// Function to update local storage with comments data
+function updateLocalStorage() {
+  localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// Initial rendering of comments
+renderComments();
+
 });
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
