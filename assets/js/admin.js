@@ -318,18 +318,17 @@ function displayCategorieInMenu() {
     const data = snapshot.val();
     console.log(data);
 
-    const options = Object.values(data).map(
-      (dataValue) => `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
-    ).join("");
+    const options = Object.values(data)
+      .map(
+        (dataValue) =>
+          `<option value="${dataValue.bookCategorie}">${dataValue.bookCategorie}</option>`
+      )
+      .join("");
 
     const menuTypeSect = document.getElementById("form_section_type_input");
     menuTypeSect.innerHTML = options;
   });
 }
-
-
-
-
 
 // function filterFunction() {
 //   var input, filter, ul, li, a, i;
@@ -346,11 +345,6 @@ function displayCategorieInMenu() {
 //     }
 //   }
 // }
-
-
-
-
-
 
 window.onload = function () {
   displayCategorieInMenu();
@@ -392,6 +386,3 @@ function displayNotification(message, type, callback) {
 function displaySuccessNotification(message, callback) {
   displayNotification(message, "success", callback);
 }
-
-
-
