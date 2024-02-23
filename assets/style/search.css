@@ -5,7 +5,8 @@ body{
   width: 100%;
   display: flex;
   /* gap: 94px; */
-  padding-top: 140px;
+  margin-top: 112px;
+  padding-left: 80px;
 }
 
 .box1 {
@@ -60,7 +61,7 @@ body{
 .box2 {
   background-color: #fff;
  width: 801px;
-  height: 504px;
+  height: 454px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -22,20 +22,19 @@
 }
 
 .about_store {
-  margin-top: 80px;
-  /* margin-left: 98px; */
+  margin-top: 112px;
+  margin-left: 70px;
   color:var(--Black);
   font-family: var(--fontMontserrat);
   font-size: 36px;
-
   font-style: normal;
   font-weight: 800;
   line-height: 70.627px;
 }
 
 .img_1 {
-  width: 50%;
-  height: 310px;
+  width: 75%;
+  height: 350px;
   flex-shrink: 0;
 }
 
@@ -52,6 +51,7 @@
   font-weight: 400;
   line-height: 35.314px;
   margin-top: 40px;
+  margin-left: 70px;
 }
 
 
@@ -62,11 +62,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
   /* justify-content: space-between; */
  
   /* gap: 72px; */
 
 }
+
+/* .about_store_section container{
+  margin-left: 100px;
+} */
 
 
 
