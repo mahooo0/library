@@ -405,7 +405,7 @@ function get_books(obj_arr, id) {
   let s = Math.floor(books_html_arr.length / 5);
   let SLIDES_arr = [];
 
-  for (let i = 0; i < s; i++) {
+  for (let i = 0; i < s+1; i++) {
     if (books_html_arr.length > 4) {
       let slide_arr = [];
       slide_arr.push(
@@ -417,6 +417,15 @@ function get_books(obj_arr, id) {
       );
       SLIDES_arr.push(slide_arr);
       books_html_arr = books_html_arr.slice(5);
+      
+      
+    }
+    else{
+      let slide_arr = [];
+      slide_arr.push(books_html_arr)
+      SLIDES_arr.push(slide_arr);
+      console.log(SLIDES_arr);
+      
     }
   }
 
