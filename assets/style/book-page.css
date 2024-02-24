@@ -376,35 +376,8 @@ body {
   margin-bottom: 133px;
 }
 
-.social-sect .media-logos {
-  margin-left: 25px;
-}
 
-.facebook-logo,
-.twitter-logo {
-  margin-right: 52px;
-  cursor: pointer;
-}
 
-.menu-mobile {
-  display: none;
-}
-
-.book-year-mobile {
-  display: none;
-}
-
-.book-text-mob {
-  display: none;
-}
-
-.mobile-footer-catalog {
-  display: none;
-}
-
-.copyrigh-mob {
-  display: none;
-}
 /* Responsive Styles */
 
 /* Mobile */
@@ -501,58 +474,6 @@ body {
     align-items: center;
   } */
 
-  .mobile-footer-catalog {
-    display: block;
-  }
-  .mobile-footer-catalog ul {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    color: #f2f2f2;
-    margin-top: 11px;
-  }
-  .mobile-line {
-    display: block;
-    border-top: 1px solid beige;
-    width: 350px;
-    margin-top: 32px;
-    /* margin-bottom: 27px; */
-  }
-
-  .copyright {
-    display: none;
-  }
-
-  .mobile-line .copyrigh-mob {
-    margin-top: 10px;
-    width: 231px;
-    height: 37px;
-    color: #fff;
-    text-align: center;
-    font-family: var(--fontMontserrat);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 196.187%; /* 23.542px */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 50px;
-  }
-
-  .bottom-logo {
-    width: 250px;
-    height: 102px;
-  }
-
-  .mobile-footer-catalog ul li {
-    width: 69px;
-  }
-
-  .menuNav li {
-    margin-bottom: 10px;
-  }
 
   .about-book {
     flex-direction: column;
@@ -583,40 +504,6 @@ body {
     width: 100%;
   }
 
-  .footer {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footerNav {
-    display: none;
-  }
-  .footer-right {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .bottom-logo {
-    margin-left: 0;
-  }
-
-  .social-text {
-    margin-bottom: 20px;
-  }
-
-  .social-sect .media-logos {
-    margin-left: 0;
-  }
-
-  .facebook-logo,
-  .twitter-logo,
-  .insta-logo {
-    margin: 0 10px 20px;
-  }
-
-  .copyright {
-    margin-top: 20px;
-  }
 }
 
 .menu-mobile {
@@ -631,9 +518,7 @@ body {
   display: none;
 }
 
-.mobile-footer-catalog {
-  display: none;
-}
+
 
 .copyrigh-mob {
   display: none;
@@ -894,93 +779,6 @@ body {
 
   /* about book description  */
 
-  .mobile-footer-catalog {
-    display: block;
-  }
-  .mobile-footer-catalog ul {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    color: #f2f2f2;
-    margin-top: 11px;
-  }
-  .mobile-line {
-    display: block;
-    border-top: 1px solid beige;
-    width: 350px;
-    margin-top: 32px;
-    /* margin-bottom: 27px; */
-  }
-
-  .copyright {
-    display: none;
-  }
-
-  .mobile-line .copyrigh-mob {
-    margin-top: 10px;
-    width: 231px;
-    height: 37px;
-    color: #fff;
-    text-align: center;
-    font-family: var(--fontMontserrat);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 196.187%; /* 23.542px */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 50px;
-  }
-
-  .bottom-logo {
-    width: 250px;
-    height: 102px;
-  }
-
-  .mobile-footer-catalog ul li {
-    width: 69px;
-  }
-
-  .menuNav li {
-    margin-bottom: 10px;
-  }
-
-  .footer {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footerNav {
-    display: none;
-  }
-  .footer-right {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .bottom-logo {
-    margin-left: 0;
-  }
-
-  .social-text {
-    margin-bottom: 20px;
-  }
-
-  .social-sect .media-logos {
-    margin-left: 0;
-  }
-
-  .facebook-logo,
-  .twitter-logo,
-  .insta-logo {
-    margin: 0 10px 20px;
-  }
-
-  .copyright {
-    margin-top: 20px;
-  }
 }
 
 
