@@ -209,3 +209,53 @@ text-align: center;
 .random_books_section{
 margin-top: 7.69rem;
     }
+
+    /* For screens smaller than 800px */
+@media screen and (min-width: 601px) and (max-width: 800px) {
+  .cotalog_text_h2 {
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .cotalog_text {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .main {
+    margin-top: 0;
+  }
+
+  .swiper {
+    width: 100%;
+  }
+
+  .book_box {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: block;
+  }
+}
+
+/* For screens smaller than 600px */
+@media screen and (max-width: 600px) {
+  .footerContainer {
+    padding: 20px;
+  }
+
+  .swiper{
+    max-width: 100%;
+  }
+
+  .footer-right {
+    width: 100%;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: block;
+  }
+}
