@@ -461,6 +461,7 @@ body {
   body {
     font-size: 14px;
     text-align: center;
+    overflow-y: scroll;
   }
 
   .headerContainer {
@@ -520,9 +521,12 @@ body {
     font-size: 16px;
   }
 
-  /* .about-sect {
-    margin-top: 40px;
-  } */
+  .about-sect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
 
   .statistics .statistic-box h1 {
     font-size: 36px;
@@ -579,6 +583,23 @@ body {
 
   .about-sect {
     margin-top: 580px; 
+    /* width: 80%;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px; */
+  }
+
+  .statistic-box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .statistics{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -655,6 +676,27 @@ body {
 
   .about-sect {
     margin-top: 280px; 
+  }
+
+  .about-sect {
+    
+    /* width: 80%; */
+    grid-template-columns: repeat(2, 1fr);
+    /* gap: 20px; */
+  }
+
+  .statistic-box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .statistics{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
 }
 
