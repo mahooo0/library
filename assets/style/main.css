@@ -365,7 +365,7 @@ footer.footerContainer {
 
     .footer-right {
       display: flex;
-      margin-left: 39px;
+      margin-left: 38px;
       width: 75%;
   }
 
@@ -382,7 +382,7 @@ footer.footerContainer {
       margin-right: 15px;
   }
   footer.footerContainer {
-    width: 765px;
+    width: 472px;
 }
 
 }
