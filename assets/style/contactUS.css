@@ -99,58 +99,69 @@ textarea.form-control {
 
 /* MOBILE */
 
-@media only screen and (max-width: 800px) {
-    .containerContact {
-      /* padding: 0 15px; */
-      width: 100%;
-      /* display: flex;
-      flex-direction: column; */
-      align-self: center;
-    }
-    .row {
-      flex-direction: column;
-      gap: 15px;
-    }
-    .column {
-      flex: 1 1 100%;
-    }
-    .sendButton {
-      width: 243px;
-      height: 49px;
-    }
-    /* .containerContact h2 {
-      align-self: flex-start; 
-    } */
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+
+  .containerContact {
+    /* padding: 0 15px; */
+    width: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    align-self: center;
+  }
+  .row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .column {
+    flex: 1 1 100%;
+  }
+  .sendButton {
+    width: 243px;
+    height: 49px;
+  }
+  /* .containerContact h2 {
+    align-self: flex-start; 
+  } */
   }
   
   
-  /* @media only screen and (min-width: 601px) and (max-width: 905px) {
-    .containerContact {
-      padding: 0 15px;
-      width: 100%;
-      display: flex;
-      justify-content: center; 
-    }
-    .row {
+   @media only screen and (min-width: 300px) and (max-width: 600px) {
+    
+    body{
+      justify-self: center;
+      justify-content: center;
+      text-align: center;
       flex-direction: column;
-      gap: 15px;
-    }
-    .column {
-      flex: 1 1 100%;
-    }
-    .sendButton {
-      width: 415px;
-    }
-    .containerContact h2 {
-        align-self: flex-start;
-      }
-  } */
   
-    /* @media only screen and (min-width: 906px) and (max-width: 1250px) {
-        .containerContact, .footer {
-          padding: 0 50px;
-          max-width: 800px; 
-          width: 100%; 
-          margin: 0 auto; 
-        }
-      } */
+    }
+  
+      .containerContact {
+        /* padding: 0 15px; */
+        /* width: 100%; */
+        /* margin: 0 auto; */
+        /* display: flex;
+        flex-direction: column; */
+        align-self: flex-start;
+        justify-content: flex-start;
+      }
+      .row {
+        flex-direction: column;
+        gap: 15px;
+        justify-content: flex-start;
+      }
+      .column {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+      }
+      .sendButton {
+        width: 153px;
+        height: 49px;
+        justify-content: flex-start;
+      }
+  
+      .column input{
+        height: 49px;
+        width: 153px;
+      }
+    }
+   
